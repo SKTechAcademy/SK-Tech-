@@ -11,11 +11,9 @@ const data = await response.json();
 
 console.log(data);
 
-document.getElementById("totalCount").innerText =
-  data.length;
+document.getElementById("totalCount").innerText = data.length;
 
-let table =
-  document.getElementById("tableBody");
+let table = document.getElementById("tableBody");
 
 table.innerHTML = "";
 
@@ -26,8 +24,8 @@ data.forEach(item => {
     <td>${item["Sk Tech Register ID"] || ""}</td>
     <td>${item["Full Name"] || ""}</td>
     <td>${item["Round"] || ""}</td>
-    <td>${item["Technologies Required"] || ""}</td>
-    <td>${item["Interview Company"] || ""}</td>
+    <td>${item[" Technologies Required"] || item["Technologies Required"] || ""}</td>
+    <td>${item["Interview Company "] || item["Interview Company"] || ""}</td>
     <td>${item["Interview Date"] || ""}</td>
     <td>${item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"] || ""}</td>
     <td>${item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"] || ""}</td>
@@ -37,14 +35,9 @@ data.forEach(item => {
 ```
 
 } catch (error) {
-
-```
-console.error("Error:", error);
-```
-
+console.error(error);
 }
 }
 
 loadData();
-
 setInterval(loadData, 30000);
