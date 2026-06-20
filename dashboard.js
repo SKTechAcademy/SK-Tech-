@@ -2,6 +2,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwxpMoYA7gmul9iMk9eA2Ca
 
 let allData = [];
 
+// Format Date
 function formatDate(val) {
     if (!val) return "";
     const d = new Date(val);
@@ -9,6 +10,7 @@ function formatDate(val) {
     return d.toLocaleDateString("en-IN");
 }
 
+// Format Time
 function formatTime(val) {
     if (!val) return "";
     const d = new Date(val);
@@ -20,12 +22,15 @@ function formatTime(val) {
     });
 }
 
+// Render Table
 function renderTable(data) {
 
     const table = document.getElementById("tableBody");
     table.innerHTML = "";
 
-    data.forEach(function(item) {
+    for (let i = 0; i < data.length; i++) {
+
+        let item = data[i];
 
         let row = "<tr>";
 
@@ -42,43 +47,63 @@ function renderTable(data) {
         row += "</tr>";
 
         table.innerHTML += row;
-    });
+    }
 }
 
-async function loadData() {
+// Load Data (NO async/await → no errors)
+function loadData() {
 
-    try {
-
-        const response = await fetch(API_URL);
-        const data = await response.json();
+    fetch(API_URL)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
 
         console.log("DATA:", data);
 
         allData = data;
 
         document.getElementById("totalCount").innerText = data.length;
+        document.getElementById("todayCount").innerText = data.length;
 
         renderTable(data);
 
-    } catch (e) {
-        console.error(e);
-    }
+    })
+    .catch(function(error) {
+        console.error("ERROR:", error);
+    });
 }
 
+// Search
 document.getElementById("searchInput")
 .addEventListener("keyup", function() {
 
-    const val = this.value.toLowerCase();
+    let val = this.value.toLowerCase();
 
-    const filtered = allData.filter(item =>
-        (item["Full Name"] || "").toLowerCase().includes(val) ||
-        (item["Interview Company "] || "").toLowerCase().includes(val) ||
-        (item[" Technologies Required"] || "").toLowerCase().includes(val) ||
-        (item["Sk Tech Register ID"] || "").toLowerCase().includes(val)
-    );
+    let filtered = [];
+
+    for (let i = 0; i < allData.length; i++) {
+
+        let item = allData[i];
+
+        let name = (item["Full Name"] || "").toLowerCase();
+        let company = (item["Interview Company "] || "").toLowerCase();
+        let tech = (item[" Technologies Required"] || "").toLowerCase();
+        let id = (item["Sk Tech Register ID"] || "").toLowerCase();
+
+        if (
+            name.includes(val) ||
+            company.includes(val) ||
+            tech.includes(val) ||
+            id.includes(val)
+        ) {
+            filtered.push(item);
+        }
+    }
 
     renderTable(filtered);
 });
 
+// Init
 loadData();
 setInterval(loadData, 60000);
