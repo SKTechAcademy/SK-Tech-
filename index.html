@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK Tech Academy</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#07152f;
+}
+
+header{
+background:#fff;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+position:sticky;
+top:0;
+z-index:10;
+}
+
+.logo h2{
+color:#0b2c5f;
+font-size:26px;
+}
+
+.logo span{
+color:#0d6efd;
+}
+
+nav a{
+margin:0 12px;
+text-decoration:none;
+color:#07152f;
+font-weight:bold;
+}
+
+.phone{
+background:#0d6efd;
+color:white;
+padding:12px 18px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.hero{
+background:linear-gradient(rgba(0,20,50,.85),rgba(0,20,50,.85)),
+url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d');
+background-size:cover;
+background-position:center;
+color:white;
+padding:100px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:58px;
+margin-bottom:15px;
+}
+
+.hero h3{
+color:#3fa9ff;
+font-size:30px;
+margin-bottom:20px;
+}
+
+.hero p{
+max-width:850px;
+margin:auto;
+font-size:20px;
+line-height:1.6;
+}
+
+.btns{
+margin-top:40px;
+}
+
+.btn{
+padding:18px 30px;
+text-decoration:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+display:inline-block;
+margin:10px;
+color:white;
+}
+
+.register{
+background:#0d6efd;
+}
+
+.interview{
+background:#28a745;
+}
+
+.section{
+padding:60px 20px;
+text-align:center;
+}
+
+.section h2{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.line{
+width:50px;
+height:4px;
+background:#0d6efd;
+margin:15px auto 35px;
+border-radius:10px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:28px;
+border-radius:12px;
+box-shadow:0 2px 12px rgba(0,0,0,.1);
+font-weight:bold;
+}
+
+.card p{
+font-weight:normal;
+margin-top:10px;
+line-height:1.5;
+color:#334155;
+}
+
+.tech{
+background:#eef5ff;
+}
+
+footer{
+background:#041a3a;
+color:white;
+padding:45px 20px;
+text-align:center;
+}
+
+footer a{
+color:white;
+text-decoration:none;
+}
+
+@media(max-width:768px){
+header{
+flex-direction:column;
+gap:12px;
+}
+nav{
+display:none;
+}
+.hero h1{
+font-size:40px;
+}
+.hero h3{
+font-size:24px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<h2>SK TECH <span>ACADEMY</span></h2>
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#technologies">Technologies</a>
+<a href="#placements">Placed Candidates</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="phone">📞 9353447457</div>
+</header>
+
+<section id="home" class="hero">
+
+<h1>SK Tech Academy</h1>
+<h3>Your Career Growth Partner</h3>
+
+<p>
+We help freshers and experienced candidates with training, resume support,
+interview preparation, mock interviews, and placement guidance until they get placed.
+</p>
+
+<div class="btns">
+<a class="btn register" href="https://forms.gle/AKGWz5JZmErRjB5a9" target="_blank">
+Candidate Registration
+</a>
+
+<a class="btn interview" href="https://forms.gle/fx3eemxa8DT6AfVM9" target="_blank">
+Interview Scheduling
+</a>
+</div>
+
+</section>
+
+<section id="services" class="section">
+<h2>Our Services</h2>
+<div class="line"></div>
+
+<div class="cards">
+<div class="card">📄 Resume Preparation<p>Professional resume building and review.</p></div>
+<div class="card">🎧 Mock Interviews<p>Real-time mock interviews with expert feedback.</p></div>
+<div class="card">🤝 Interview Support<p>End-to-end interview preparation support.</p></div>
+<div class="card">💼 Placement Assistance<p>Dedicated support until you get placed.</p></div>
+<div class="card">⭐ Career Guidance<p>Career growth and mentoring support.</p></div>
+<div class="card">🎓 Training & Mentorship<p>Industry-oriented practical training.</p></div>
+</div>
+</section>
+
+<section id="technologies" class="section tech">
+<h2>Technologies We Support</h2>
+<div class="line"></div>
+
+<div class="cards">
+<div class="card">.NET</div>
+<div class="card">Java</div>
+<div class="card">QA / Testing</div>
+<div class="card">Data Analyst</div>
+<div class="card">Data Engineer</div>
+<div class="card">DevOps</div>
+<div class="card">SAP</div>
+<div class="card">GenAI Engineer</div>
+<div class="card">Business Analyst</div>
+</div>
+</section>
+
+<section id="placements" class="section">
+<h2>Recently Placed Candidates</h2>
+<div class="line"></div>
+
+<div class="cards">
+<div class="card">Rahul Kumar<p>.NET Developer<br>Mphasis</p></div>
+<div class="card">Priya Sharma<p>QA Engineer<br>Capgemini</p></div>
+<div class="card">Sandeep Reddy<p>SAP Consultant<br>Tech Mahindra</p></div>
+<div class="card">Anjali Verma<p>Data Analyst<br>Hexaware</p></div>
+</div>
+</section>
+
+<footer id="contact">
+<h2>SK TECH ACADEMY</h2>
+<br>
+<p>📞 Call / WhatsApp: <a href="tel:9353447457">9353447457</a></p>
+<p>📧 <a href="mailto:support@mysktech.com">support@mysktech.com</a></p>
+<p>📍 Bangalore, Karnataka, India</p>
+<br>
+<p>© 2026 SK Tech Academy. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
