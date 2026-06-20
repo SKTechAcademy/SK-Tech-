@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SK Tech Interview Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="header">
+
+    <img src="logo.jpeg">
+
+    <h1>SK TECH Interview Dashboard</h1>
+
+</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h2 id="totalCount">0</h2>
+        <p>Total Interviews</p>
+    </div>
+
+    <div class="card">
+        <h2 id="todayCount">0</h2>
+        <p>Today's Interviews</p>
+    </div>
+
+</div>
+
+<div class="search-section">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search Candidate">
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Round</th>
+<th>Technology</th>
+<th>Company</th>
+<th>Date</th>
+<th>From</th>
+<th>To</th>
+<th>Batch</th>
+</tr>
+
+</thead>
+
+<tbody id="tableBody">
+
+</tbody>
+
+</table>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
