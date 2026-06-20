@@ -9,12 +9,12 @@ try {
 const response = await fetch(API_URL);
 const data = await response.json();
 
-console.log(data);
+console.log("FULL DATA:", data);
+console.log("FIRST RECORD:", data[0]);
 
 document.getElementById("totalCount").innerText = data.length;
 
 let table = document.getElementById("tableBody");
-
 table.innerHTML = "";
 
 data.forEach(item => {
@@ -35,7 +35,7 @@ data.forEach(item => {
 ```
 
 } catch (error) {
-console.error(error);
+console.error("ERROR:", error);
 }
 }
 
