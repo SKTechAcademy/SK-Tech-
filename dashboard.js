@@ -8,21 +8,15 @@ function formatDate(dateValue) {
 ```
 if (!dateValue) return "";
 
-try {
+const date = new Date(dateValue);
 
-    const date = new Date(dateValue);
+if (isNaN(date)) return dateValue;
 
-    if (isNaN(date)) return dateValue;
-
-    return date.toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric"
-    });
-
-} catch {
-    return dateValue;
-}
+return date.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+});
 ```
 
 }
@@ -32,21 +26,15 @@ function formatTime(timeValue) {
 ```
 if (!timeValue) return "";
 
-try {
+const date = new Date(timeValue);
 
-    const date = new Date(timeValue);
+if (isNaN(date)) return "";
 
-    if (isNaN(date)) return timeValue;
-
-    return date.toLocaleTimeString("en-IN", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-    });
-
-} catch {
-    return timeValue;
-}
+return date.toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+});
 ```
 
 }
@@ -55,7 +43,6 @@ function renderTable(data) {
 
 ```
 const table = document.getElementById("tableBody");
-
 table.innerHTML = "";
 
 data.forEach(function(item) {
@@ -81,10 +68,6 @@ data.forEach(function(item) {
 
 }
 
-```
-
-}
-
 async function loadData() {
 
 ```
@@ -93,21 +76,36 @@ try {
     const response = await fetch(API_URL);
     const data = await response.json();
 
-    console.log("API DATA:", data);
-
     allData = data;
 
     document.getElementById("totalCount").innerText =
         data.length;
 
-    document.getElementById("todayCount").innerText =
-        data.length;
+    const today = new Date().toISOString().split("T")[0];
 
-    renderTable(data);
+    const todayData = data.filter(function(item) {
+
+        if (!item["Interview Date"]) return false;
+
+        const rowDate = new Date(item["Interview Date"]);
+
+        if (isNaN(rowDate)) return false;
+
+        const rowDateStr =
+            rowDate.toISOString().split("T")[0];
+
+        return rowDateStr === today;
+
+    });
+
+    document.getElementById("todayCount").innerText =
+        todayData.length;
+
+    renderTable(todayData);
 
 } catch(error) {
 
-    console.error("ERROR:", error);
+    console.error(error);
 
 }
 ```
@@ -120,32 +118,13 @@ document.getElementById("searchInput")
 ```
 const value = this.value.toLowerCase();
 
-const filtered = allData.filter(item => {
+const filtered = allData.filter(function(item) {
 
     return (
-
-        (item["Full Name"] || "")
-        .toLowerCase()
-        .includes(value)
-
-        ||
-
-        (item["Interview Company "] || "")
-        .toLowerCase()
-        .includes(value)
-
-        ||
-
-        (item[" Technologies Required"] || "")
-        .toLowerCase()
-        .includes(value)
-
-        ||
-
-        (item["Sk Tech Register ID"] || "")
-        .toLowerCase()
-        .includes(value)
-
+        (item["Full Name"] || "").toLowerCase().includes(value) ||
+        (item["Interview Company "] || "").toLowerCase().includes(value) ||
+        (item[" Technologies Required"] || "").toLowerCase().includes(value) ||
+        (item["Sk Tech Register ID"] || "").toLowerCase().includes(value)
     );
 
 });
@@ -156,5 +135,4 @@ renderTable(filtered);
 });
 
 loadData();
-
 setInterval(loadData, 60000);
