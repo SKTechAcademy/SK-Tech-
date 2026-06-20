@@ -55,24 +55,32 @@ function renderTable(data) {
 
 ```
 const table = document.getElementById("tableBody");
+
 table.innerHTML = "";
 
-data.forEach(item => {
+data.forEach(function(item) {
 
-    table.innerHTML += `
-    <tr>
-        <td>${item["Sk Tech Register ID"] || ""}</td>
-        <td>${item["Full Name"] || ""}</td>
-        <td>${item["Round"] || ""}</td>
-        <td>${item[" Technologies Required"] || ""}</td>
-        <td>${item["Interview Company "] || ""}</td>
-        <td>${formatDate(item["Interview Date"])}</td>
-        <td>${formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])}</td>
-        <td>${formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])}</td>
-        <td>${item["Batch"] || ""}</td>
-    </tr>
-    `;
+    let row = "<tr>";
+
+    row += "<td>" + (item["Sk Tech Register ID"] || "") + "</td>";
+    row += "<td>" + (item["Full Name"] || "") + "</td>";
+    row += "<td>" + (item["Round"] || "") + "</td>";
+    row += "<td>" + (item[" Technologies Required"] || "") + "</td>";
+    row += "<td>" + (item["Interview Company "] || "") + "</td>";
+    row += "<td>" + formatDate(item["Interview Date"]) + "</td>";
+    row += "<td>" + formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"]) + "</td>";
+    row += "<td>" + formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"]) + "</td>";
+    row += "<td>" + (item["Batch"] || "") + "</td>";
+
+    row += "</tr>";
+
+    table.innerHTML += row;
+
 });
+```
+
+}
+
 ```
 
 }
