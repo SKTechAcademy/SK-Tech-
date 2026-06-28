@@ -35,6 +35,36 @@ function renderTable(data) {
     row += "</tr>";
     table.innerHTML += row;
   }
+
+  // Force mobile color fix after rendering
+  setTimeout(forceMobileColorFix, 100);
+}
+
+function forceMobileColorFix() {
+  const bookedRows = document.querySelectorAll('tr.booked-row');
+  bookedRows.forEach(function(row) {
+    // Force inline styles for mobile compatibility
+    row.style.backgroundColor = '#dc2626';
+    row.style.background = '#dc2626';
+    row.style.border = '3px solid #dc2626';
+    row.style.boxShadow = '0 0 10px rgba(220, 38, 38, 0.5)';
+    
+    // Force cell styles
+    const cells = row.querySelectorAll('td');
+    cells.forEach(function(cell) {
+      cell.style.color = '#ffffff';
+      cell.style.fontWeight = 'bold';
+      cell.style.background = 'transparent';
+    });
+
+    // Add visual indicator for mobile
+    if (window.innerWidth <= 768) {
+      const firstCell = cells[0];
+      if (firstCell && !firstCell.textContent.includes('🔴')) {
+        firstCell.innerHTML = '🔴 ' + firstCell.innerHTML;
+      }
+    }
+  });
 }
 
 function classifyRows(upcoming) {
