@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SK Tech Interview Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="animated-bg">
+  <div class="shape s1"></div>
+  <div class="shape s2"></div>
+  <div class="shape s3"></div>
+</div>
+<div class="particles" id="particles"></div>
+
+<div class="header">
+
+    <img src="logo.jpeg">
+
+    <h1>SK TECH Interview Dashboard</h1>
+
+</div>
+
+    <div class="cards">
+
+    <!-- Cards with additional classes for styling and icons -->
+    <div class="card total">
+        <h2 id="totalCount">0</h2>
+        <p>Upcoming Interviews</p>
+    </div>
+
+    <div class="card today">
+        <h2 id="todayCount">0</h2>
+        <p>Today's Interviews</p>
+    </div>
+
+</div>
+
+<!-- Home button to navigate back to the main page -->
+<div style="margin-top: 20px;">
+    <a href="index.html" class="home-btn">Home</a>
+</div>
+
+<!-- Interview Scheduling button -->
+<div style="margin-top: 15px;">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSephX9KvEW53ZZrLTOTeakP6XC04aN1HCaYoH-l4rN3bwpaJA/viewform" target="_blank" class="schedule-btn">Interview Scheduling</a>
+</div>
+
+<!-- Tabs for filtering -->
+<div class="tabs">
+    <button class="tab-btn active" data-tab="all">All Upcoming</button>
+    <button class="tab-btn" data-tab="today">Today</button>
+    <button class="tab-btn" data-tab="tomorrow">Tomorrow</button>
+    <button class="tab-btn" data-tab="available">Available Slots</button>
+</div>
+
+<!-- Removed search input as per new requirements -->
+<div class="search-section" style="display:none;"></div>
+
+<table>
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Round</th>
+<th>Date</th>
+<th>From</th>
+<th>To</th>
+<th>Batch</th>
+</tr>
+
+</thead>
+
+<tbody id="tableBody">
+
+</tbody>
+
+</table>
+
+<script src="shared-utils.js"></script>
+<script src="dashboard.js"></script>
+<script>
+(function() {
+  const particles = document.getElementById('particles');
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (10 + Math.random() * 20) + 's';
+    p.style.animationDelay = Math.random() * 10 + 's';
+    p.style.opacity = Math.random() * 0.5 + 0.2;
+    particles.appendChild(p);
+  }
+})();
+</script>
+
+</body>
+</html>
