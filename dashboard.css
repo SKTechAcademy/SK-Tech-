@@ -212,16 +212,13 @@ table {
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    table-layout: fixed;
 }
 
-/* Set specific column widths */
-th:nth-child(1), td:nth-child(1) { width: 15%; } /* ID */
-th:nth-child(2), td:nth-child(2) { width: 20%; } /* Round */
-th:nth-child(3), td:nth-child(3) { width: 20%; } /* Date */
-th:nth-child(4), td:nth-child(4) { width: 15%; } /* From */
-th:nth-child(5), td:nth-child(5) { width: 15%; } /* To */
-th:nth-child(6), td:nth-child(6) { width: 15%; } /* Batch */
+/* Ensure BATCH column doesn't get cut off */
+th:nth-child(6), td:nth-child(6) {
+    min-width: 80px;
+    width: auto;
+}
 
 th {
     background: rgba(255, 255, 255, 0.1);
@@ -475,21 +472,17 @@ tbody tr[style*="background: #ef4444"] {
 /* Mobile responsive table fixes */
 @media screen and (max-width: 768px) {
     table {
-        display: table;
+        display: block;
         overflow-x: auto;
         white-space: nowrap;
         font-size: 12px;
         border-radius: 12px;
-        table-layout: fixed;
     }
     
     th, td {
         padding: 8px 6px !important;
         font-size: 11px !important;
-        text-align: center !important;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        min-width: 80px;
     }
     
     th {
@@ -497,13 +490,10 @@ tbody tr[style*="background: #ef4444"] {
         padding: 6px 4px !important;
     }
     
-    /* Adjust column widths for mobile */
-    th:nth-child(1), td:nth-child(1) { width: 20%; } /* ID */
-    th:nth-child(2), td:nth-child(2) { width: 18%; } /* Round */
-    th:nth-child(3), td:nth-child(3) { width: 22%; } /* Date */
-    th:nth-child(4), td:nth-child(4) { width: 15%; } /* From */
-    th:nth-child(5), td:nth-child(5) { width: 15%; } /* To */
-    th:nth-child(6), td:nth-child(6) { width: 10%; } /* Batch */
+    /* Ensure BATCH column has enough space */
+    th:nth-child(6), td:nth-child(6) {
+        min-width: 100px !important;
+    }
     
     .header {
         padding: 15px 20px;
