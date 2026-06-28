@@ -266,6 +266,21 @@ tr.conflict-row {
 tr.booked-row {
     /* Red tint for booked slots */
     background: rgba(239, 68, 68, 0.4);
+    background-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Mobile-specific styles to ensure booked rows show red */
+@media (max-width: 768px) {
+    tr.booked-row {
+        background: rgba(239, 68, 68, 0.5) !important;
+        background-color: #ef4444 !important;
+        opacity: 0.9;
+    }
+    
+    /* Ensure table cells inherit the row background */
+    tr.booked-row td {
+        background: transparent !important;
+    }
 }
 tr.today-available-row {
     /* Green tint for today's available slots */
