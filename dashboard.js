@@ -14,10 +14,14 @@ function renderTable(data) {
     const obj = data[i];
     const item = obj.item || obj;
     const rowClass = obj.rowClass || "";
+    const rowStyle = obj.rowStyle || "";
 
     let row = "<tr";
     if (rowClass) {
       row += " class=\"" + rowClass + "\"";
+    }
+    if (rowStyle) {
+      row += " style=\"" + rowStyle + "\"";
     }
     row += ">";
 
@@ -95,6 +99,7 @@ function createBookedSlot(dateObj, startMinutes, endMinutes, item) {
       "Batch": item["Batch"] || ""
     },
     rowClass: "booked-row",
+    rowStyle: "background-color: #ef4444 !important; background: #ef4444 !important;",
     dateOnly: dateObj
   };
 }
