@@ -462,3 +462,78 @@ tbody tr[style*="background: #ef4444"] {
         z-index: 1;
     }
 }
+
+/* Mobile responsive table fixes */
+@media screen and (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-size: 12px;
+        border-radius: 12px;
+    }
+    
+    th, td {
+        padding: 8px 6px !important;
+        font-size: 11px !important;
+        min-width: 80px;
+    }
+    
+    th {
+        font-size: 10px !important;
+        padding: 6px 4px !important;
+    }
+    
+    .header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header h1 {
+        font-size: 20px;
+    }
+    
+    .cards {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .card {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 8px;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    th, td {
+        padding: 6px 4px !important;
+        font-size: 10px !important;
+        min-width: 70px;
+    }
+    
+    .header img {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .header h1 {
+        font-size: 18px;
+    }
+    
+    body {
+        padding: 12px;
+    }
+}
