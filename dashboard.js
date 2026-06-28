@@ -160,8 +160,13 @@ function getAvailableSlots(upcoming, daysToShow) {
     });
 
     // Generate free 1-hour slots and booked slot rows between operating hours
-    // For today, start from current time; for future dates, start from opening time
-    let current = isToday ? Math.max(OPEN_MINUTES, currentMinutes) : OPEN_MINUTES;
+    // For today, start from next full hour; for future dates, start from opening time
+    let current = OPEN_MINUTES;
+    if (isToday) {
+      // Round up to next full hour
+      const nextHour = Math.ceil(currentMinutes / 60) * 60;
+      current = Math.max(OPEN_MINUTES, nextHour);
+    }
     merged.forEach(function(slot) {
       while (current + SLOT_MINUTES <= slot.start) {
         slots.push(createAvailableSlot(dateObj, current, current + SLOT_MINUTES, isToday));
