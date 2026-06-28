@@ -125,6 +125,10 @@ function getAvailableSlots(upcoming, daysToShow) {
     const dateTime = dateObj.getTime();
     const isToday = dateTime === today.getTime();
 
+    // Get current time in minutes for filtering past slots
+    const now = new Date();
+    const currentMinutes = isToday ? (now.getHours() * 60 + now.getMinutes()) : 0;
+
     // Get booked slots for this date, sorted by start time
     const dayBooked = bookedSlots
       .map(function(item) {
@@ -156,7 +160,8 @@ function getAvailableSlots(upcoming, daysToShow) {
     });
 
     // Generate free 1-hour slots and booked slot rows between operating hours
-    let current = OPEN_MINUTES;
+    // For today, start from current time; for future dates, start from opening time
+    let current = isToday ? Math.max(OPEN_MINUTES, currentMinutes) : OPEN_MINUTES;
     merged.forEach(function(slot) {
       while (current + SLOT_MINUTES <= slot.start) {
         slots.push(createAvailableSlot(dateObj, current, current + SLOT_MINUTES, isToday));
