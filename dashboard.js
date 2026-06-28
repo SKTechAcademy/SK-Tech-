@@ -60,7 +60,7 @@ function classifyRows(upcoming) {
 
 const OPEN_MINUTES = 7 * 60; // 7:00 AM
 const CLOSE_MINUTES = 24 * 60; // 12:00 AM (midnight)
-const SLOT_MINUTES = 60;
+const SLOT_MINUTES = 30;
 
 function minutesToTimeStr(minutes) {
   if (minutes === 24 * 60) return "12:00 am";
