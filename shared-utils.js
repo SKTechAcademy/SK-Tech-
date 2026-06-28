@@ -19,7 +19,12 @@ function formatDate(val) {
   if (!val) return "";
   const d = new Date(val);
   if (isNaN(d)) return val;
-  return d.toLocaleDateString("en-IN");
+  
+  // Format as DD/MM/YYYY to ensure consistency across all devices
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const year = d.getFullYear();
+  return `${day}/${month}/${year}`;
 }
 
 function parseTimeString(str) {
