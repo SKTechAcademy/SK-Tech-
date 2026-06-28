@@ -14,7 +14,12 @@ function renderTable(data) {
     const obj = data[i];
     const item = obj.item || obj;
     const rowClass = obj.rowClass || "";
-    const rowStyle = obj.rowStyle || "";
+    let rowStyle = obj.rowStyle || "";
+
+    // Force red styling for booked rows directly in HTML
+    if (rowClass && rowClass.includes('booked-row')) {
+      rowStyle = "background-color: #dc2626 !important; background: #dc2626 !important; border: 3px solid #dc2626 !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.5) !important;";
+    }
 
     let row = "<tr";
     if (rowClass) {
@@ -25,19 +30,25 @@ function renderTable(data) {
     }
     row += ">";
 
-    row += "<td>" + escapeHtml(item["Sk Tech Register ID"] || "") + "</td>";
-    row += "<td>" + escapeHtml(item["Round"] || "") + "</td>";
-    row += "<td>" + escapeHtml(formatDate(item["Interview Date"])) + "</td>";
-    row += "<td>" + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
-    row += "<td>" + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
-    row += "<td>" + escapeHtml(item["Batch"] || "") + "</td>";
+    // Add red indicator for booked rows in first cell
+    const idContent = escapeHtml(item["Sk Tech Register ID"] || "");
+    const bookedIndicator = (rowClass && rowClass.includes('booked-row')) ? "🔴 " : "";
+    
+    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + bookedIndicator + idContent + "</td>";
+    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(item["Round"] || "") + "</td>";
+    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(formatDate(item["Interview Date"])) + "</td>";
+    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
+    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
+    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(item["Batch"] || "") + "</td>";
 
     row += "</tr>";
     table.innerHTML += row;
   }
 
   // Force mobile color fix after rendering
-  setTimeout(forceMobileColorFix, 100);
+  setTimeout(forceMobileColorFix, 50);
+  setTimeout(forceMobileColorFix, 200);
+  setTimeout(forceMobileColorFix, 500);
 }
 
 function forceMobileColorFix() {
