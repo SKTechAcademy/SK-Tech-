@@ -14,65 +14,79 @@ function renderTable(data) {
     const obj = data[i];
     const item = obj.item || obj;
     const rowClass = obj.rowClass || "";
-    let rowStyle = obj.rowStyle || "";
+    const isBooked = rowClass && rowClass.includes('booked-row');
 
-    // Force red styling for booked rows directly in HTML
-    if (rowClass && rowClass.includes('booked-row')) {
-      rowStyle = "background-color: #dc2626 !important; background: #dc2626 !important; border: 3px solid #dc2626 !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.5) !important;";
-    }
-
-    let row = "<tr";
-    if (rowClass) {
-      row += " class=\"" + rowClass + "\"";
-    }
-    if (rowStyle) {
-      row += " style=\"" + rowStyle + "\"";
-    }
-    row += ">";
-
-    // Add red indicator for booked rows in first cell
-    const idContent = escapeHtml(item["Sk Tech Register ID"] || "");
-    const bookedIndicator = (rowClass && rowClass.includes('booked-row')) ? "🔴 " : "";
+    // Create row element directly instead of HTML string
+    const row = document.createElement('tr');
     
-    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + bookedIndicator + idContent + "</td>";
-    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(item["Round"] || "") + "</td>";
-    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(formatDate(item["Interview Date"])) + "</td>";
-    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
-    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
-    row += "<td style='" + ((rowClass && rowClass.includes('booked-row')) ? "color: #ffffff !important; font-weight: bold !important;" : "") + "'>" + escapeHtml(item["Batch"] || "") + "</td>";
+    // Apply styles directly to DOM element
+    if (isBooked) {
+      row.style.backgroundColor = '#dc2626';
+      row.style.background = '#dc2626';
+      row.style.border = '3px solid #dc2626';
+      row.style.boxShadow = '0 0 10px rgba(220, 38, 38, 0.5)';
+      row.style.setProperty('background-color', '#dc2626', 'important');
+      row.style.setProperty('background', '#dc2626', 'important');
+    }
 
-    row += "</tr>";
-    table.innerHTML += row;
+    // Create cells with direct styling
+    const idContent = escapeHtml(item["Sk Tech Register ID"] || "");
+    const bookedIndicator = isBooked ? "🔴 " : "";
+    
+    const cells = [
+      bookedIndicator + idContent,
+      escapeHtml(item["Round"] || ""),
+      escapeHtml(formatDate(item["Interview Date"])),
+      escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])),
+      escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])),
+      escapeHtml(item["Batch"] || "")
+    ];
+
+    cells.forEach(cellContent => {
+      const td = document.createElement('td');
+      td.textContent = cellContent;
+      if (isBooked) {
+        td.style.color = '#ffffff';
+        td.style.fontWeight = 'bold';
+        td.style.background = 'transparent';
+        td.style.setProperty('color', '#ffffff', 'important');
+        td.style.setProperty('font-weight', 'bold', 'important');
+        td.style.setProperty('background', 'transparent', 'important');
+      }
+      row.appendChild(td);
+    });
+
+    table.appendChild(row);
   }
 
   // Force mobile color fix after rendering
-  setTimeout(forceMobileColorFix, 50);
-  setTimeout(forceMobileColorFix, 200);
-  setTimeout(forceMobileColorFix, 500);
+  setTimeout(forceMobileColorFix, 100);
 }
 
 function forceMobileColorFix() {
-  const bookedRows = document.querySelectorAll('tr.booked-row');
-  bookedRows.forEach(function(row) {
-    // Force inline styles for mobile compatibility
-    row.style.backgroundColor = '#dc2626';
-    row.style.background = '#dc2626';
-    row.style.border = '3px solid #dc2626';
-    row.style.boxShadow = '0 0 10px rgba(220, 38, 38, 0.5)';
-    
-    // Force cell styles
+  // Find all rows and check data content instead of CSS classes
+  const allRows = document.querySelectorAll('tbody tr');
+  allRows.forEach(function(row) {
     const cells = row.querySelectorAll('td');
-    cells.forEach(function(cell) {
-      cell.style.color = '#ffffff';
-      cell.style.fontWeight = 'bold';
-      cell.style.background = 'transparent';
-    });
-
-    // Add visual indicator for mobile
-    if (window.innerWidth <= 768) {
-      const firstCell = cells[0];
-      if (firstCell && !firstCell.textContent.includes('🔴')) {
-        firstCell.innerHTML = '🔴 ' + firstCell.innerHTML;
+    if (cells.length > 0) {
+      const idCell = cells[0].textContent;
+      // Check if this is a booked row by looking for non-empty ID and specific patterns
+      const isBooked = idCell.trim() && !idCell.includes('Available') && idCell !== '';
+      
+      if (isBooked) {
+        // Apply multiple styling approaches
+        row.setAttribute('style', 'background-color: #dc2626 !important; background: #dc2626 !important; border: 3px solid #dc2626 !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.5) !important;');
+        row.style.cssText = 'background-color: #dc2626 !important; background: #dc2626 !important; border: 3px solid #dc2626 !important; box-shadow: 0 0 10px rgba(220, 38, 38, 0.5) !important;';
+        
+        cells.forEach(function(cell) {
+          cell.setAttribute('style', 'color: #ffffff !important; font-weight: bold !important; background: transparent !important;');
+          cell.style.cssText = 'color: #ffffff !important; font-weight: bold !important; background: transparent !important;';
+          
+          // Add red indicator if not present
+          if (cell === cells[0] && !cell.textContent.includes('🔴')) {
+            cell.textContent = '🔴 ' + cell.textContent;
+          }
+        });
       }
     }
   });
