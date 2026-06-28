@@ -214,12 +214,6 @@ table {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Ensure BATCH column doesn't get cut off */
-th:nth-child(6), td:nth-child(6) {
-    min-width: 80px;
-    width: auto;
-}
-
 th {
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
@@ -239,14 +233,8 @@ td {
     font-size: 14px;
 }
 
-tr:hover:not(.booked-row):not(.conflict-row) {
+tr:hover {
     background: rgba(255, 255, 255, 0.05);
-}
-
-/* Ensure booked and conflict rows maintain their background on hover */
-tr.booked-row:hover,
-tr.conflict-row:hover {
-    background: rgba(239, 68, 68, 0.4) !important;
 }
 
 tbody tr {
@@ -277,76 +265,7 @@ tr.conflict-row {
 }
 tr.booked-row {
     /* Red tint for booked slots */
-    background: rgba(239, 68, 68, 0.4) !important;
-    background-color: rgba(239, 68, 68, 0.4) !important;
-    border-left: 5px solid #dc2626 !important;
-    border-right: 5px solid #dc2626 !important;
-    position: relative;
-}
-
-tr.booked-row::before {
-    content: "🔴 BOOKED";
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
-    background: #dc2626;
-    color: white;
-    padding: 2px 6px;
-    font-size: 10px;
-    font-weight: bold;
-    border-radius: 2px;
-    white-space: nowrap;
-}
-
-tr.booked-row td {
-    color: #ffffff !important;
-    font-weight: bold !important;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
-}
-
-/* Mobile-specific styles to ensure booked rows show red */
-@media (max-width: 768px) {
-    tr.booked-row {
-        background: #dc2626 !important;
-        border: 3px solid #dc2626 !important;
-        box-shadow: 0 0 10px rgba(220, 38, 38, 0.5) !important;
-    }
-    
-    tr.booked-row td {
-        background: transparent !important;
-        color: #ffffff !important;
-        font-weight: bold !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-    }
-    
-    tr.booked-row::before {
-        content: "🔴 BOOKED" !important;
-        display: block !important;
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-        background: #dc2626 !important;
-        color: white !important;
-        padding: 4px !important;
-        font-size: 12px !important;
-        text-align: center !important;
-        margin-bottom: 4px !important;
-    }
-}
-
-/* Extra small mobile devices */
-@media (max-width: 480px) {
-    tr.booked-row {
-        background: #b91c1c !important;
-        border: 4px solid #991b1b !important;
-    }
-    
-    tr.booked-row td:first-child::before {
-        content: "🔴";
-        margin-right: 8px;
-    }
+    background: rgba(239, 68, 68, 0.4);
 }
 tr.today-available-row {
     /* Green tint for today's available slots */
@@ -442,109 +361,4 @@ th, td {
 
 .empty-row {
     background: rgba(255, 255, 255, 0.05);
-}
-
-/* Universal fallback for booked rows - highest specificity */
-tbody tr.booked-row,
-tbody tr[style*="background-color: #ef4444"],
-tbody tr[style*="background: #ef4444"] {
-    background-color: #ef4444 !important;
-    background: #ef4444 !important;
-    color: #ffffff !important;
-}
-
-/* Force red background on all mobile devices */
-@media screen and (max-width: 1024px) {
-    tbody tr.booked-row {
-        background-color: #ef4444 !important;
-        background: #ef4444 !important;
-        box-shadow: inset 0 0 0 1000px rgba(239, 68, 68, 0.8) !important;
-    }
-    
-    tbody tr.booked-row td {
-        background: transparent !important;
-        color: #ffffff !important;
-        position: relative;
-        z-index: 1;
-    }
-}
-
-/* Mobile responsive table fixes */
-@media screen and (max-width: 768px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        font-size: 12px;
-        border-radius: 12px;
-    }
-    
-    th, td {
-        padding: 8px 6px !important;
-        font-size: 11px !important;
-        min-width: 80px;
-    }
-    
-    th {
-        font-size: 10px !important;
-        padding: 6px 4px !important;
-    }
-    
-    /* Ensure BATCH column has enough space */
-    th:nth-child(6), td:nth-child(6) {
-        min-width: 100px !important;
-    }
-    
-    .header {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .header h1 {
-        font-size: 20px;
-    }
-    
-    .cards {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .card {
-        width: 100%;
-        padding: 20px;
-    }
-    
-    .tabs {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 8px;
-    }
-    
-    .tab-btn {
-        padding: 10px 16px;
-        font-size: 12px;
-        white-space: nowrap;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    th, td {
-        padding: 6px 4px !important;
-        font-size: 10px !important;
-        min-width: 70px;
-    }
-    
-    .header img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .header h1 {
-        font-size: 18px;
-    }
-    
-    body {
-        padding: 12px;
-    }
 }
