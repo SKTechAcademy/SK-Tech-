@@ -233,8 +233,14 @@ td {
     font-size: 14px;
 }
 
-tr:hover {
+tr:hover:not(.booked-row):not(.conflict-row) {
     background: rgba(255, 255, 255, 0.05);
+}
+
+/* Ensure booked and conflict rows maintain their background on hover */
+tr.booked-row:hover,
+tr.conflict-row:hover {
+    background: rgba(239, 68, 68, 0.4) !important;
 }
 
 tbody tr {
