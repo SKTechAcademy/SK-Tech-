@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Dashboard – Interview Slots</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Basic reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #eef3fb, #f7fbff);
+      color: #0d2f66;
+      min-height: 100vh;
+    }
+    header {
+      background: #0d2f66;
+      color: #ffffff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+    header .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+    }
+    header nav a {
+      color: #ffffff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      flex: 1 1 220px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #586b8d;
+    }
+    .card .count {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0d2f66;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    table thead {
+      background: #0d2f66;
+      color: #ffffff;
+    }
+    table th, table td {
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    table tbody tr:nth-child(odd) {
+      background: #f8fbff;
+    }
+    .status-booked {
+      color: #e63757;
+      font-weight: 600;
+    }
+    .status-available {
+      color: #37a55d;
+      font-weight: 600;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #586b8d;
+      font-size: 13px;
+    }
+    .user-info {
+      margin-bottom: 16px;
+      font-size: 15px;
+      color: #586b8d;
+    }
+    .user-info strong {
+      color: #0d2f66;
+    }
+    .loading-row, .error-row, .empty-row {
+      text-align: center;
+      padding: 24px 12px;
+      font-size: 14px;
+      color: #586b8d;
+    }
+    .error-row {
+      color: #e63757;
+      background: #fff0f3;
+    }
+    .empty-row {
+      background: #f8fbff;
+    }
+    @media (max-width: 700px) {
+      .card-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body data-required-role="candidate">
+  <header>
+    <div class="logo">
+      <img src="logo.jpeg" alt="SK Tech Logo">
+      <span>SK Tech Academy</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="interviews.html">Dashboard</a>
+      <a href="#" id="logoutLink">Logout</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Interview Slot Availability</h1>
+    <p class="user-info">Welcome, Register ID: <strong id="candidateRegisterId">-</strong></p>
+    <div class="card-container">
+      <div class="card">
+        <h3>Today's Interviews</h3>
+        <div class="count" id="todayCount">0</div>
+      </div>
+      <div class="card">
+        <h3>Available Slots</h3>
+        <div class="count" id="availableCount">0</div>
+      </div>
+      <div class="card">
+        <h3>My Booked Slots</h3>
+        <div class="count" id="bookedCount">0</div>
+      </div>
+    </div>
+    <h2>Booked Slots</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Register ID</th>
+          <th>Technology</th>
+          <th>Date</th>
+          <th>Time Slot</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="bookedBody"></tbody>
+    </table>
+    <h2>Available Slots</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Register ID</th>
+          <th>Technology</th>
+          <th>Date</th>
+          <th>Time Slot</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="availableBody"></tbody>
+    </table>
+  </main>
+  <footer>
+    &copy; <span id="year"></span> SK Tech Academy. All rights reserved.
+  </footer>
+
+  <!-- Include Firebase libs to allow logout functionality if needed -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="shared-utils.js"></script>
+  <script src="auth-guard.js"></script>
+  <script src="candidate.js"></script>
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Handle logout: clear role and sign out if using Firebase auth
+    document.getElementById('logoutLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('registerId');
+      localStorage.removeItem('email');
+      // sign out from Firebase auth if needed
+      if (typeof auth !== 'undefined') {
+        auth.signOut().then(function() {
+          window.location.href = 'login.html';
+        });
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+  </script>
+</body>
+</html>
