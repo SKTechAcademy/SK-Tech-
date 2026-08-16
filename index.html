@@ -996,6 +996,19 @@ footer a:hover{color:var(--orange);padding-left:5px}
   <div class="stat"><h2 data-count="100">0</h2><p>Placement Support %</p></div>
 </div>
 
+<section class="conversion-section lead-section lead-section-priority" id="quick-register">
+  <div class="lead-copy reveal"><span>Ready to start?</span><h2>Get a Free Career Guidance Call</h2><p>Share the basic details below. Your information opens directly in WhatsApp so you remain in control before sending it.</p><div class="lead-points"><b><i class="fas fa-check"></i> Course guidance</b><b><i class="fas fa-check"></i> Career roadmap</b><b><i class="fas fa-check"></i> Placement support information</b></div></div>
+  <form id="quickLeadForm" class="quick-lead-form reveal" novalidate>
+    <label>Full Name<input id="leadName" name="name" autocomplete="name" maxlength="60" required placeholder="Enter your full name"></label>
+    <label>Phone Number<input id="leadPhone" name="phone" inputmode="tel" autocomplete="tel" maxlength="18" required placeholder="Example: +91 9876543210"></label>
+    <label>Interested Technology<select id="leadCourse" name="course" required><option value="">Select technology</option><option>.NET Full Stack</option><option>Java Full Stack</option><option>React / Frontend</option><option>DevOps / Cloud</option><option>QA / Automation Testing</option><option>Data Engineering / Analytics</option><option>SAP</option><option>Career Guidance</option></select></label>
+    <label>Experience<select id="leadExperience" name="experience" required><option value="">Select experience</option><option>Fresher</option><option>0–2 Years</option><option>2–5 Years</option><option>5+ Years</option></select></label>
+    <p id="leadError" class="lead-error" role="alert"></p>
+    <button type="submit"><i class="fab fa-whatsapp"></i> Request Guidance on WhatsApp</button>
+    <small>We do not submit anything until you confirm it in WhatsApp.</small>
+  </form>
+</section>
+
 <section class="conversion-section live-jobs-section" id="live-jobs">
   <div class="conversion-heading reveal">
     <span>Updated from our live opportunities</span>
@@ -1173,19 +1186,6 @@ footer a:hover{color:var(--orange);padding-left:5px}
       <a class="btn blue" target="_blank" href="https://forms.gle/h9aqB2KtMqqB9rmc6"><i class="fas fa-arrow-right"></i> Register Now</a>
     </div>
   </div>
-</section>
-
-<section class="conversion-section lead-section" id="quick-register">
-  <div class="lead-copy reveal"><span>Ready to start?</span><h2>Get a Free Career Guidance Call</h2><p>Share the basic details below. Your information opens directly in WhatsApp so you remain in control before sending it.</p><div class="lead-points"><b><i class="fas fa-check"></i> Course guidance</b><b><i class="fas fa-check"></i> Career roadmap</b><b><i class="fas fa-check"></i> Placement support information</b></div></div>
-  <form id="quickLeadForm" class="quick-lead-form reveal" novalidate>
-    <label>Full Name<input id="leadName" name="name" autocomplete="name" maxlength="60" required placeholder="Enter your full name"></label>
-    <label>Phone Number<input id="leadPhone" name="phone" inputmode="tel" autocomplete="tel" maxlength="18" required placeholder="Example: +91 9876543210"></label>
-    <label>Interested Technology<select id="leadCourse" name="course" required><option value="">Select technology</option><option>.NET Full Stack</option><option>Java Full Stack</option><option>React / Frontend</option><option>DevOps / Cloud</option><option>QA / Automation Testing</option><option>Data Engineering / Analytics</option><option>SAP</option><option>Career Guidance</option></select></label>
-    <label>Experience<select id="leadExperience" name="experience" required><option value="">Select experience</option><option>Fresher</option><option>0–2 Years</option><option>2–5 Years</option><option>5+ Years</option></select></label>
-    <p id="leadError" class="lead-error" role="alert"></p>
-    <button type="submit"><i class="fab fa-whatsapp"></i> Request Guidance on WhatsApp</button>
-    <small>We do not submit anything until you confirm it in WhatsApp.</small>
-  </form>
 </section>
 
 <section class="conversion-section faq-section" id="faq">
