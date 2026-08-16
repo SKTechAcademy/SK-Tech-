@@ -33,7 +33,8 @@ function renderTable(data) {
 
     row += "<td>" + escapeHtml(item["Sk Tech Register ID"] || "") + "</td>";
     row += "<td>" + escapeHtml(item["Round"] || "") + "</td>";
-    row += "<td>" + escapeHtml(formatDate(item["Interview Date"])) + "</td>";
+    const dateLabel = obj.dateLabel || "Upcoming";
+    row += '<td><span class="date-badge">' + escapeHtml(dateLabel) + '</span><span class="date-value">' + escapeHtml(formatDate(item["Interview Date"])) + "</span></td>";
     row += "<td>" + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
     row += "<td>" + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
     row += "<td>" + escapeHtml(item["Batch"] || "") + "</td>";
@@ -47,6 +48,8 @@ function classifyRows(upcoming) {
   const today = getToday();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
+  const dayAfterTomorrow = new Date(today);
+  dayAfterTomorrow.setDate(today.getDate() + 2);
   const conflictIndices = findConflicts(upcoming);
 
   const rows = [];
@@ -54,16 +57,23 @@ function classifyRows(upcoming) {
     const itm = upcoming[i];
     const dateOnly = getDateOnly(itm["Interview Date"]);
     let rowClass = "";
+    let dateLabel = "Later";
     if (conflictIndices.has(i)) {
       rowClass = "conflict-row";
+      dateLabel = "Conflict";
     } else if (dateOnly && dateOnly.getTime() === today.getTime()) {
       rowClass = "today-row";
+      dateLabel = "Today";
     } else if (dateOnly && dateOnly.getTime() === tomorrow.getTime()) {
       rowClass = "tomorrow-row";
+      dateLabel = "Tomorrow";
+    } else if (dateOnly && dateOnly.getTime() === dayAfterTomorrow.getTime()) {
+      rowClass = "day-after-row";
+      dateLabel = "Day After";
     } else {
       rowClass = "future-row";
     }
-    rows.push({ item: itm, rowClass: rowClass, dateOnly: dateOnly });
+    rows.push({ item: itm, rowClass: rowClass, dateOnly: dateOnly, dateLabel: dateLabel });
   }
   return rows;
 }
