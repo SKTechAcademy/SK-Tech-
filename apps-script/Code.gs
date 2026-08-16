@@ -3,7 +3,12 @@ var STATUS_SHEET_NAME = "Interview Status Updates";
 var STATUS_HEADERS = ["InterviewKey", "SK ID", "Original Date", "Original From", "Original To", "Batch", "Status", "Remarks", "Rescheduled Date", "Rescheduled From", "Rescheduled To", "Updated At", "Updated By"];
 var PUBLIC_CACHE_KEY = "public_interviews_v2";
 
-function doGet() {
+function doGet(event) {
+  // Preserve the existing Html web app unless the dashboard explicitly requests
+  // the interview JSON route.
+  if (!event || !event.parameter || event.parameter.action !== "interviews") {
+    return renderExistingHtml_();
+  }
   try {
     var cache = CacheService.getScriptCache();
     var cached = cache.get(PUBLIC_CACHE_KEY);
@@ -20,6 +25,53 @@ function doGet() {
   } catch (error) {
     return jsonOutput_({ ok: false, error: safeError_(error) });
   }
+}
+
+function renderExistingHtml_() {
+  var sheet = getSpreadsheet_().getSheets()[1];
+  var data = sheet.getDataRange().getValues();
+  var template = HtmlService.createTemplateFromFile("Html");
+  template.data = data;
+  return template.evaluate().setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function onFormSubmit(e) {
+  var spreadsheet = getSpreadsheet_();
+  var responseSheet = spreadsheet.getSheetByName("Form Responses 3_Candiate details");
+  var candidateSheet = spreadsheet.getSheetByName("Candiate Details");
+  if (!e || !e.range || !responseSheet || !candidateSheet) return;
+
+  var row = e.range.getRow();
+  var email = responseSheet.getRange(row, 2).getValue();
+  var name = responseSheet.getRange(row, 3).getValue();
+  if (!email || !name) return;
+
+  var lastRow = candidateSheet.getLastRow();
+  var skId = lastRow;
+  var nextRow = lastRow + 1;
+  candidateSheet.getRange(nextRow, 1).setValue(skId);
+  candidateSheet.getRange(nextRow, 2).setValue(name);
+
+  var subject = "SK Tech Registration Successful";
+  var body = "Hello " + name + ",\n\n" +
+    "Welcome to SK Tech.\n\n" +
+    "Your registration was successful.\n\n" +
+    "Your SK Tech ID: SK" + skId + "\n\n" +
+    "Candidate Name: " + name + "\n\n" +
+    "Please use this ID for future communication.\n\n" +
+    "Regards,\nSK Tech Team";
+
+  GmailApp.sendEmail(email, subject, body, {
+    from: "support@mysktech.com",
+    bcc: "support@mysktech.com",
+    name: "SK Tech"
+  });
+}
+
+function checkSheetNames() {
+  getSpreadsheet_().getSheets().forEach(function(sheet) {
+    Logger.log("Sheet Name: [" + sheet.getName() + "]");
+  });
 }
 
 function doPost(event) {

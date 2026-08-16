@@ -3,7 +3,7 @@
  * Common helpers used by admin.js, candidate.js, and dashboard.js.
  */
 
-const API_URL = "https://script.google.com/macros/s/AKfycbwxpMoYA7gmul9iMk9eA2Cae07sxynCp6Ff73BhXFAdJoOMBmNzZP2-5ck2qRyqjm7W/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwxpMoYA7gmul9iMk9eA2Cae07sxynCp6Ff73BhXFAdJoOMBmNzZP2-5ck2qRyqjm7W/exec?action=interviews";
 
 function escapeHtml(str) {
   if (str === null || str === undefined) return "";

@@ -3,7 +3,7 @@
 This backend keeps `Form Responses 1` as the booking source and creates/uses an append-only `Interview Status Updates` tab. The public `doGet` response contains only the six schedule fields plus status/remarks. Admin reads and writes require a verified Google ID token and an email allowlist.
 
 1. Open the Apps Script project currently serving the interview dashboard.
-2. Back up the existing `Code.gs`, then replace its dashboard `doGet`/`doPost` implementation with `Code.gs` from this folder. If that project contains unrelated form/email functions, retain them.
+2. Back up the existing `Code.gs`, then replace it with the combined `Code.gs` from this folder. The combined file preserves the existing Html page, SK ID creation and registration email functions. Interview JSON is served only through `?action=interviews`.
 3. In **Project Settings → Script properties**, add:
    - `SPREADSHEET_ID`: the private ID of the existing SK interview spreadsheet.
    - `GOOGLE_CLIENT_ID`: the OAuth Web Client ID used by `interview-admin-config.js`.
