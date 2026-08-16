@@ -44,6 +44,19 @@ function renderTable(data) {
   }
 }
 
+function isWeekend(dateOnly) {
+  return !!dateOnly && (dateOnly.getDay() === 0 || dateOnly.getDay() === 6);
+}
+
+function isPanelUnavailable(item) {
+  const searchable = [
+    item["Round"], item["Status"], item["Remarks"], item[" Technologies Required"]
+  ].join(" ").toLowerCase();
+  const mentionsSupport = /panel|pannel|supporter|support/.test(searchable);
+  const mentionsUnavailable = /not\s*(available|avaible)|unavailable|not\s*avail/.test(searchable);
+  return mentionsSupport && mentionsUnavailable;
+}
+
 function classifyRows(upcoming) {
   const today = getToday();
   const tomorrow = new Date(today);
@@ -58,7 +71,10 @@ function classifyRows(upcoming) {
     const dateOnly = getDateOnly(itm["Interview Date"]);
     let rowClass = "";
     let dateLabel = "Later";
-    if (conflictIndices.has(i)) {
+    if (isPanelUnavailable(itm) || isWeekend(dateOnly)) {
+      rowClass = "unavailable-row";
+      dateLabel = isWeekend(dateOnly) ? "Weekend Closed" : "Panel Unavailable";
+    } else if (conflictIndices.has(i)) {
       rowClass = "conflict-row";
       dateLabel = "Conflict";
     } else if (dateOnly && dateOnly.getTime() === today.getTime()) {
@@ -119,6 +135,22 @@ function createBookedSlot(dateObj, startMinutes, endMinutes, item) {
   };
 }
 
+function createWeekendUnavailableSlot(dateObj) {
+  return {
+    item: {
+      "Sk Tech Register ID": "Unavailable",
+      "Round": "Panel support not available (Weekend)",
+      "Interview Date": dateObj,
+      "Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment": minutesToTimeStr(OPEN_MINUTES),
+      "Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment": minutesToTimeStr(CLOSE_MINUTES),
+      "Batch": "-"
+    },
+    rowClass: "unavailable-row",
+    dateOnly: dateObj,
+    dateLabel: "Weekend Closed"
+  };
+}
+
 function getAvailableSlots(upcoming, daysToShow) {
   const slots = [];
   const today = getToday();
@@ -144,6 +176,12 @@ function getAvailableSlots(upcoming, daysToShow) {
   dates.forEach(function(dateObj) {
     const dateTime = dateObj.getTime();
     const isToday = dateTime === today.getTime();
+
+    // Saturdays and Sundays are always unavailable for panel support.
+    if (isWeekend(dateObj)) {
+      slots.push(createWeekendUnavailableSlot(dateObj));
+      return;
+    }
 
     // Get current time in minutes for filtering past slots
     const now = new Date();
