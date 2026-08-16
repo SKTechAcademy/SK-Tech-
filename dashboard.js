@@ -1,6 +1,15 @@
 // dashboard.js
 // Public interview dashboard for SK Tech Academy.
 let dashboardRequestController = null;
+let dashboardRows = [];
+let dashboardUpcoming = [];
+let dashboardLoaded = false;
+
+function renderActiveInterviewTab() {
+  const activeBtn = document.querySelector(".tab-btn.active");
+  const activeTab = activeBtn ? activeBtn.getAttribute("data-tab") : "all";
+  renderTable(filterByTab(dashboardRows, activeTab, dashboardUpcoming, 5));
+}
 
 function renderTable(data) {
   const table = document.getElementById("tableBody");
@@ -215,9 +224,10 @@ function loadData() {
 
   if (dashboardRequestController) dashboardRequestController.abort();
   dashboardRequestController = new AbortController();
-  const timeoutId = setTimeout(function() { dashboardRequestController.abort(); }, 15000);
+  const currentController = dashboardRequestController;
+  const timeoutId = setTimeout(function() { currentController.abort(); }, 15000);
 
-  fetch(API_URL, { signal: dashboardRequestController.signal, cache: "no-store" })
+  fetch(API_URL, { signal: currentController.signal, cache: "no-store" })
     .then(function(response) {
       if (!response.ok) throw new Error("Server returned " + response.status);
       return response.json();
@@ -230,18 +240,19 @@ function loadData() {
       let { upcoming, todayCount } = filterUpcoming(data);
       upcoming = sortByDateTime(upcoming);
       const allRows = classifyRows(upcoming);
+      dashboardUpcoming = upcoming;
+      dashboardRows = allRows;
+      dashboardLoaded = true;
 
       setText("totalCount", upcoming.length);
       setText("todayCount", todayCount);
 
-      const activeBtn = document.querySelector(".tab-btn.active");
-      const activeTab = activeBtn ? activeBtn.getAttribute("data-tab") : "all";
-      const filteredRows = filterByTab(allRows, activeTab, upcoming, 5);
-      renderTable(filteredRows);
+      renderActiveInterviewTab();
       const updated = document.getElementById("lastUpdated");
       if (updated) updated.textContent = "Updated " + new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
     })
     .catch(function(error) {
+      if (currentController !== dashboardRequestController) return;
       if (error.name === "AbortError") error = new Error("The server took too long to respond");
       console.error("ERROR:", error);
       if (tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state">Unable to load interview data.<br><small>' + escapeHtml(error.message) + '</small><br><button class="retry-btn" type="button" onclick="loadData()">Try again</button></td></tr>';
@@ -273,8 +284,7 @@ function switchInterviewTab(tabName) {
   if (target) target.classList.add("active");
 
   showInterviewTable();
-  activeTab = tabName;
-  loadData();
+  if (dashboardLoaded) renderActiveInterviewTab(); else loadData();
 }
 
 function initTabs() {
@@ -292,7 +302,7 @@ function initTabs() {
         showJobsContainer();
       } else {
         showInterviewTable();
-        loadData();
+        if (dashboardLoaded) renderActiveInterviewTab(); else loadData();
       }
     });
   });
