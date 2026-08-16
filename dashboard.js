@@ -378,45 +378,39 @@ function showJobsContainer() {
 }
 
 function switchInterviewTab(tabName) {
+  activateDashboardTab(tabName, true);
+}
+
+function activateDashboardTab(tabName, updateUrl) {
   const tabs = document.querySelectorAll(".tab-btn");
   tabs.forEach(function(btn) { btn.classList.remove("active"); });
   const target = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
   if (target) target.classList.add("active");
-
-  showInterviewTable();
-  if (dashboardLoaded) renderActiveInterviewTab(); else loadData();
+  if (updateUrl && history.replaceState) history.replaceState(null, "", tabName === "all" ? location.pathname + location.search : "#" + tabName);
+  if (tabName === "jobs") {
+    if (typeof jobsAgeFilter !== "undefined") jobsAgeFilter = "all";
+    showJobsContainer();
+  } else {
+    showInterviewTable();
+    if (dashboardLoaded) renderActiveInterviewTab(); else loadData();
+  }
 }
 
 function initTabs() {
-  const tabs = document.querySelectorAll(".tab-btn");
-  tabs.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      tabs.forEach(function(b) { b.classList.remove("active"); });
-      btn.classList.add("active");
-
-      const tab = btn.getAttribute("data-tab");
-      if (history.replaceState) history.replaceState(null, "", tab === "all" ? location.pathname + location.search : "#" + tab);
-      if (tab === "jobs") {
-        if (typeof jobsAgeFilter !== "undefined") {
-          jobsAgeFilter = "all";
-        }
-        showJobsContainer();
-      } else {
-        showInterviewTable();
-        if (dashboardLoaded) renderActiveInterviewTab(); else loadData();
-      }
-    });
+  const tabBar = document.querySelector(".tabs");
+  if (!tabBar) return;
+  tabBar.addEventListener("click", function(event) {
+    const btn = event.target.closest(".tab-btn");
+    if (!btn || !tabBar.contains(btn)) return;
+    event.preventDefault();
+    activateDashboardTab(btn.getAttribute("data-tab"), true);
   });
 }
 
 function openTabFromLocation() {
   const requested = location.hash.replace("#", "").toLowerCase();
   if (requested !== "jobs" && requested !== "jobopenings") return;
-  const tabs = document.querySelectorAll(".tab-btn");
-  tabs.forEach(function(btn) {
-    btn.classList.toggle("active", btn.getAttribute("data-tab") === "jobs");
-  });
-  showJobsContainer();
+  activateDashboardTab("jobs", false);
   requestAnimationFrame(function() {
     const jobs = document.getElementById("jobsContainer");
     if (jobs) jobs.scrollIntoView({ behavior: "smooth", block: "start" });
