@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SK Tech Interview Dashboard & Job Openings</title>
+    <meta name="description" content="View upcoming SK Tech interviews, available interview slots and current IT job openings." />
+    <meta name="theme-color" content="#07101f" />
+    <link rel="canonical" href="https://www.mysktech.com/interviews.html" />
 
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="jobs.css">
+    <link rel="stylesheet" href="experience.css">
+    <link rel="stylesheet" href="dashboard-3d.css">
 </head>
 
-<body>
+<body class="dashboard-page">
+<a class="skip-link" href="#dashboardContent">Skip to dashboard</a>
 
 <div class="animated-bg">
   <div class="shape s1"></div>
@@ -19,32 +25,33 @@
 <div class="particles" id="particles"></div>
 
 <div class="header">
-
-    <img src="logo.jpeg">
-
-    <h1>SK TECH Interview Dashboard</h1>
-
+    <img src="logo.jpeg" alt="SK Tech logo" width="66" height="66">
+    <div class="header-copy">
+      <h1>SK TECH Interview Dashboard</h1>
+      <p>Interviews, available slots and live job opportunities in one place.</p>
+    </div>
+    <span class="live-pill">LIVE DASHBOARD</span>
 </div>
-
+<main id="dashboardContent" class="dashboard-shell">
     <div class="cards">
 
     <!-- Cards with additional classes for styling and icons -->
-    <div class="card total" onclick="switchInterviewTab('all')" style="cursor: pointer;">
+    <div class="card total" data-icon="📊" onclick="switchInterviewTab('all')" style="cursor: pointer;" role="button" tabindex="0">
         <h2 id="totalCount">0</h2>
         <p>Upcoming Interviews</p>
     </div>
 
-    <div class="card today" onclick="switchInterviewTab('today')" style="cursor: pointer;">
+    <div class="card today" data-icon="📅" onclick="switchInterviewTab('today')" style="cursor: pointer;" role="button" tabindex="0">
         <h2 id="todayCount">0</h2>
         <p>Today's Interviews</p>
     </div>
 
-    <div class="card job-new" onclick="filterJobsByAge('new')" style="cursor: pointer;">
+    <div class="card job-new" data-icon="✨" onclick="filterJobsByAge('new')" style="cursor: pointer;" role="button" tabindex="0">
         <h2 id="newJobsCount">0</h2>
         <p>New Openings</p>
     </div>
 
-    <div class="card job-old" onclick="filterJobsByAge('old')" style="cursor: pointer;">
+    <div class="card job-old" data-icon="📁" onclick="filterJobsByAge('old')" style="cursor: pointer;" role="button" tabindex="0">
         <h2 id="oldJobsCount">0</h2>
         <p>Old Openings</p>
     </div>
@@ -52,13 +59,13 @@
 </div>
 
 <!-- Home button to navigate back to the main page -->
-<div style="margin-top: 20px;">
-    <a href="index.html" class="home-btn">Home</a>
-</div>
-
-<!-- Interview Scheduling button -->
-<div style="margin-top: 15px;">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSephX9KvEW53ZZrLTOTeakP6XC04aN1HCaYoH-l4rN3bwpaJA/viewform" target="_blank" class="schedule-btn">Interview Scheduling</a>
+<div class="action-row">
+  <div class="quick-actions">
+    <a href="index.html" class="home-btn">← Home</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSephX9KvEW53ZZrLTOTeakP6XC04aN1HCaYoH-l4rN3bwpaJA/viewform" target="_blank" rel="noopener" class="schedule-btn">＋ Schedule Interview</a>
+    <button type="button" class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  </div>
+  <span id="lastUpdated" class="last-updated" aria-live="polite"></span>
 </div>
 
 <!-- Tabs for filtering -->
@@ -73,7 +80,8 @@
 <!-- Removed search input as per new requirements -->
 <div class="search-section" style="display:none;"></div>
 
-<table>
+<div class="table-shell">
+<table aria-label="Upcoming interviews">
 
 <thead>
 
@@ -93,20 +101,28 @@
 </tbody>
 
 </table>
+</div>
 
 <!-- Job Openings Section -->
 <div id="jobsContainer" class="jobs-container" style="display:none;">
   <div class="jobs-header">
-    <h2>Current Job Openings</h2>
+    <div><h2>Current Job Openings</h2><p>Search opportunities by role, company, skill or location.</p></div>
+  </div>
+  <div class="job-toolbar">
+    <label class="job-search"><span>⌕</span><input id="jobSearch" type="search" placeholder="Search jobs, skills or location" autocomplete="off"></label>
+    <select id="jobTypeFilter" aria-label="Filter by employment type"><option value="">All job types</option></select>
+    <select id="jobSort" aria-label="Sort jobs"><option value="newest">Newest first</option><option value="title">Job title A–Z</option></select>
   </div>
   <div id="jobsGrid" class="jobs-grid">
     <!-- Job cards injected here -->
   </div>
 </div>
+</main>
 
 <script src="shared-utils.js"></script>
 <script src="dashboard.js"></script>
 <script src="jobs.js"></script>
+<script src="experience.js" defer></script>
 <script>
 (function() {
   const particles = document.getElementById('particles');

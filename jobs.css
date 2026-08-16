@@ -33,6 +33,13 @@
     gap: 24px;
 }
 
+.job-toolbar { display:grid; grid-template-columns:minmax(240px,1fr) 190px 170px; gap:12px; margin:0 0 22px; }
+.job-search { display:flex; align-items:center; gap:10px; padding:0 14px; border:1px solid rgba(255,255,255,.12); border-radius:13px; background:rgba(255,255,255,.07); color:#9fb0c8; }
+.job-search input,.job-toolbar select { width:100%; min-height:46px; border:1px solid rgba(255,255,255,.12); border-radius:13px; padding:0 14px; background:#172131; color:#fff; outline:none; }
+.job-search input { min-height:44px; padding:0; border:0; background:transparent; }
+.job-search:focus-within,.job-toolbar select:focus { border-color:#39d7ff; box-shadow:0 0 0 3px rgba(57,215,255,.12); }
+@media(max-width:700px){.job-toolbar{grid-template-columns:1fr}.job-actions,.job-share-actions{display:grid;grid-template-columns:1fr 1fr}}
+
 .job-card {
     background: #ffffff;
     border-radius: 20px;

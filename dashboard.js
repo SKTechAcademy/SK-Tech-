@@ -1,5 +1,6 @@
 // dashboard.js
 // Public interview dashboard for SK Tech Academy.
+let dashboardRequestController = null;
 
 function renderTable(data) {
   const table = document.getElementById("tableBody");
@@ -209,10 +210,18 @@ function filterByTab(rows, tab, upcoming, daysToShow) {
 }
 
 function loadData() {
-  showLoading("tableBody", 6);
+  const tableBody = document.getElementById("tableBody");
+  if (tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state"><div class="state-spinner" aria-hidden="true"></div><div>Loading latest interview schedule…</div></td></tr>';
 
-  fetch(API_URL)
-    .then(function(response) { return response.json(); })
+  if (dashboardRequestController) dashboardRequestController.abort();
+  dashboardRequestController = new AbortController();
+  const timeoutId = setTimeout(function() { dashboardRequestController.abort(); }, 15000);
+
+  fetch(API_URL, { signal: dashboardRequestController.signal, cache: "no-store" })
+    .then(function(response) {
+      if (!response.ok) throw new Error("Server returned " + response.status);
+      return response.json();
+    })
     .then(function(data) {
       if (!Array.isArray(data)) {
         throw new Error("Unexpected response from server");
@@ -229,11 +238,15 @@ function loadData() {
       const activeTab = activeBtn ? activeBtn.getAttribute("data-tab") : "all";
       const filteredRows = filterByTab(allRows, activeTab, upcoming, 5);
       renderTable(filteredRows);
+      const updated = document.getElementById("lastUpdated");
+      if (updated) updated.textContent = "Updated " + new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
     })
     .catch(function(error) {
+      if (error.name === "AbortError") error = new Error("The server took too long to respond");
       console.error("ERROR:", error);
-      showError("tableBody", "Failed to load data: " + error.message, 6);
-    });
+      if (tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state">Unable to load interview data.<br><small>' + escapeHtml(error.message) + '</small><br><button class="retry-btn" type="button" onclick="loadData()">Try again</button></td></tr>';
+    })
+    .finally(function() { clearTimeout(timeoutId); });
 }
 
 function showInterviewTable() {
