@@ -362,15 +362,19 @@ async function loadData() {
 
 function showInterviewTable() {
   const table = document.querySelector("table");
+  const tableShell = document.querySelector(".table-shell");
   const jobsContainer = document.getElementById("jobsContainer");
-  if (table) table.style.display = "";
+  if (tableShell) tableShell.style.display = "block";
+  if (table) table.style.display = "table";
   if (jobsContainer) jobsContainer.style.display = "none";
 }
 
 function showJobsContainer() {
   const table = document.querySelector("table");
+  const tableShell = document.querySelector(".table-shell");
   const jobsContainer = document.getElementById("jobsContainer");
-  if (table) table.style.display = "none";
+  if (tableShell) tableShell.style.display = "none";
+  if (table) table.style.display = "table";
   if (jobsContainer) jobsContainer.style.display = "block";
   if (typeof loadJobs === "function") {
     loadJobs();
