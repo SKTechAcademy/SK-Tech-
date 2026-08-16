@@ -122,6 +122,7 @@ function createAvailableSlot(dateObj, startMinutes, endMinutes, isToday) {
 }
 
 function createBookedSlot(dateObj, startMinutes, endMinutes, item) {
+  const unavailable = isPanelUnavailable(item);
   return {
     item: {
       "Sk Tech Register ID": item["Sk Tech Register ID"] || "Booked",
@@ -131,8 +132,9 @@ function createBookedSlot(dateObj, startMinutes, endMinutes, item) {
       "Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment": minutesToTimeStr(endMinutes),
       "Batch": item["Batch"] || ""
     },
-    rowClass: "booked-row",
-    dateOnly: dateObj
+    rowClass: unavailable ? "unavailable-row" : "booked-row",
+    dateOnly: dateObj,
+    dateLabel: unavailable ? "Panel Unavailable" : "Booked"
   };
 }
 
@@ -178,12 +180,6 @@ function getAvailableSlots(upcoming, daysToShow) {
     const dateTime = dateObj.getTime();
     const isToday = dateTime === today.getTime();
 
-    // Saturdays and Sundays are always unavailable for panel support.
-    if (isWeekend(dateObj)) {
-      slots.push(createWeekendUnavailableSlot(dateObj));
-      return;
-    }
-
     // Get current time in minutes for filtering past slots
     const now = new Date();
     const currentMinutes = isToday ? (now.getHours() * 60 + now.getMinutes()) : 0;
@@ -202,6 +198,15 @@ function getAvailableSlots(upcoming, daysToShow) {
         return itemDate && itemDate.getTime() === dateTime && slot.start > 0 && slot.end > 0;
       })
       .sort(function(a, b) { return a.start - b.start; });
+
+    // Weekends remain closed, but real Sheet bookings must still be visible.
+    if (isWeekend(dateObj)) {
+      slots.push(createWeekendUnavailableSlot(dateObj));
+      dayBooked.forEach(function(slot) {
+        slots.push(createBookedSlot(dateObj, slot.start, slot.end, slot.item));
+      });
+      return;
+    }
 
     // Merge overlapping/adjacent booked slots
     const merged = [];

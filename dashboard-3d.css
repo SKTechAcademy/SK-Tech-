@@ -85,7 +85,8 @@ body.dashboard-page {
 .dashboard-page tbody tr.future-row { background:linear-gradient(90deg,rgba(64,49,128,.92),rgba(46,38,94,.88)); border-left:4px solid #9a83ff; }
 .dashboard-page tbody tr.conflict-row { background:linear-gradient(90deg,rgba(158,20,48,.98),rgba(102,17,36,.94)); border-left:4px solid #ff405d; box-shadow:inset 0 0 24px rgba(255,64,93,.16); }
 .dashboard-page tbody tr.unavailable-row { background:linear-gradient(90deg,rgba(178,18,52,.98),rgba(111,15,38,.94)); border-left:4px solid #ff405d; box-shadow:inset 0 0 28px rgba(255,64,93,.18); }
-.dashboard-page tbody tr.today-row td,.dashboard-page tbody tr.tomorrow-row td,.dashboard-page tbody tr.day-after-row td,.dashboard-page tbody tr.future-row td,.dashboard-page tbody tr.conflict-row td,.dashboard-page tbody tr.unavailable-row td { color:#f8fbff !important; }
+.dashboard-page tbody tr.booked-row { background:linear-gradient(90deg,rgba(139,24,48,.96),rgba(89,20,36,.92)); border-left:4px solid #ff5a71; }
+.dashboard-page tbody tr.today-row td,.dashboard-page tbody tr.tomorrow-row td,.dashboard-page tbody tr.day-after-row td,.dashboard-page tbody tr.future-row td,.dashboard-page tbody tr.conflict-row td,.dashboard-page tbody tr.unavailable-row td,.dashboard-page tbody tr.booked-row td { color:#f8fbff !important; }
 .dashboard-page tbody tr.conflict-row td { color:#fff; font-weight:700; }
 .dashboard-page tbody tr.unavailable-row td { color:#fff; font-weight:750; }
 .date-badge { display:inline-flex; margin-right:9px; padding:4px 8px; border-radius:99px; background:rgba(255,255,255,.12); color:#fff; font-size:10px; font-weight:850; text-transform:uppercase; letter-spacing:.45px; }
@@ -96,6 +97,7 @@ body.dashboard-page {
 .future-row .date-badge { background:#6751ce; }
 .conflict-row .date-badge { background:#e11d48; box-shadow:0 0 14px rgba(255,64,93,.45); }
 .unavailable-row .date-badge { background:#e11d48; box-shadow:0 0 14px rgba(255,64,93,.5); }
+.booked-row .date-badge { background:#d92d4f; box-shadow:0 0 12px rgba(255,90,113,.38); }
 .load-state { padding:42px 18px !important; text-align:center; }
 .state-spinner { width:30px; height:30px; margin:0 auto 12px; border:3px solid rgba(255,255,255,.13); border-top-color:#39d7ff; border-radius:50%; animation:spin .8s linear infinite; }
 @keyframes spin { to { transform:rotate(360deg); } }
