@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>SK Tech – Interview Status Admin</title>
+  <link rel="stylesheet" href="interview-status.css?v=1">
+</head>
+<body class="status-admin-page">
+  <main class="status-admin-shell">
+    <header class="status-admin-header">
+      <img src="logo.jpeg" alt="SK Tech logo">
+      <div><h1>Interview Status Management</h1><p>Authorised SK Tech administrators only</p></div>
+      <nav class="status-admin-nav">
+        <a href="interviews.html">Public Dashboard</a>
+        <button id="signOutButton" type="button" hidden>Sign out</button>
+      </nav>
+    </header>
+
+    <section id="signInPanel" class="sign-in-panel">
+      <h2>Admin sign-in required</h2>
+      <p>Sign in with an approved SK Tech Google account to manage interview statuses.</p>
+      <div id="googleSignIn"></div>
+      <div id="setupMessage" class="admin-message" role="status"></div>
+    </section>
+
+    <section id="statusPanel" class="status-panel" hidden>
+      <div class="admin-toolbar">
+        <span>Signed in as <span id="adminUser" class="admin-user"></span></span>
+        <input id="adminSearch" type="search" placeholder="Search SK ID, candidate, round or date" autocomplete="off">
+        <button id="refreshAdmin" class="secondary-btn" type="button">Refresh</button>
+      </div>
+      <div id="adminMessage" class="admin-message" aria-live="polite"></div>
+      <div class="status-table-wrap">
+        <table class="status-table">
+          <thead><tr><th>SK ID</th><th>Candidate</th><th>Round</th><th>Date</th><th>Time</th><th>Batch</th><th>Current status</th><th>Change status</th></tr></thead>
+          <tbody id="statusAdminBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="statusDialog" class="status-dialog">
+    <form id="statusForm" class="status-form" method="dialog" novalidate>
+      <h2 id="statusDialogTitle">Update interview status</h2>
+      <p id="statusContext" class="context"></p>
+      <div id="rescheduleFields" class="reschedule-grid" hidden>
+        <div class="form-field"><label for="rescheduledDate">New interview date</label><input id="rescheduledDate" type="date"></div>
+        <div class="form-field"><label for="rescheduledFrom">From</label><input id="rescheduledFrom" type="time"></div>
+        <div class="form-field"><label for="rescheduledTo">To</label><input id="rescheduledTo" type="time"></div>
+      </div>
+      <div class="form-field"><label id="remarksLabel" for="statusRemarks">Remarks (optional)</label><textarea id="statusRemarks" maxlength="500" placeholder="Add a note for this status change"></textarea></div>
+      <div id="statusFormError" class="field-error" role="alert"></div>
+      <div class="dialog-actions">
+        <button id="cancelStatusUpdate" class="secondary-btn" type="button">Cancel</button>
+        <button id="saveStatusUpdate" class="primary-btn" type="submit">Save status</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="shared-utils.js?v=20260816-3"></script>
+  <script src="interview-status-utils.js?v=1"></script>
+  <script src="interview-admin-config.js?v=1"></script>
+  <script src="interview-admin.js?v=1"></script>
+</body>
+</html>

@@ -98,6 +98,8 @@ function filterUpcoming(data) {
   let todayCount = 0;
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
+    const interviewStatus = String(item["Status"] || "Scheduled").toLowerCase().trim();
+    if (interviewStatus === "completed" || interviewStatus === "cancelled") continue;
     const dateOnly = getDateOnly(item["Interview Date"]);
     if (!dateOnly) continue;
     if (dateOnly >= today) {

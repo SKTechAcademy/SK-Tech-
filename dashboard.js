@@ -26,7 +26,7 @@ function renderTable(data) {
   table.innerHTML = "";
 
   if (data.length === 0) {
-    showEmpty("tableBody", "No interviews found for this tab.", 6);
+    showEmpty("tableBody", "No interviews found for this tab.", 7);
     return;
   }
 
@@ -48,6 +48,8 @@ function renderTable(data) {
     row += "<td>" + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
     row += "<td>" + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
     row += "<td>" + escapeHtml(item["Batch"] || "") + "</td>";
+    const interviewStatus = item["Status"] || "Scheduled";
+    row += '<td><span class="interview-status status-' + escapeHtml(interviewStatus.toLowerCase().replace(/[^a-z]+/g, "-")) + '">' + escapeHtml(interviewStatus) + "</span></td>";
 
     row += "</tr>";
     table.innerHTML += row;
@@ -320,7 +322,7 @@ function waitBeforeRetry(milliseconds) {
 
 async function loadData() {
   const tableBody = document.getElementById("tableBody");
-  if (!dashboardLoaded && tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state"><div class="state-spinner" aria-hidden="true"></div><div>Loading latest interview schedule…</div><small>Connecting securely to the schedule…</small></td></tr>';
+  if (!dashboardLoaded && tableBody) tableBody.innerHTML = '<tr><td colspan="7" class="load-state"><div class="state-spinner" aria-hidden="true"></div><div>Loading latest interview schedule…</div><small>Connecting securely to the schedule…</small></td></tr>';
   const updated = document.getElementById("lastUpdated");
   if (dashboardLoaded && updated) updated.textContent = "Refreshing… current data remains visible";
 
@@ -356,7 +358,7 @@ async function loadData() {
     renderActiveInterviewTab();
     if (updated) updated.textContent = "Connection slow • Showing last loaded data";
   } else if (tableBody) {
-    tableBody.innerHTML = '<tr><td colspan="6" class="load-state">Unable to load interview data after automatic retries.<br><small>' + escapeHtml(lastError.message) + '</small><br><button class="retry-btn" type="button" onclick="loadData()">Try again</button></td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="7" class="load-state">Unable to load interview data after automatic retries.<br><small>' + escapeHtml(lastError.message) + '</small><br><button class="retry-btn" type="button" onclick="loadData()">Try again</button></td></tr>';
   }
 }
 

@@ -1,0 +1,90 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body.status-admin-page {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #eef5ff;
+  background: radial-gradient(circle at 10% 10%, #123e7a 0, #07111f 38%, #080c15 72%);
+}
+.status-admin-shell { max-width: 1500px; margin: 0 auto; }
+.status-admin-header {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 20px 24px; border: 1px solid rgba(122,190,255,.22); border-radius: 20px;
+  background: rgba(14,29,51,.82); box-shadow: 0 18px 50px rgba(0,0,0,.3);
+}
+.status-admin-header img { width: 58px; height: 58px; border-radius: 14px; }
+.status-admin-header h1 { margin: 0; font-size: clamp(1.35rem, 3vw, 2rem); }
+.status-admin-header p { margin: 5px 0 0; color: #aebbd0; }
+.status-admin-nav { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+.status-admin-nav a, .status-admin-nav button, .primary-btn, .secondary-btn {
+  border: 1px solid rgba(255,255,255,.16); border-radius: 10px; padding: 10px 15px;
+  background: #13233a; color: #fff; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+}
+.primary-btn { background: linear-gradient(135deg,#087cff,#12aaf5); border-color: transparent; }
+.secondary-btn { background: #17253a; }
+.sign-in-panel, .status-panel {
+  margin-top: 22px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px;
+  background: rgba(14,25,42,.88); padding: 24px;
+}
+.sign-in-panel { text-align: center; padding: 50px 24px; }
+.sign-in-panel h2 { margin-top: 0; }
+.sign-in-panel p { color: #aebbd0; }
+#googleSignIn { display: flex; justify-content: center; margin-top: 22px; }
+.admin-toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
+.admin-toolbar input {
+  flex: 1 1 280px; min-width: 0; padding: 12px 14px; border-radius: 10px;
+  color: #eef5ff; background: #0d192b; border: 1px solid #30425e;
+}
+.admin-user { color: #72dcff; font-weight: 700; }
+.admin-message { min-height: 22px; margin: 12px 0; color: #b8c6da; }
+.admin-message.error { color: #ff8095; }
+.admin-message.success { color: #57e8ab; }
+.status-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,.12); }
+.status-table { width: 100%; border-collapse: collapse; min-width: 1050px; }
+.status-table th { padding: 13px; background: #29364a; color: #dce6f6; text-align: left; font-size: 12px; text-transform: uppercase; }
+.status-table td { padding: 12px 13px; border-top: 1px solid rgba(255,255,255,.08); }
+.status-table tr:hover { background: rgba(255,255,255,.035); }
+.status-select {
+  min-width: 140px; padding: 9px 10px; border: 1px solid #405472; border-radius: 9px;
+  background: #111f34; color: white; font-weight: 700;
+}
+.status-pill { display: inline-block; margin-top: 6px; padding: 4px 8px; border-radius: 20px; font-size: 11px; font-weight: 800; }
+.status-scheduled { background: #183f69; color: #7fd2ff; }
+.status-completed { background: #0d513b; color: #72f0bd; }
+.status-cancelled { background: #681c2e; color: #ff9fb0; }
+.status-rescheduled { background: #5e3b0b; color: #ffd080; }
+.status-other { background: #402a6e; color: #cbb1ff; }
+.empty-admin-state { padding: 42px !important; text-align: center; color: #aebbd0; }
+dialog.status-dialog {
+  width: min(520px, calc(100vw - 28px)); border: 1px solid #38506e; border-radius: 16px;
+  padding: 0; color: #edf5ff; background: #0e1b2e; box-shadow: 0 30px 90px rgba(0,0,0,.65);
+}
+dialog.status-dialog::backdrop { background: rgba(0,5,14,.76); backdrop-filter: blur(5px); }
+.status-form { padding: 24px; }
+.status-form h2 { margin: 0 0 6px; }
+.status-form .context { color: #9fb0c7; margin: 0 0 18px; }
+.form-field { display: grid; gap: 7px; margin-top: 14px; }
+.form-field label { font-weight: 700; font-size: 13px; }
+.form-field input, .form-field textarea {
+  width: 100%; padding: 11px 12px; border-radius: 9px; border: 1px solid #3a4d69;
+  background: #101e32; color: #fff; font: inherit;
+}
+.form-field textarea { min-height: 95px; resize: vertical; }
+.reschedule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.reschedule-grid .form-field:first-child { grid-column: 1 / -1; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+.field-error { color: #ff8da1; font-size: 13px; min-height: 18px; margin-top: 10px; }
+[hidden] { display: none !important; }
+@media (max-width: 680px) {
+  body.status-admin-page { padding: 12px; }
+  .status-admin-header { padding: 16px; }
+  .status-admin-nav { width: 100%; margin-left: 0; }
+  .status-admin-nav a, .status-admin-nav button { flex: 1; text-align: center; }
+  .sign-in-panel, .status-panel { padding: 16px; }
+  .reschedule-grid { grid-template-columns: 1fr; }
+  .reschedule-grid .form-field:first-child { grid-column: auto; }
+  .dialog-actions { flex-direction: column-reverse; }
+  .dialog-actions button { width: 100%; }
+}
