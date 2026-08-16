@@ -10,6 +10,9 @@ const JOBS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vScvHF8CHd
 let jobsData = [];
 let jobsLoaded = false;
 let jobsAgeFilter = "all"; // all, new, old
+let jobsSearchQuery = "";
+let jobsTypeFilter = "";
+let jobsSort = "newest";
 
 /**
  * Simple CSV parser that handles quoted fields and commas inside quotes.
@@ -255,6 +258,7 @@ function loadJobs() {
       }
       jobsData = activeJobs;
       jobsLoaded = true;
+      populateJobTypes();
       renderJobs();
     })
     .catch(function(error) {
@@ -309,6 +313,22 @@ function renderJobs() {
     filtered = jobsData.filter(function(job) { return !isNewJob(job.postedDate); });
   }
 
+  if (jobsSearchQuery) {
+    filtered = filtered.filter(function(job) {
+      const haystack = [job.title, job.companyName, job.location, job.skills, job.experience].join(" ").toLowerCase();
+      return haystack.indexOf(jobsSearchQuery) !== -1;
+    });
+  }
+  if (jobsTypeFilter) {
+    filtered = filtered.filter(function(job) { return job.employmentType.toLowerCase() === jobsTypeFilter; });
+  }
+  filtered = filtered.slice().sort(function(a, b) {
+    if (jobsSort === "title") return a.title.localeCompare(b.title);
+    const dateA = parseDateInput(a.postedDate);
+    const dateB = parseDateInput(b.postedDate);
+    return (dateB ? dateB.getTime() : 0) - (dateA ? dateA.getTime() : 0);
+  });
+
   if (filtered.length === 0) {
     setJobsEmpty("No " + (jobsAgeFilter === "new" ? "new" : jobsAgeFilter === "old" ? "old" : "active") + " job openings at the moment.");
     return;
@@ -317,7 +337,26 @@ function renderJobs() {
   for (let i = 0; i < filtered.length; i++) {
     grid.appendChild(buildJobCard(filtered[i]));
   }
+  if (typeof window.refresh3DEffects === "function") window.refresh3DEffects();
 }
+
+function populateJobTypes() {
+  const select = document.getElementById("jobTypeFilter");
+  if (!select || select.options.length > 1) return;
+  const types = Array.from(new Set(jobsData.map(function(job) { return job.employmentType; }).filter(Boolean))).sort();
+  types.forEach(function(type) {
+    const option = document.createElement("option"); option.value = type.toLowerCase(); option.textContent = type; select.appendChild(option);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const search = document.getElementById("jobSearch");
+  const type = document.getElementById("jobTypeFilter");
+  const sort = document.getElementById("jobSort");
+  if (search) search.addEventListener("input", function() { jobsSearchQuery = search.value.trim().toLowerCase(); renderJobs(); });
+  if (type) type.addEventListener("change", function() { jobsTypeFilter = type.value; renderJobs(); });
+  if (sort) sort.addEventListener("change", function() { jobsSort = sort.value; renderJobs(); });
+});
 
 function viewJobDetails(jobId) {
   const job = findJobById(jobId);

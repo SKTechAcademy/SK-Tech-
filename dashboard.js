@@ -1,5 +1,25 @@
 // dashboard.js
 // Public interview dashboard for SK Tech Academy.
+let dashboardRequestController = null;
+let dashboardRows = [];
+let dashboardUpcoming = [];
+let dashboardLoaded = false;
+let dashboardLoadSequence = 0;
+const DASHBOARD_CACHE_KEY = "sktechInterviewCacheV1";
+const DASHBOARD_CACHE_MAX_AGE = 6 * 60 * 60 * 1000;
+
+function updateTodayCalendarIcon() {
+  const now = new Date();
+  setText("calendarMonth", now.toLocaleDateString("en-IN", { month: "short" }).toUpperCase());
+  setText("calendarDay", String(now.getDate()));
+}
+
+function renderActiveInterviewTab() {
+  const activeBtn = document.querySelector(".tab-btn.active");
+  const activeTab = activeBtn ? activeBtn.getAttribute("data-tab") : "all";
+  // Seven days guarantees that Saturday and Sunday availability is always visible.
+  renderTable(filterByTab(dashboardRows, activeTab, dashboardUpcoming, 7));
+}
 
 function renderTable(data) {
   const table = document.getElementById("tableBody");
@@ -23,7 +43,8 @@ function renderTable(data) {
 
     row += "<td>" + escapeHtml(item["Sk Tech Register ID"] || "") + "</td>";
     row += "<td>" + escapeHtml(item["Round"] || "") + "</td>";
-    row += "<td>" + escapeHtml(formatDate(item["Interview Date"])) + "</td>";
+    const dateLabel = obj.dateLabel || "Upcoming";
+    row += '<td><span class="date-badge">' + escapeHtml(dateLabel) + '</span><span class="date-value">' + escapeHtml(formatDate(item["Interview Date"])) + "</span></td>";
     row += "<td>" + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
     row += "<td>" + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
     row += "<td>" + escapeHtml(item["Batch"] || "") + "</td>";
@@ -33,10 +54,30 @@ function renderTable(data) {
   }
 }
 
+function isWeekend(dateOnly) {
+  return !!dateOnly && (dateOnly.getDay() === 0 || dateOnly.getDay() === 6);
+}
+
+function getWeekdayLabel(dateOnly) {
+  if (!dateOnly) return "Upcoming";
+  return dateOnly.toLocaleDateString("en-IN", { weekday: "long" });
+}
+
+function isPanelUnavailable(item) {
+  const searchable = [
+    item["Round"], item["Status"], item["Remarks"], item[" Technologies Required"]
+  ].join(" ").toLowerCase();
+  const mentionsSupport = /panel|pannel|supporter|support/.test(searchable);
+  const mentionsUnavailable = /not\s*(available|avaible)|unavailable|not\s*avail/.test(searchable);
+  return mentionsSupport && mentionsUnavailable;
+}
+
 function classifyRows(upcoming) {
   const today = getToday();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
+  const dayAfterTomorrow = new Date(today);
+  dayAfterTomorrow.setDate(today.getDate() + 2);
   const conflictIndices = findConflicts(upcoming);
 
   const rows = [];
@@ -44,16 +85,27 @@ function classifyRows(upcoming) {
     const itm = upcoming[i];
     const dateOnly = getDateOnly(itm["Interview Date"]);
     let rowClass = "";
-    if (conflictIndices.has(i)) {
+    let dateLabel = "Later";
+    if (isPanelUnavailable(itm) || isWeekend(dateOnly)) {
+      rowClass = "unavailable-row";
+      dateLabel = isWeekend(dateOnly) ? "Weekend Closed" : "Panel Unavailable";
+    } else if (conflictIndices.has(i)) {
       rowClass = "conflict-row";
+      dateLabel = "Conflict";
     } else if (dateOnly && dateOnly.getTime() === today.getTime()) {
       rowClass = "today-row";
+      dateLabel = "Today";
     } else if (dateOnly && dateOnly.getTime() === tomorrow.getTime()) {
       rowClass = "tomorrow-row";
+      dateLabel = "Tomorrow";
+    } else if (dateOnly && dateOnly.getTime() === dayAfterTomorrow.getTime()) {
+      rowClass = "day-after-row";
+      dateLabel = getWeekdayLabel(dateOnly);
     } else {
       rowClass = "future-row";
+      dateLabel = getWeekdayLabel(dateOnly);
     }
-    rows.push({ item: itm, rowClass: rowClass, dateOnly: dateOnly });
+    rows.push({ item: itm, rowClass: rowClass, dateOnly: dateOnly, dateLabel: dateLabel });
   }
   return rows;
 }
@@ -85,6 +137,7 @@ function createAvailableSlot(dateObj, startMinutes, endMinutes, isToday) {
 }
 
 function createBookedSlot(dateObj, startMinutes, endMinutes, item) {
+  const unavailable = isPanelUnavailable(item);
   return {
     item: {
       "Sk Tech Register ID": item["Sk Tech Register ID"] || "Booked",
@@ -94,8 +147,25 @@ function createBookedSlot(dateObj, startMinutes, endMinutes, item) {
       "Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment": minutesToTimeStr(endMinutes),
       "Batch": item["Batch"] || ""
     },
-    rowClass: "booked-row",
-    dateOnly: dateObj
+    rowClass: unavailable ? "unavailable-row" : "booked-row",
+    dateOnly: dateObj,
+    dateLabel: unavailable ? "Panel Unavailable" : "Booked"
+  };
+}
+
+function createWeekendUnavailableSlot(dateObj) {
+  return {
+    item: {
+      "Sk Tech Register ID": "Unavailable",
+      "Round": "Panel support not available (Weekend)",
+      "Interview Date": dateObj,
+      "Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment": minutesToTimeStr(OPEN_MINUTES),
+      "Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment": minutesToTimeStr(CLOSE_MINUTES),
+      "Batch": "-"
+    },
+    rowClass: "unavailable-row",
+    dateOnly: dateObj,
+    dateLabel: "Weekend Closed"
   };
 }
 
@@ -143,6 +213,15 @@ function getAvailableSlots(upcoming, daysToShow) {
         return itemDate && itemDate.getTime() === dateTime && slot.start > 0 && slot.end > 0;
       })
       .sort(function(a, b) { return a.start - b.start; });
+
+    // Weekends remain closed, but real Sheet bookings must still be visible.
+    if (isWeekend(dateObj)) {
+      slots.push(createWeekendUnavailableSlot(dateObj));
+      dayBooked.forEach(function(slot) {
+        slots.push(createBookedSlot(dateObj, slot.start, slot.end, slot.item));
+      });
+      return;
+    }
 
     // Merge overlapping/adjacent booked slots
     const merged = [];
@@ -208,45 +287,94 @@ function filterByTab(rows, tab, upcoming, daysToShow) {
   return rows;
 }
 
-function loadData() {
-  showLoading("tableBody", 6);
+function applyDashboardData(data, cached) {
+  if (!Array.isArray(data)) throw new Error("Unexpected response from server");
+  let result = filterUpcoming(data);
+  let upcoming = sortByDateTime(result.upcoming);
+  dashboardUpcoming = upcoming;
+  dashboardRows = classifyRows(upcoming);
+  dashboardLoaded = true;
+  setText("totalCount", upcoming.length);
+  setText("todayCount", result.todayCount);
+  renderActiveInterviewTab();
+  const updated = document.getElementById("lastUpdated");
+  if (updated) updated.textContent = cached ? "Showing saved data • Refreshing…" : "Updated " + new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+}
 
-  fetch(API_URL)
-    .then(function(response) { return response.json(); })
-    .then(function(data) {
-      if (!Array.isArray(data)) {
-        throw new Error("Unexpected response from server");
-      }
+function restoreDashboardCache() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(DASHBOARD_CACHE_KEY) || "null");
+    if (cached && Array.isArray(cached.data) && Date.now() - cached.savedAt < DASHBOARD_CACHE_MAX_AGE) {
+      applyDashboardData(cached.data, true);
+      return true;
+    }
+  } catch (error) {
+    console.warn("Dashboard cache unavailable:", error);
+  }
+  return false;
+}
 
-      let { upcoming, todayCount } = filterUpcoming(data);
-      upcoming = sortByDateTime(upcoming);
-      const allRows = classifyRows(upcoming);
+function waitBeforeRetry(milliseconds) {
+  return new Promise(function(resolve) { setTimeout(resolve, milliseconds); });
+}
 
-      setText("totalCount", upcoming.length);
-      setText("todayCount", todayCount);
+async function loadData() {
+  const tableBody = document.getElementById("tableBody");
+  if (!dashboardLoaded && tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state"><div class="state-spinner" aria-hidden="true"></div><div>Loading latest interview schedule…</div><small>Connecting securely to the schedule…</small></td></tr>';
+  const updated = document.getElementById("lastUpdated");
+  if (dashboardLoaded && updated) updated.textContent = "Refreshing… current data remains visible";
 
-      const activeBtn = document.querySelector(".tab-btn.active");
-      const activeTab = activeBtn ? activeBtn.getAttribute("data-tab") : "all";
-      const filteredRows = filterByTab(allRows, activeTab, upcoming, 5);
-      renderTable(filteredRows);
-    })
-    .catch(function(error) {
-      console.error("ERROR:", error);
-      showError("tableBody", "Failed to load data: " + error.message, 6);
-    });
+  dashboardLoadSequence += 1;
+  const sequence = dashboardLoadSequence;
+  if (dashboardRequestController) dashboardRequestController.abort();
+  let lastError = new Error("Unable to reach the schedule server");
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (sequence !== dashboardLoadSequence) return;
+    dashboardRequestController = new AbortController();
+    const currentController = dashboardRequestController;
+    const timeoutId = setTimeout(function() { currentController.abort(); }, 20000 + attempt * 5000);
+    try {
+      const response = await fetch(API_URL, { signal: currentController.signal, cache: "default" });
+      if (!response.ok) throw new Error("Server returned " + response.status);
+      const data = await response.json();
+      if (sequence !== dashboardLoadSequence) return;
+      applyDashboardData(data, false);
+      try { localStorage.setItem(DASHBOARD_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data: data })); } catch (cacheError) { console.warn("Could not save dashboard cache:", cacheError); }
+      clearTimeout(timeoutId);
+      return;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (sequence !== dashboardLoadSequence) return;
+      lastError = error.name === "AbortError" ? new Error("The server took too long to respond") : error;
+      if (attempt < 2) await waitBeforeRetry(1000 * (attempt + 1));
+    }
+  }
+
+  console.error("Dashboard refresh failed:", lastError);
+  if (dashboardLoaded) {
+    renderActiveInterviewTab();
+    if (updated) updated.textContent = "Connection slow • Showing last loaded data";
+  } else if (tableBody) {
+    tableBody.innerHTML = '<tr><td colspan="6" class="load-state">Unable to load interview data after automatic retries.<br><small>' + escapeHtml(lastError.message) + '</small><br><button class="retry-btn" type="button" onclick="loadData()">Try again</button></td></tr>';
+  }
 }
 
 function showInterviewTable() {
   const table = document.querySelector("table");
+  const tableShell = document.querySelector(".table-shell");
   const jobsContainer = document.getElementById("jobsContainer");
-  if (table) table.style.display = "";
+  if (tableShell) tableShell.style.display = "block";
+  if (table) table.style.display = "table";
   if (jobsContainer) jobsContainer.style.display = "none";
 }
 
 function showJobsContainer() {
   const table = document.querySelector("table");
+  const tableShell = document.querySelector(".table-shell");
   const jobsContainer = document.getElementById("jobsContainer");
-  if (table) table.style.display = "none";
+  if (tableShell) tableShell.style.display = "none";
+  if (table) table.style.display = "table";
   if (jobsContainer) jobsContainer.style.display = "block";
   if (typeof loadJobs === "function") {
     loadJobs();
@@ -254,42 +382,61 @@ function showJobsContainer() {
 }
 
 function switchInterviewTab(tabName) {
+  activateDashboardTab(tabName, true);
+}
+
+function activateDashboardTab(tabName, updateUrl) {
   const tabs = document.querySelectorAll(".tab-btn");
   tabs.forEach(function(btn) { btn.classList.remove("active"); });
   const target = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
   if (target) target.classList.add("active");
-
-  showInterviewTable();
-  activeTab = tabName;
-  loadData();
+  // HTMLPreview embeds the GitHub file URL inside its query string and rejects
+  // history mutations. Never let an optional URL update stop tab switching.
+  if (updateUrl && history.replaceState && location.hostname !== "htmlpreview.github.io") {
+    try {
+      history.replaceState(null, "", tabName === "all" ? location.pathname + location.search : "#" + tabName);
+    } catch (historyError) {
+      console.warn("Could not update the dashboard URL:", historyError);
+    }
+  }
+  if (tabName === "jobs") {
+    if (typeof jobsAgeFilter !== "undefined") jobsAgeFilter = "all";
+    showJobsContainer();
+  } else {
+    showInterviewTable();
+    if (dashboardLoaded) renderActiveInterviewTab(); else loadData();
+  }
 }
 
 function initTabs() {
-  const tabs = document.querySelectorAll(".tab-btn");
-  tabs.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      tabs.forEach(function(b) { b.classList.remove("active"); });
-      btn.classList.add("active");
+  const tabBar = document.querySelector(".tabs");
+  if (!tabBar) return;
+  tabBar.addEventListener("click", function(event) {
+    const btn = event.target.closest(".tab-btn");
+    if (!btn || !tabBar.contains(btn)) return;
+    event.preventDefault();
+    activateDashboardTab(btn.getAttribute("data-tab"), true);
+  });
+}
 
-      const tab = btn.getAttribute("data-tab");
-      if (tab === "jobs") {
-        if (typeof jobsAgeFilter !== "undefined") {
-          jobsAgeFilter = "all";
-        }
-        showJobsContainer();
-      } else {
-        showInterviewTable();
-        loadData();
-      }
-    });
+function openTabFromLocation() {
+  const requested = location.hash.replace("#", "").toLowerCase();
+  if (requested !== "jobs" && requested !== "jobopenings") return;
+  activateDashboardTab("jobs", false);
+  requestAnimationFrame(function() {
+    const jobs = document.getElementById("jobsContainer");
+    if (jobs) jobs.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
 window.switchInterviewTab = switchInterviewTab;
 
+restoreDashboardCache();
 loadData();
+updateTodayCalendarIcon();
 initTabs();
-showInterviewTable();
+if (location.hash === "#jobs" || location.hash.toLowerCase() === "#jobopenings") openTabFromLocation(); else showInterviewTable();
+window.addEventListener("hashchange", openTabFromLocation);
 setInterval(function() {
   const activeBtn = document.querySelector(".tab-btn.active");
   if (activeBtn && activeBtn.getAttribute("data-tab") !== "jobs") {

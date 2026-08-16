@@ -4,7 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SK Tech Academy | Learn • Practice • Grow • Get Placed</title>
+<meta name="description" content="SK Tech Academy provides practical IT training, mock interviews, resume support and placement assistance for freshers and experienced professionals." />
+<meta name="theme-color" content="#071226" />
+<link rel="canonical" href="https://www.mysktech.com/" />
+<meta property="og:title" content="SK Tech Academy | Learn • Practice • Get Placed" />
+<meta property="og:description" content="Industry-focused IT training, interview preparation and placement support." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.mysktech.com/" />
+<meta property="og:image" content="https://www.mysktech.com/logo.jpeg" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="experience.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 html{scroll-behavior:smooth}
@@ -896,9 +905,13 @@ footer a:hover{color:var(--orange);padding-left:5px}
   .testimonials-grid{grid-template-columns:1fr}
 }
 </style>
+<link rel="stylesheet" href="home-ai.css?v=20260816-3">
+<link rel="stylesheet" href="premium-shell.css?v=20260816-3">
+<link rel="stylesheet" href="conversion.css?v=20260816-3">
 </head>
 
-<body>
+<body class="home-page">
+<a class="skip-link" href="#home">Skip to main content</a>
 
 <div class="animated-bg">
   <div class="shape s1"></div>
@@ -922,8 +935,10 @@ footer a:hover{color:var(--orange);padding-left:5px}
     <div>
       <h2>SK <span>TECH</span></h2>
       <small>Learn • Practice • Grow • Get Placed</small>
-    </div>
   </div>
+  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <nav>
     <a href="#home">Home</a>
     <a href="#why">About Us</a>
@@ -937,27 +952,42 @@ footer a:hover{color:var(--orange);padding-left:5px}
   </a>
 </header>
 
-<section id="home" class="hero">
+<section id="home" class="hero ai-hero">
   <div class="hero-content">
-    <h1>Your Skills Today,<br>Your <span>Success Tomorrow</span></h1>
-    <p>Training, interview preparation and placement support for freshers and experienced professionals.</p>
+    <div class="ai-eyebrow">AI-powered career acceleration</div>
+    <h1>Build skills.<br>Become <span>job ready.</span></h1>
+    <div class="ai-role-line">Your path to becoming a <strong id="aiRole">Full Stack Developer</strong></div>
+    <p class="hero-summary">Practical training, real interview preparation and continuous placement support—built around your career goal, not a generic syllabus.</p>
     <div class="actions">
       <a class="btn blue" target="_blank" href="https://forms.gle/h9aqB2KtMqqB9rmc6"><i class="fas fa-user-plus"></i> Candidate Registration<br><small>Start Your Journey</small></a>
+      <a class="btn ai-secondary-btn" href="interviews.html"><i class="fas fa-chart-line"></i> Explore Live Opportunities</a>
     </div>
-    <div class="hero-tags">
-      <span><i class="fas fa-chalkboard-teacher"></i> Expert Trainers</span>
-      <span><i class="fas fa-laptop-code"></i> Live Projects</span>
-      <span><i class="fas fa-comments"></i> Mock Interviews</span>
-      <span><i class="fas fa-headset"></i> 100% Support</span>
-      <span><i class="fas fa-graduation-cap"></i> Course Training</span>
+    <div class="trust-row">
+      <span><i class="fas fa-check-circle"></i> Real-time projects</span>
+      <span><i class="fas fa-check-circle"></i> Expert mock interviews</span>
+      <span><i class="fas fa-check-circle"></i> Placement guidance</span>
     </div>
   </div>
-  <div class="support-box">
-    <h2>100%</h2>
-    <p>Placement Support</p>
-    <div style="font-size:48px;color:#ff8500">📈</div>
+  <div class="ai-stage" aria-label="Interactive AI career growth visualization">
+    <div class="reference-ai-visual" aria-label="Animated AI network globe">
+      <span class="globe-aura"></span>
+      <img src="assets/ai-globe-3d.webp" alt="Futuristic 3D connected AI globe" width="1100" height="1100">
+    </div>
+    <span class="ai-node n1"></span><span class="ai-node n2"></span><span class="ai-node n3"></span><span class="ai-node n4"></span>
+    <span class="ai-connector c1"></span><span class="ai-connector c2"></span><span class="ai-connector c3"></span>
+    <div class="neural-core"><div class="orbit"><i class="orbit-dot"></i></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="core-sphere"></div></div>
+    <div class="career-card cc1"><div class="card-top"><span class="mini-icon"><i class="fas fa-code"></i></span><span class="status">LIVE</span></div><b>Industry-ready skills</b><p>Projects mapped to real roles</p><div class="progress"><i style="width:86%"></i></div></div>
+    <div class="career-card cc2"><div class="card-top"><span class="mini-icon"><i class="fas fa-microphone-alt"></i></span><span class="status">READY</span></div><b>Interview intelligence</b><p>Practice, feedback, improve</p><div class="progress"><i style="width:74%"></i></div></div>
+    <div class="career-card cc3"><div class="card-top"><span class="mini-icon"><i class="fas fa-rocket"></i></span><span class="status">GROWING</span></div><b>Career momentum</b><p>Profile to placement support</p><div class="progress"><i style="width:92%"></i></div></div>
   </div>
 </section>
+
+<div class="ai-capability-strip reveal">
+  <div class="capability"><i class="fas fa-brain"></i><div><b>Focused Learning</b><small>Role-based roadmaps</small></div></div>
+  <div class="capability"><i class="fas fa-laptop-code"></i><div><b>Live Experience</b><small>Production-style projects</small></div></div>
+  <div class="capability"><i class="fas fa-user-check"></i><div><b>Interview Ready</b><small>Mocks with feedback</small></div></div>
+  <div class="capability"><i class="fas fa-briefcase"></i><div><b>Placement Support</b><small>Until you get placed</small></div></div>
+</div>
 
 <div class="stats reveal">
   <div class="stat"><h2 data-count="1000">0</h2><p>Students Trained</p></div>
@@ -965,6 +995,42 @@ footer a:hover{color:var(--orange);padding-left:5px}
   <div class="stat"><h2 data-count="15">0</h2><p>Technologies</p></div>
   <div class="stat"><h2 data-count="100">0</h2><p>Placement Support %</p></div>
 </div>
+
+<section class="conversion-section lead-section lead-section-priority" id="quick-register">
+  <div class="lead-copy reveal"><span>Ready to start?</span><h2>Get a Free Career Guidance Call</h2><p>Share the basic details below. Your information opens directly in WhatsApp so you remain in control before sending it.</p><div class="lead-points"><b><i class="fas fa-check"></i> Course guidance</b><b><i class="fas fa-check"></i> Career roadmap</b><b><i class="fas fa-check"></i> Placement support information</b></div></div>
+  <form id="quickLeadForm" class="quick-lead-form reveal" novalidate>
+    <label>Full Name<input id="leadName" name="name" autocomplete="name" maxlength="60" required placeholder="Enter your full name"></label>
+    <label>Phone Number<input id="leadPhone" name="phone" inputmode="tel" autocomplete="tel" maxlength="18" required placeholder="Example: +91 9876543210"></label>
+    <label>Interested Technology<select id="leadCourse" name="course" required><option value="">Select technology</option><option>.NET Full Stack</option><option>Java Full Stack</option><option>React / Frontend</option><option>DevOps / Cloud</option><option>QA / Automation Testing</option><option>Data Engineering / Analytics</option><option>SAP</option><option>Career Guidance</option></select></label>
+    <label>Experience<select id="leadExperience" name="experience" required><option value="">Select experience</option><option>Fresher</option><option>0–2 Years</option><option>2–5 Years</option><option>5+ Years</option></select></label>
+    <p id="leadError" class="lead-error" role="alert"></p>
+    <button type="submit"><i class="fab fa-whatsapp"></i> Request Guidance on WhatsApp</button>
+    <small>We do not submit anything until you confirm it in WhatsApp.</small>
+  </form>
+</section>
+
+<section class="conversion-section live-jobs-section" id="live-jobs">
+  <div class="conversion-heading reveal">
+    <span>Updated from our live opportunities</span>
+    <h2>Latest <em>Job Openings</em></h2>
+    <p>Explore current roles and move directly to the complete opportunities dashboard.</p>
+  </div>
+  <div id="homeJobsGrid" class="home-jobs-grid" aria-live="polite">
+    <div class="job-skeleton"></div><div class="job-skeleton"></div><div class="job-skeleton"></div>
+  </div>
+  <div class="section-action"><a class="conversion-btn" data-jobs-nav href="interviews.html#jobs">View All Live Opportunities <i class="fas fa-arrow-right"></i></a></div>
+</section>
+
+<section class="conversion-section journey-section" id="journey">
+  <div class="conversion-heading reveal"><span>Your path with SK TECH</span><h2>From Learning to <em>Placement</em></h2></div>
+  <div class="journey-grid reveal">
+    <article><b>01</b><i class="fas fa-user-plus"></i><h3>Register</h3><p>Tell us your career goal and preferred technology.</p></article>
+    <article><b>02</b><i class="fas fa-laptop-code"></i><h3>Learn</h3><p>Build practical skills through role-focused training.</p></article>
+    <article><b>03</b><i class="fas fa-code-branch"></i><h3>Build Projects</h3><p>Gain real implementation and project experience.</p></article>
+    <article><b>04</b><i class="fas fa-comments"></i><h3>Prepare</h3><p>Attend mock interviews and improve with feedback.</p></article>
+    <article><b>05</b><i class="fas fa-briefcase"></i><h3>Get Support</h3><p>Receive continuous opportunity and placement guidance.</p></article>
+  </div>
+</section>
 
 <section id="why" class="section">
   <div class="title reveal">
@@ -983,10 +1049,10 @@ footer a:hover{color:var(--orange);padding-left:5px}
       <div class="check"><span class="dot">✓</span> Placement Guidance Until You Get Placed</div>
     </div>
     <div class="frames stagger">
-      <div class="frame"><span class="num">1</span><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80"><div><h3>Still Struggling To Switch Company?</h3><p>You're not alone.</p></div></div>
-      <div class="frame"><span class="num">2</span><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80"><div><h3>We Help You Crack Real Interviews</h3><p>With expert guidance.</p></div></div>
-      <div class="frame"><span class="num">3</span><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=700&q=80"><div><h3>Real-time Interview Support</h3><p>Be confident, be ready.</p></div></div>
-      <div class="frame"><span class="num">4</span><img src="https://images.unsplash.com/photo-1551836022-8b2858c9c69b?auto=format&fit=crop&w=700&q=80"><div><h3>Mock Interviews That Make You Better</h3><p>Practice. Improve. Succeed.</p></div></div>
+      <div class="frame"><span class="num">1</span><img loading="lazy" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" alt="Professional learning online"><div><h3>Still Struggling To Switch Company?</h3><p>You're not alone.</p></div></div>
+      <div class="frame"><span class="num">2</span><img loading="lazy" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80" alt="Professional preparing for an interview"><div><h3>We Help You Crack Real Interviews</h3><p>With expert guidance.</p></div></div>
+      <div class="frame"><span class="num">3</span><img loading="lazy" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=700&q=80" alt="Interview support session"><div><h3>Real-time Interview Support</h3><p>Be confident, be ready.</p></div></div>
+      <div class="frame"><span class="num">4</span><img loading="lazy" src="https://images.unsplash.com/photo-1551836022-8b2858c9c69b?auto=format&fit=crop&w=700&q=80" alt="Mock interview practice"><div><h3>Mock Interviews That Make You Better</h3><p>Practice. Improve. Succeed.</p></div></div>
     </div>
   </div>
 </section>
@@ -1122,6 +1188,16 @@ footer a:hover{color:var(--orange);padding-left:5px}
   </div>
 </section>
 
+<section class="conversion-section faq-section" id="faq">
+  <div class="conversion-heading reveal"><span>Quick answers</span><h2>Frequently Asked <em>Questions</em></h2></div>
+  <div class="faq-list reveal">
+    <details><summary>Who can join SK TECH training?<i class="fas fa-plus"></i></summary><p>Freshers, career-gap candidates and experienced professionals can join based on their career goals.</p></details>
+    <details><summary>Is training available online?<i class="fas fa-plus"></i></summary><p>Contact our support team to confirm the available batches and learning format for your selected technology.</p></details>
+    <details><summary>What placement support is provided?<i class="fas fa-plus"></i></summary><p>Support includes profile guidance, practical preparation, mock interviews and access to relevant opportunities.</p></details>
+    <details><summary>How can I view current job openings?<i class="fas fa-plus"></i></summary><p>Use the Interview Dashboard and open the Job Openings tab to search, filter and apply for available roles.</p></details>
+  </div>
+</section>
+
 <footer id="contact" class="reveal">
   <div>
     <img src="logo.jpeg" alt="SK Tech Logo">
@@ -1154,6 +1230,10 @@ footer a:hover{color:var(--orange);padding-left:5px}
 
 <div class="copy">© 2026 SK Tech Academy. All Rights Reserved.</div>
 <a class="whatsapp" target="_blank" href="https://wa.me/919353447457"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+<nav class="mobile-action-bar" aria-label="Quick actions"><a href="tel:+919353447457"><i class="fas fa-phone"></i><span>Call</span></a><a class="primary" href="#quick-register"><i class="fas fa-user-plus"></i><span>Register</span></a><a target="_blank" href="https://wa.me/919353447457"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a></nav>
+<script src="experience.js?v=20260816-3" defer></script>
+<script src="home-ai.js?v=20260816-3" defer></script>
+<script src="conversion.js?v=20260816-7" defer></script>
 
 <script>
 const particles = document.getElementById('particles');

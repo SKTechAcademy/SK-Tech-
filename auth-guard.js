@@ -6,7 +6,7 @@
   const body = document.body;
   const requiredAttr = body.getAttribute("data-required-role") || "";
   const requiredRoles = requiredAttr.split(",").map(function(r) { return r.trim(); }).filter(Boolean);
-  const userRole = localStorage.getItem("userRole");
+  const userRole = (localStorage.getItem("userRole") || "").toLowerCase().trim();
 
   if (!userRole) {
     window.location.replace("login.html");
@@ -31,4 +31,16 @@
     registerId: localStorage.getItem("registerId") || "",
     email: localStorage.getItem("email") || ""
   };
+
+  // localStorage is only a UI hint. Firebase remains the source of truth for a signed-in session.
+  if (typeof auth !== "undefined" && auth.onAuthStateChanged) {
+    auth.onAuthStateChanged(function(user) {
+      if (!user) {
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("registerId");
+        localStorage.removeItem("email");
+        window.location.replace("login.html");
+      }
+    });
+  }
 })();
