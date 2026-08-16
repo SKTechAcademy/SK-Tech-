@@ -49,6 +49,11 @@ function isWeekend(dateOnly) {
   return !!dateOnly && (dateOnly.getDay() === 0 || dateOnly.getDay() === 6);
 }
 
+function getWeekdayLabel(dateOnly) {
+  if (!dateOnly) return "Upcoming";
+  return dateOnly.toLocaleDateString("en-IN", { weekday: "long" });
+}
+
 function isPanelUnavailable(item) {
   const searchable = [
     item["Round"], item["Status"], item["Remarks"], item[" Technologies Required"]
@@ -86,9 +91,10 @@ function classifyRows(upcoming) {
       dateLabel = "Tomorrow";
     } else if (dateOnly && dateOnly.getTime() === dayAfterTomorrow.getTime()) {
       rowClass = "day-after-row";
-      dateLabel = "Day After";
+      dateLabel = getWeekdayLabel(dateOnly);
     } else {
       rowClass = "future-row";
+      dateLabel = getWeekdayLabel(dateOnly);
     }
     rows.push({ item: itm, rowClass: rowClass, dateOnly: dateOnly, dateLabel: dateLabel });
   }
