@@ -1,5 +1,8 @@
 (function(){
   "use strict";
+  // Always open the landing page at the beginning of the hero unless a section link was requested.
+  if("scrollRestoration" in history) history.scrollRestoration="manual";
+  if(!location.hash) requestAnimationFrame(function(){window.scrollTo(0,0);});
   const roles=["Full Stack Developer","Cloud & DevOps Engineer","Data Professional","QA Automation Engineer","SAP Consultant"];
   let roleIndex=0;
   function rotateRole(){
