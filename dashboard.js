@@ -386,7 +386,15 @@ function activateDashboardTab(tabName, updateUrl) {
   tabs.forEach(function(btn) { btn.classList.remove("active"); });
   const target = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
   if (target) target.classList.add("active");
-  if (updateUrl && history.replaceState) history.replaceState(null, "", tabName === "all" ? location.pathname + location.search : "#" + tabName);
+  // HTMLPreview embeds the GitHub file URL inside its query string and rejects
+  // history mutations. Never let an optional URL update stop tab switching.
+  if (updateUrl && history.replaceState && location.hostname !== "htmlpreview.github.io") {
+    try {
+      history.replaceState(null, "", tabName === "all" ? location.pathname + location.search : "#" + tabName);
+    } catch (historyError) {
+      console.warn("Could not update the dashboard URL:", historyError);
+    }
+  }
   if (tabName === "jobs") {
     if (typeof jobsAgeFilter !== "undefined") jobsAgeFilter = "all";
     showJobsContainer();
