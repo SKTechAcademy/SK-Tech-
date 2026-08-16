@@ -907,6 +907,7 @@ footer a:hover{color:var(--orange);padding-left:5px}
 </style>
 <link rel="stylesheet" href="home-ai.css">
 <link rel="stylesheet" href="premium-shell.css">
+<link rel="stylesheet" href="conversion.css">
 </head>
 
 <body class="home-page">
@@ -994,6 +995,29 @@ footer a:hover{color:var(--orange);padding-left:5px}
   <div class="stat"><h2 data-count="15">0</h2><p>Technologies</p></div>
   <div class="stat"><h2 data-count="100">0</h2><p>Placement Support %</p></div>
 </div>
+
+<section class="conversion-section live-jobs-section" id="live-jobs">
+  <div class="conversion-heading reveal">
+    <span>Updated from our live opportunities</span>
+    <h2>Latest <em>Job Openings</em></h2>
+    <p>Explore current roles and move directly to the complete opportunities dashboard.</p>
+  </div>
+  <div id="homeJobsGrid" class="home-jobs-grid" aria-live="polite">
+    <div class="job-skeleton"></div><div class="job-skeleton"></div><div class="job-skeleton"></div>
+  </div>
+  <div class="section-action"><a class="conversion-btn" href="interviews.html#jobOpenings">View All Live Opportunities <i class="fas fa-arrow-right"></i></a></div>
+</section>
+
+<section class="conversion-section journey-section" id="journey">
+  <div class="conversion-heading reveal"><span>Your path with SK TECH</span><h2>From Learning to <em>Placement</em></h2></div>
+  <div class="journey-grid reveal">
+    <article><b>01</b><i class="fas fa-user-plus"></i><h3>Register</h3><p>Tell us your career goal and preferred technology.</p></article>
+    <article><b>02</b><i class="fas fa-laptop-code"></i><h3>Learn</h3><p>Build practical skills through role-focused training.</p></article>
+    <article><b>03</b><i class="fas fa-code-branch"></i><h3>Build Projects</h3><p>Gain real implementation and project experience.</p></article>
+    <article><b>04</b><i class="fas fa-comments"></i><h3>Prepare</h3><p>Attend mock interviews and improve with feedback.</p></article>
+    <article><b>05</b><i class="fas fa-briefcase"></i><h3>Get Support</h3><p>Receive continuous opportunity and placement guidance.</p></article>
+  </div>
+</section>
 
 <section id="why" class="section">
   <div class="title reveal">
@@ -1151,6 +1175,29 @@ footer a:hover{color:var(--orange);padding-left:5px}
   </div>
 </section>
 
+<section class="conversion-section lead-section" id="quick-register">
+  <div class="lead-copy reveal"><span>Ready to start?</span><h2>Get a Free Career Guidance Call</h2><p>Share the basic details below. Your information opens directly in WhatsApp so you remain in control before sending it.</p><div class="lead-points"><b><i class="fas fa-check"></i> Course guidance</b><b><i class="fas fa-check"></i> Career roadmap</b><b><i class="fas fa-check"></i> Placement support information</b></div></div>
+  <form id="quickLeadForm" class="quick-lead-form reveal" novalidate>
+    <label>Full Name<input id="leadName" name="name" autocomplete="name" maxlength="60" required placeholder="Enter your full name"></label>
+    <label>Phone Number<input id="leadPhone" name="phone" inputmode="tel" autocomplete="tel" maxlength="18" required placeholder="Example: +91 9876543210"></label>
+    <label>Interested Technology<select id="leadCourse" name="course" required><option value="">Select technology</option><option>.NET Full Stack</option><option>Java Full Stack</option><option>React / Frontend</option><option>DevOps / Cloud</option><option>QA / Automation Testing</option><option>Data Engineering / Analytics</option><option>SAP</option><option>Career Guidance</option></select></label>
+    <label>Experience<select id="leadExperience" name="experience" required><option value="">Select experience</option><option>Fresher</option><option>0–2 Years</option><option>2–5 Years</option><option>5+ Years</option></select></label>
+    <p id="leadError" class="lead-error" role="alert"></p>
+    <button type="submit"><i class="fab fa-whatsapp"></i> Request Guidance on WhatsApp</button>
+    <small>We do not submit anything until you confirm it in WhatsApp.</small>
+  </form>
+</section>
+
+<section class="conversion-section faq-section" id="faq">
+  <div class="conversion-heading reveal"><span>Quick answers</span><h2>Frequently Asked <em>Questions</em></h2></div>
+  <div class="faq-list reveal">
+    <details><summary>Who can join SK TECH training?<i class="fas fa-plus"></i></summary><p>Freshers, career-gap candidates and experienced professionals can join based on their career goals.</p></details>
+    <details><summary>Is training available online?<i class="fas fa-plus"></i></summary><p>Contact our support team to confirm the available batches and learning format for your selected technology.</p></details>
+    <details><summary>What placement support is provided?<i class="fas fa-plus"></i></summary><p>Support includes profile guidance, practical preparation, mock interviews and access to relevant opportunities.</p></details>
+    <details><summary>How can I view current job openings?<i class="fas fa-plus"></i></summary><p>Use the Interview Dashboard and open the Job Openings tab to search, filter and apply for available roles.</p></details>
+  </div>
+</section>
+
 <footer id="contact" class="reveal">
   <div>
     <img src="logo.jpeg" alt="SK Tech Logo">
@@ -1183,8 +1230,10 @@ footer a:hover{color:var(--orange);padding-left:5px}
 
 <div class="copy">© 2026 SK Tech Academy. All Rights Reserved.</div>
 <a class="whatsapp" target="_blank" href="https://wa.me/919353447457"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+<nav class="mobile-action-bar" aria-label="Quick actions"><a href="tel:+919353447457"><i class="fas fa-phone"></i><span>Call</span></a><a class="primary" href="#quick-register"><i class="fas fa-user-plus"></i><span>Register</span></a><a target="_blank" href="https://wa.me/919353447457"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a></nav>
 <script src="experience.js" defer></script>
 <script src="home-ai.js" defer></script>
+<script src="conversion.js" defer></script>
 
 <script>
 const particles = document.getElementById('particles');
