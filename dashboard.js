@@ -395,6 +395,7 @@ function initTabs() {
       btn.classList.add("active");
 
       const tab = btn.getAttribute("data-tab");
+      if (history.replaceState) history.replaceState(null, "", tab === "all" ? location.pathname + location.search : "#" + tab);
       if (tab === "jobs") {
         if (typeof jobsAgeFilter !== "undefined") {
           jobsAgeFilter = "all";
@@ -408,13 +409,28 @@ function initTabs() {
   });
 }
 
+function openTabFromLocation() {
+  const requested = location.hash.replace("#", "").toLowerCase();
+  if (requested !== "jobs" && requested !== "jobopenings") return;
+  const tabs = document.querySelectorAll(".tab-btn");
+  tabs.forEach(function(btn) {
+    btn.classList.toggle("active", btn.getAttribute("data-tab") === "jobs");
+  });
+  showJobsContainer();
+  requestAnimationFrame(function() {
+    const jobs = document.getElementById("jobsContainer");
+    if (jobs) jobs.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
 window.switchInterviewTab = switchInterviewTab;
 
 restoreDashboardCache();
 loadData();
 updateTodayCalendarIcon();
 initTabs();
-showInterviewTable();
+if (location.hash === "#jobs" || location.hash.toLowerCase() === "#jobopenings") openTabFromLocation(); else showInterviewTable();
+window.addEventListener("hashchange", openTabFromLocation);
 setInterval(function() {
   const activeBtn = document.querySelector(".tab-btn.active");
   if (activeBtn && activeBtn.getAttribute("data-tab") !== "jobs") {
