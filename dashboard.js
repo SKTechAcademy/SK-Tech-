@@ -4,6 +4,9 @@ let dashboardRequestController = null;
 let dashboardRows = [];
 let dashboardUpcoming = [];
 let dashboardLoaded = false;
+let dashboardLoadSequence = 0;
+const DASHBOARD_CACHE_KEY = "sktechInterviewCacheV1";
+const DASHBOARD_CACHE_MAX_AGE = 6 * 60 * 60 * 1000;
 
 function updateTodayCalendarIcon() {
   const now = new Date();
@@ -284,46 +287,77 @@ function filterByTab(rows, tab, upcoming, daysToShow) {
   return rows;
 }
 
-function loadData() {
+function applyDashboardData(data, cached) {
+  if (!Array.isArray(data)) throw new Error("Unexpected response from server");
+  let result = filterUpcoming(data);
+  let upcoming = sortByDateTime(result.upcoming);
+  dashboardUpcoming = upcoming;
+  dashboardRows = classifyRows(upcoming);
+  dashboardLoaded = true;
+  setText("totalCount", upcoming.length);
+  setText("todayCount", result.todayCount);
+  renderActiveInterviewTab();
+  const updated = document.getElementById("lastUpdated");
+  if (updated) updated.textContent = cached ? "Showing saved data • Refreshing…" : "Updated " + new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+}
+
+function restoreDashboardCache() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(DASHBOARD_CACHE_KEY) || "null");
+    if (cached && Array.isArray(cached.data) && Date.now() - cached.savedAt < DASHBOARD_CACHE_MAX_AGE) {
+      applyDashboardData(cached.data, true);
+      return true;
+    }
+  } catch (error) {
+    console.warn("Dashboard cache unavailable:", error);
+  }
+  return false;
+}
+
+function waitBeforeRetry(milliseconds) {
+  return new Promise(function(resolve) { setTimeout(resolve, milliseconds); });
+}
+
+async function loadData() {
   const tableBody = document.getElementById("tableBody");
-  if (tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state"><div class="state-spinner" aria-hidden="true"></div><div>Loading latest interview schedule…</div></td></tr>';
+  if (!dashboardLoaded && tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state"><div class="state-spinner" aria-hidden="true"></div><div>Loading latest interview schedule…</div><small>Connecting securely to the schedule…</small></td></tr>';
+  const updated = document.getElementById("lastUpdated");
+  if (dashboardLoaded && updated) updated.textContent = "Refreshing… current data remains visible";
 
+  dashboardLoadSequence += 1;
+  const sequence = dashboardLoadSequence;
   if (dashboardRequestController) dashboardRequestController.abort();
-  dashboardRequestController = new AbortController();
-  const currentController = dashboardRequestController;
-  const timeoutId = setTimeout(function() { currentController.abort(); }, 15000);
+  let lastError = new Error("Unable to reach the schedule server");
 
-  fetch(API_URL, { signal: currentController.signal, cache: "no-store" })
-    .then(function(response) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (sequence !== dashboardLoadSequence) return;
+    dashboardRequestController = new AbortController();
+    const currentController = dashboardRequestController;
+    const timeoutId = setTimeout(function() { currentController.abort(); }, 20000 + attempt * 5000);
+    try {
+      const response = await fetch(API_URL, { signal: currentController.signal, cache: "default" });
       if (!response.ok) throw new Error("Server returned " + response.status);
-      return response.json();
-    })
-    .then(function(data) {
-      if (!Array.isArray(data)) {
-        throw new Error("Unexpected response from server");
-      }
+      const data = await response.json();
+      if (sequence !== dashboardLoadSequence) return;
+      applyDashboardData(data, false);
+      try { localStorage.setItem(DASHBOARD_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data: data })); } catch (cacheError) { console.warn("Could not save dashboard cache:", cacheError); }
+      clearTimeout(timeoutId);
+      return;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (sequence !== dashboardLoadSequence) return;
+      lastError = error.name === "AbortError" ? new Error("The server took too long to respond") : error;
+      if (attempt < 2) await waitBeforeRetry(1000 * (attempt + 1));
+    }
+  }
 
-      let { upcoming, todayCount } = filterUpcoming(data);
-      upcoming = sortByDateTime(upcoming);
-      const allRows = classifyRows(upcoming);
-      dashboardUpcoming = upcoming;
-      dashboardRows = allRows;
-      dashboardLoaded = true;
-
-      setText("totalCount", upcoming.length);
-      setText("todayCount", todayCount);
-
-      renderActiveInterviewTab();
-      const updated = document.getElementById("lastUpdated");
-      if (updated) updated.textContent = "Updated " + new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
-    })
-    .catch(function(error) {
-      if (currentController !== dashboardRequestController) return;
-      if (error.name === "AbortError") error = new Error("The server took too long to respond");
-      console.error("ERROR:", error);
-      if (tableBody) tableBody.innerHTML = '<tr><td colspan="6" class="load-state">Unable to load interview data.<br><small>' + escapeHtml(error.message) + '</small><br><button class="retry-btn" type="button" onclick="loadData()">Try again</button></td></tr>';
-    })
-    .finally(function() { clearTimeout(timeoutId); });
+  console.error("Dashboard refresh failed:", lastError);
+  if (dashboardLoaded) {
+    renderActiveInterviewTab();
+    if (updated) updated.textContent = "Connection slow • Showing last loaded data";
+  } else if (tableBody) {
+    tableBody.innerHTML = '<tr><td colspan="6" class="load-state">Unable to load interview data after automatic retries.<br><small>' + escapeHtml(lastError.message) + '</small><br><button class="retry-btn" type="button" onclick="loadData()">Try again</button></td></tr>';
+  }
 }
 
 function showInterviewTable() {
@@ -376,6 +410,7 @@ function initTabs() {
 
 window.switchInterviewTab = switchInterviewTab;
 
+restoreDashboardCache();
 loadData();
 updateTodayCalendarIcon();
 initTabs();
