@@ -905,6 +905,7 @@ footer a:hover{color:var(--orange);padding-left:5px}
   .testimonials-grid{grid-template-columns:1fr}
 }
 </style>
+<link rel="stylesheet" href="home-ai.css">
 </head>
 
 <body>
@@ -949,27 +950,38 @@ footer a:hover{color:var(--orange);padding-left:5px}
   </a>
 </header>
 
-<section id="home" class="hero">
+<section id="home" class="hero ai-hero">
   <div class="hero-content">
-    <h1>Your Skills Today,<br>Your <span>Success Tomorrow</span></h1>
-    <p>Training, interview preparation and placement support for freshers and experienced professionals.</p>
+    <div class="ai-eyebrow">AI-powered career acceleration</div>
+    <h1>Build skills.<br>Become <span>job ready.</span></h1>
+    <div class="ai-role-line">Your path to becoming a <strong id="aiRole">Full Stack Developer</strong></div>
+    <p class="hero-summary">Practical training, real interview preparation and continuous placement support—built around your career goal, not a generic syllabus.</p>
     <div class="actions">
       <a class="btn blue" target="_blank" href="https://forms.gle/h9aqB2KtMqqB9rmc6"><i class="fas fa-user-plus"></i> Candidate Registration<br><small>Start Your Journey</small></a>
+      <a class="btn ai-secondary-btn" href="interviews.html"><i class="fas fa-chart-line"></i> Explore Live Opportunities</a>
     </div>
-    <div class="hero-tags">
-      <span><i class="fas fa-chalkboard-teacher"></i> Expert Trainers</span>
-      <span><i class="fas fa-laptop-code"></i> Live Projects</span>
-      <span><i class="fas fa-comments"></i> Mock Interviews</span>
-      <span><i class="fas fa-headset"></i> 100% Support</span>
-      <span><i class="fas fa-graduation-cap"></i> Course Training</span>
+    <div class="trust-row">
+      <span><i class="fas fa-check-circle"></i> Real-time projects</span>
+      <span><i class="fas fa-check-circle"></i> Expert mock interviews</span>
+      <span><i class="fas fa-check-circle"></i> Placement guidance</span>
     </div>
   </div>
-  <div class="support-box">
-    <h2>100%</h2>
-    <p>Placement Support</p>
-    <div style="font-size:48px;color:#ff8500">📈</div>
+  <div class="ai-stage" aria-label="Interactive AI career growth visualization">
+    <span class="ai-node n1"></span><span class="ai-node n2"></span><span class="ai-node n3"></span><span class="ai-node n4"></span>
+    <span class="ai-connector c1"></span><span class="ai-connector c2"></span><span class="ai-connector c3"></span>
+    <div class="neural-core"><div class="orbit"><i class="orbit-dot"></i></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="core-sphere"></div></div>
+    <div class="career-card cc1"><div class="card-top"><span class="mini-icon"><i class="fas fa-code"></i></span><span class="status">LIVE</span></div><b>Industry-ready skills</b><p>Projects mapped to real roles</p><div class="progress"><i style="width:86%"></i></div></div>
+    <div class="career-card cc2"><div class="card-top"><span class="mini-icon"><i class="fas fa-microphone-alt"></i></span><span class="status">READY</span></div><b>Interview intelligence</b><p>Practice, feedback, improve</p><div class="progress"><i style="width:74%"></i></div></div>
+    <div class="career-card cc3"><div class="card-top"><span class="mini-icon"><i class="fas fa-rocket"></i></span><span class="status">GROWING</span></div><b>Career momentum</b><p>Profile to placement support</p><div class="progress"><i style="width:92%"></i></div></div>
   </div>
 </section>
+
+<div class="ai-capability-strip reveal">
+  <div class="capability"><i class="fas fa-brain"></i><div><b>Focused Learning</b><small>Role-based roadmaps</small></div></div>
+  <div class="capability"><i class="fas fa-laptop-code"></i><div><b>Live Experience</b><small>Production-style projects</small></div></div>
+  <div class="capability"><i class="fas fa-user-check"></i><div><b>Interview Ready</b><small>Mocks with feedback</small></div></div>
+  <div class="capability"><i class="fas fa-briefcase"></i><div><b>Placement Support</b><small>Until you get placed</small></div></div>
+</div>
 
 <div class="stats reveal">
   <div class="stat"><h2 data-count="1000">0</h2><p>Students Trained</p></div>
@@ -1167,6 +1179,7 @@ footer a:hover{color:var(--orange);padding-left:5px}
 <div class="copy">© 2026 SK Tech Academy. All Rights Reserved.</div>
 <a class="whatsapp" target="_blank" href="https://wa.me/919353447457"><i class="fab fa-whatsapp"></i> WhatsApp</a>
 <script src="experience.js" defer></script>
+<script src="home-ai.js" defer></script>
 
 <script>
 const particles = document.getElementById('particles');
