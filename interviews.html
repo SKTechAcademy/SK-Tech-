@@ -41,7 +41,8 @@
         <p>Upcoming Interviews</p>
     </div>
 
-    <div class="card today" data-icon="📅" onclick="switchInterviewTab('today')" style="cursor: pointer;" role="button" tabindex="0">
+    <div class="card today" onclick="switchInterviewTab('today')" style="cursor: pointer;" role="button" tabindex="0">
+        <span class="dynamic-calendar" aria-hidden="true"><small id="calendarMonth">---</small><strong id="calendarDay">--</strong></span>
         <h2 id="todayCount">0</h2>
         <p>Today's Interviews</p>
     </div>

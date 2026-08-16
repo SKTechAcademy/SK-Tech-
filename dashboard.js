@@ -5,6 +5,12 @@ let dashboardRows = [];
 let dashboardUpcoming = [];
 let dashboardLoaded = false;
 
+function updateTodayCalendarIcon() {
+  const now = new Date();
+  setText("calendarMonth", now.toLocaleDateString("en-IN", { month: "short" }).toUpperCase());
+  setText("calendarDay", String(now.getDate()));
+}
+
 function renderActiveInterviewTab() {
   const activeBtn = document.querySelector(".tab-btn.active");
   const activeTab = activeBtn ? activeBtn.getAttribute("data-tab") : "all";
@@ -371,6 +377,7 @@ function initTabs() {
 window.switchInterviewTab = switchInterviewTab;
 
 loadData();
+updateTodayCalendarIcon();
 initTabs();
 showInterviewTable();
 setInterval(function() {

@@ -42,6 +42,9 @@ body.dashboard-page {
 .dashboard-page .card::after { content:attr(data-icon); position:absolute; right:18px; top:16px; font-size:38px; opacity:.28; filter:saturate(.7); }
 .dashboard-page .card::before { content:""; position:absolute; inset:auto 0 0; height:4px; background:linear-gradient(90deg,#168bff,#39d7ff); }
 .dashboard-page .card.today::before { background:linear-gradient(90deg,#8a7dff,#b6adff); }
+.dynamic-calendar { position:absolute; right:20px; top:17px; width:42px; overflow:hidden; border-radius:9px; background:#dce8f8; color:#15243b; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,.24); transform:translateZ(20px); }
+.dynamic-calendar small { display:block; padding:3px 2px; background:linear-gradient(135deg,#7368df,#998cff); color:#fff; font-size:9px; font-weight:900; letter-spacing:.7px; line-height:1.1; }
+.dynamic-calendar strong { display:block; padding:4px 2px 5px; font-size:18px; line-height:1; }
 .dashboard-page .card.job-new::before { background:linear-gradient(90deg,#26d99a,#70efbd); }
 .dashboard-page .card.job-old::before { background:linear-gradient(90deg,#ff9b45,#ffc16f); }
 .dashboard-page .card h2 { margin:10px 0 10px; font-size:42px; line-height:1; }
