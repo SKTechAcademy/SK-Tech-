@@ -8,7 +8,8 @@ let dashboardLoaded = false;
 function renderActiveInterviewTab() {
   const activeBtn = document.querySelector(".tab-btn.active");
   const activeTab = activeBtn ? activeBtn.getAttribute("data-tab") : "all";
-  renderTable(filterByTab(dashboardRows, activeTab, dashboardUpcoming, 5));
+  // Seven days guarantees that Saturday and Sunday availability is always visible.
+  renderTable(filterByTab(dashboardRows, activeTab, dashboardUpcoming, 7));
 }
 
 function renderTable(data) {
