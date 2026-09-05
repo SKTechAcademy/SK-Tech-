@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SK TECH | Naukri Auto Apply</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><div class="brand">SK TECH</div><h1>Naukri Auto Apply</h1><p>Match the right jobs and control applications from one dashboard.</p></div>
+      <div class="status"><span id="workerDot"></span><strong id="workerStatus">Worker offline</strong></div>
+    </header>
+
+    <section class="grid">
+      <article class="panel profile">
+        <h2>Candidate Profile</h2>
+        <label>Target roles<input id="roles" value=".NET Developer, .NET Full Stack Developer, Software Engineer"></label>
+        <label>Experience (years)<input id="experience" type="number" min="0" step="0.5" value="4"></label>
+        <label>Skills<textarea id="skills">C#, .NET Core, ASP.NET Core, Web API, Angular, React, SQL Server, Azure</textarea></label>
+        <label>Locations<input id="locations" value="Bangalore, Hyderabad, Chennai, Remote"></label>
+        <label>Minimum match <b id="matchLabel">75%</b><input id="minMatch" type="range" min="40" max="100" value="75"></label>
+        <div class="actions"><button id="saveBtn" class="secondary">Save Settings</button><button id="startBtn">Start Auto Apply</button></div>
+        <p class="note">Naukri login, OTP and CAPTCHA are completed manually in the Playwright browser. Credentials are never stored in this page.</p>
+      </article>
+
+      <article class="panel activity">
+        <div class="activityHead"><div><h2>Application Activity</h2><p id="runMessage">Connect the local worker to begin.</p></div><button id="stopBtn" class="danger" disabled>Stop</button></div>
+        <div class="stats">
+          <div><span>Found</span><strong id="found">0</strong></div><div><span>Matched</span><strong id="matched">0</strong></div><div><span>Applied</span><strong id="applied">0</strong></div><div><span>Skipped</span><strong id="skipped">0</strong></div><div><span>Review</span><strong id="review">0</strong></div>
+        </div>
+        <div class="tableWrap"><table><thead><tr><th>Role</th><th>Company</th><th>Match</th><th>Status</th></tr></thead><tbody id="jobs"><tr><td colspan="4" class="empty">No applications yet.</td></tr></tbody></table></div>
+        <div class="logs"><div class="logsHead"><strong>Worker Log</strong><button id="clearLog">Clear</button></div><pre id="log">Dashboard ready.</pre></div>
+      </article>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
