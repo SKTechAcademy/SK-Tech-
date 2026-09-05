@@ -1,4 +1,4 @@
-const $=id=>document.getElementById(id);const API=localStorage.getItem('sktechWorkerUrl')||'http://127.0.0.1:8787';
+const $=id=>document.getElementById(id);const API=localStorage.getItem('sktechWorkerUrl')||window.location.origin;
 const log=m=>{$('log').textContent+=`\n[${new Date().toLocaleTimeString()}] ${m}`;$('log').scrollTop=$('log').scrollHeight};
 const profile=()=>({roles:$('roles').value.split(',').map(x=>x.trim()).filter(Boolean),experience:Number($('experience').value),skills:$('skills').value.split(',').map(x=>x.trim()).filter(Boolean),locations:$('locations').value.split(',').map(x=>x.trim()).filter(Boolean),minMatch:Number($('minMatch').value)});
 function save(){localStorage.setItem('sktechNaukriProfile',JSON.stringify(profile()));log('Candidate settings saved locally.')}function load(){try{const p=JSON.parse(localStorage.getItem('sktechNaukriProfile'));if(!p)return;$('roles').value=p.roles.join(', ');$('experience').value=p.experience;$('skills').value=p.skills.join(', ');$('locations').value=p.locations.join(', ');$('minMatch').value=p.minMatch;$('matchLabel').textContent=p.minMatch+'%'}catch{}}
