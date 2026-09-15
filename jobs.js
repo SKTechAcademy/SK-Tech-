@@ -13,6 +13,8 @@ let jobsAgeFilter = "all"; // all, new, old
 let jobsSearchQuery = "";
 let jobsTypeFilter = "";
 let jobsSort = "newest";
+const JOBS_PAGE_SIZE = 10;
+let jobsPage = 1;
 
 /**
  * Simple CSV parser that handles quoted fields and commas inside quotes.
@@ -285,6 +287,7 @@ function updateJobCounts() {
 
 function filterJobsByAge(age) {
   jobsAgeFilter = age;
+  jobsPage = 1;
 
   // Switch to Job Openings tab visually
   const tabs = document.querySelectorAll(".tab-btn");
@@ -329,15 +332,61 @@ function renderJobs() {
     return (dateB ? dateB.getTime() : 0) - (dateA ? dateA.getTime() : 0);
   });
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / JOBS_PAGE_SIZE));
+  jobsPage = Math.max(1, Math.min(jobsPage, totalPages));
+  renderJobsPagination(filtered.length, totalPages);
+
   if (filtered.length === 0) {
     setJobsEmpty("No " + (jobsAgeFilter === "new" ? "new" : jobsAgeFilter === "old" ? "old" : "active") + " job openings at the moment.");
     return;
   }
 
-  for (let i = 0; i < filtered.length; i++) {
+  const start = (jobsPage - 1) * JOBS_PAGE_SIZE;
+  for (let i = start; i < Math.min(start + JOBS_PAGE_SIZE, filtered.length); i++) {
     grid.appendChild(buildJobCard(filtered[i]));
   }
   if (typeof window.refresh3DEffects === "function") window.refresh3DEffects();
+}
+
+function renderJobsPagination(total, totalPages) {
+  let pager = document.getElementById("jobsPagination");
+  if (!pager) {
+    pager = document.createElement("nav");
+    pager.id = "jobsPagination";
+    pager.className = "jobs-pagination";
+    pager.setAttribute("aria-label", "Job pages");
+    document.getElementById("jobsGrid").after(pager);
+  }
+  pager.replaceChildren();
+  pager.hidden = total === 0;
+  if (!total) return;
+  const previous = document.createElement("button");
+  previous.type = "button";
+  previous.textContent = "Previous";
+  previous.disabled = jobsPage === 1;
+  previous.addEventListener("click", function() { changeJobsPage(-1); });
+  const status = document.createElement("span");
+  status.setAttribute("role", "status");
+  const start = (jobsPage - 1) * JOBS_PAGE_SIZE + 1;
+  status.textContent = "Showing " + start + "–" + Math.min(start + JOBS_PAGE_SIZE - 1, total) +
+    " of " + total + " jobs · Page " + jobsPage + " of " + totalPages;
+  const next = document.createElement("button");
+  next.type = "button";
+  next.textContent = "Next";
+  next.disabled = jobsPage === totalPages;
+  next.addEventListener("click", function() { changeJobsPage(1); });
+  pager.append(previous, status, next);
+}
+
+function changeJobsPage(direction) {
+  jobsPage += direction;
+  renderJobs();
+  const heading = document.querySelector(".jobs-header h2");
+  if (heading) {
+    heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+    heading.scrollIntoView({ block: "start" });
+  }
 }
 
 function populateJobTypes() {
@@ -353,9 +402,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const search = document.getElementById("jobSearch");
   const type = document.getElementById("jobTypeFilter");
   const sort = document.getElementById("jobSort");
-  if (search) search.addEventListener("input", function() { jobsSearchQuery = search.value.trim().toLowerCase(); renderJobs(); });
-  if (type) type.addEventListener("change", function() { jobsTypeFilter = type.value; renderJobs(); });
-  if (sort) sort.addEventListener("change", function() { jobsSort = sort.value; renderJobs(); });
+  if (search) search.addEventListener("input", function() { jobsSearchQuery = search.value.trim().toLowerCase(); jobsPage = 1; renderJobs(); });
+  if (type) type.addEventListener("change", function() { jobsTypeFilter = type.value; jobsPage = 1; renderJobs(); });
+  if (sort) sort.addEventListener("change", function() { jobsSort = sort.value; jobsPage = 1; renderJobs(); });
 });
 
 function viewJobDetails(jobId) {
