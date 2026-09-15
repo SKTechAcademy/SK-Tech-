@@ -37,7 +37,7 @@
   }
 
   function setupReveal() {
-    const elements = document.querySelectorAll("section, .cards, .tabs, .dashboard-shell, table, .jobs-container");
+    const elements = document.querySelectorAll("section, .cards, .tabs");
     if (reducedMotion || !("IntersectionObserver" in window)) {
       elements.forEach(function (el) { el.classList.add("is-visible"); });
       return;
