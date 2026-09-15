@@ -554,3 +554,11 @@
         width: 100%;
     }
 }
+
+/* Pagination stays visible below the current ten job cards. */
+.jobs-pagination { display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin:24px 0; color:#d1d7e6; }
+.jobs-pagination[hidden] { display:none; }
+.jobs-pagination button { padding:11px 20px; border:1px solid #39d7ff; border-radius:10px; background:#172131; color:#fff; cursor:pointer; font:inherit; }
+.jobs-pagination button:disabled { opacity:.45; cursor:default; }
+.jobs-pagination button:focus-visible { outline:3px solid #39d7ff; outline-offset:3px; }
+.jobs-pagination span { text-align:center; }
