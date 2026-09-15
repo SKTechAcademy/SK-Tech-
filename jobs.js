@@ -236,38 +236,96 @@ function setJobsEmpty(message) {
   }
 }
 
-function loadJobs() {
-  if (jobsLoaded && jobsData.length > 0) {
-    renderJobs();
-    return;
+let jobsRequest = null;
+let requestedJobOpened = false;
+
+function openRequestedJob() {
+  if (requestedJobOpened || !document.getElementById("jobModal")) return;
+  const id = new URLSearchParams(location.search).get("job");
+  if (id && findJobById(id)) {
+    requestedJobOpened = true;
+    viewJobDetails(id);
   }
-
-  setJobsLoading();
-
-  fetch(JOBS_CSV_URL)
-    .then(function(response) {
-      if (!response.ok) throw new Error("Failed to load jobs: " + response.status);
-      return response.text();
-    })
-    .then(function(csvText) {
-      const rows = parseCsv(csvText);
-      const activeJobs = [];
-      for (let i = 0; i < rows.length; i++) {
-        const job = normalizeJob(rows[i]);
-        if (job.status.toLowerCase() === "active") {
-          activeJobs.push(job);
-        }
-      }
-      jobsData = activeJobs;
-      jobsLoaded = true;
-      populateJobTypes();
-      renderJobs();
-    })
-    .catch(function(error) {
-      console.error("Jobs load error:", error);
-      setJobsError(error.message || "Failed to load job openings.");
-    });
 }
+
+function jobsNotice(message, retry) {
+  let notice = document.getElementById("jobsNotice");
+  if (!notice) {
+    notice = document.createElement("div");
+    notice.id = "jobsNotice";
+    notice.setAttribute("role", "status");
+    document.getElementById("jobsGrid").before(notice);
+  }
+  notice.replaceChildren();
+  notice.textContent = message;
+  if (retry) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "refresh-btn";
+    button.textContent = "Retry loading jobs";
+    button.addEventListener("click", function() { loadJobs(true); });
+    notice.appendChild(button);
+  }
+}
+
+function acceptJobRows(rows) {
+  jobsData = rows.map(normalizeJob).filter(function(job) {
+    return job.status.toLowerCase() === "active";
+  });
+  jobsLoaded = true;
+  populateJobTypes();
+  renderJobs();
+  openRequestedJob();
+}
+
+function loadJobs(force) {
+  if (jobsRequest) return jobsRequest;
+  if (jobsLoaded && !force) {
+    renderJobs();
+    openRequestedJob();
+    return Promise.resolve();
+  }
+  if (!jobsLoaded) {
+    try {
+      const cached = JSON.parse(localStorage.getItem("skHomeJobs") || "null");
+      if (cached && Array.isArray(cached.rows) && Date.now() - cached.time < 21600000) {
+        acceptJobRows(cached.rows);
+        jobsNotice("Showing saved jobs while checking for updates.", false);
+      }
+    } catch (error) { /* Storage may be disabled; live loading still works. */ }
+  }
+  if (!jobsLoaded) setJobsLoading();
+  jobsRequest = (async function() {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const controller = new AbortController();
+      const timeout = setTimeout(function() { controller.abort(); }, 15000);
+      try {
+        const url = new URL(JOBS_CSV_URL);
+        url.searchParams.set("t", String(Date.now()));
+        const response = await fetch(url.href, { signal: controller.signal, cache: "no-store" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        const csvText = await response.text();
+        const headers = parseCsvLine(csvText.split(/\r?\n/)[0]).map(function(h) { return h.trim(); });
+        if (!headers.includes("Job ID") || !headers.includes("Status")) throw new Error("Invalid jobs response");
+        const rows = parseCsv(csvText);
+        acceptJobRows(rows);
+        try { localStorage.setItem("skHomeJobs", JSON.stringify({ time: Date.now(), rows: rows })); } catch (error) {}
+        jobsNotice("", false);
+        const id = new URLSearchParams(location.search).get("job");
+        if (id && !findJobById(id)) jobsNotice("This opening is no longer available. Browse the current jobs below.", false);
+        return;
+      } catch (error) {
+        if (attempt === 2) {
+          if (!jobsLoaded) setJobsError("Unable to load jobs right now. Please retry.");
+          jobsNotice(jobsLoaded ? "Live updates are unavailable. Showing saved jobs; availability may have changed. " : "", true);
+        }
+      } finally { clearTimeout(timeout); }
+      await new Promise(function(resolve) { setTimeout(resolve, 1000 * (attempt + 1)); });
+    }
+  })().finally(function() { jobsRequest = null; });
+  return jobsRequest;
+}
+document.addEventListener("DOMContentLoaded", openRequestedJob);
 
 function updateJobCounts() {
   let newCount = 0;
