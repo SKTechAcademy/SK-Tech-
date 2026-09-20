@@ -129,14 +129,18 @@ body {
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
 }
 
-.card h2 {
+.card h2,
+.card .card-count {
+    display: block;
     font-size: 46px;
     margin: 0;
     color: #ffffff;
     font-weight: 800;
 }
 
-.card p {
+.card p,
+.card .card-label {
+    display: block;
     margin-top: 8px;
     font-size: 15px;
     color: #d1d7e6;

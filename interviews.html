@@ -39,26 +39,26 @@
     <div class="cards">
 
     <!-- Cards with additional classes for styling and icons -->
-    <div class="card total" data-icon="📊" onclick="switchInterviewTab('all')" style="cursor: pointer;" role="button" tabindex="0">
-        <h2 id="totalCount">0</h2>
-        <p>Upcoming Interviews</p>
-    </div>
+    <button type="button" class="card total" data-icon="📊" onclick="switchInterviewTab('all')">
+        <span class="card-count" id="totalCount">0</span>
+        <span class="card-label">Upcoming Interviews</span>
+    </button>
 
-    <div class="card today" onclick="switchInterviewTab('today')" style="cursor: pointer;" role="button" tabindex="0">
+    <button type="button" class="card today" onclick="switchInterviewTab('today')">
         <span class="dynamic-calendar" aria-hidden="true"><small id="calendarMonth">---</small><strong id="calendarDay">--</strong></span>
-        <h2 id="todayCount">0</h2>
-        <p>Today's Interviews</p>
-    </div>
+        <span class="card-count" id="todayCount">0</span>
+        <span class="card-label">Today's Interviews</span>
+    </button>
 
-    <div class="card job-new" data-icon="✨" onclick="filterJobsByAge('new')" style="cursor: pointer;" role="button" tabindex="0">
-        <h2 id="newJobsCount">0</h2>
-        <p>New Openings</p>
-    </div>
+    <button type="button" class="card job-new" data-icon="✨" onclick="filterJobsByAge('new')">
+        <span class="card-count" id="newJobsCount">0</span>
+        <span class="card-label">New Openings</span>
+    </button>
 
-    <div class="card job-old" data-icon="📁" onclick="filterJobsByAge('old')" style="cursor: pointer;" role="button" tabindex="0">
-        <h2 id="oldJobsCount">0</h2>
-        <p>Old Openings</p>
-    </div>
+    <button type="button" class="card job-old" data-icon="📁" onclick="filterJobsByAge('old')">
+        <span class="card-count" id="oldJobsCount">0</span>
+        <span class="card-label">Old Openings</span>
+    </button>
 
 </div>
 
@@ -81,7 +81,7 @@
     <button class="tab-btn" data-tab="jobs">Job Openings</button>
 </div>
 
-<div class="schedule-legend" aria-label="Schedule colour guide">
+<div class="schedule-legend" role="group" aria-label="Schedule colour guide">
   <span><i class="legend-dot today-dot"></i>Today</span>
   <span><i class="legend-dot tomorrow-dot"></i>Tomorrow</span>
   <span><i class="legend-dot day-after-dot"></i>Next Weekday</span>
