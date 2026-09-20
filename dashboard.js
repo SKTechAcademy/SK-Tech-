@@ -400,6 +400,7 @@ function activateDashboardTab(tabName, updateUrl) {
     }
   }
   if (tabName === "jobs") {
+    if (typeof window.skTrack === "function") window.skTrack("job_openings_view");
     if (typeof jobsAgeFilter !== "undefined") jobsAgeFilter = "all";
     showJobsContainer();
   } else {

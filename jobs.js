@@ -346,6 +346,7 @@ function updateJobCounts() {
 function filterJobsByAge(age) {
   jobsAgeFilter = age;
   jobsPage = 1;
+  if (typeof window.skTrack === "function") window.skTrack("job_age_filter", { age_group: age });
 
   // Switch to Job Openings tab visually
   const tabs = document.querySelectorAll(".tab-btn");
@@ -460,14 +461,33 @@ document.addEventListener("DOMContentLoaded", function() {
   const search = document.getElementById("jobSearch");
   const type = document.getElementById("jobTypeFilter");
   const sort = document.getElementById("jobSort");
-  if (search) search.addEventListener("input", function() { jobsSearchQuery = search.value.trim().toLowerCase(); jobsPage = 1; renderJobs(); });
-  if (type) type.addEventListener("change", function() { jobsTypeFilter = type.value; jobsPage = 1; renderJobs(); });
-  if (sort) sort.addEventListener("change", function() { jobsSort = sort.value; jobsPage = 1; renderJobs(); });
+  let searchTrackTimer = null;
+  if (search) search.addEventListener("input", function() {
+    jobsSearchQuery = search.value.trim().toLowerCase(); jobsPage = 1; renderJobs();
+    clearTimeout(searchTrackTimer);
+    searchTrackTimer = setTimeout(function() {
+      if (jobsSearchQuery && typeof window.skTrack === "function") {
+        window.skTrack("job_search", { query_length: jobsSearchQuery.length });
+      }
+    }, 800);
+  });
+  if (type) type.addEventListener("change", function() {
+    jobsTypeFilter = type.value; jobsPage = 1; renderJobs();
+    if (typeof window.skTrack === "function") window.skTrack("job_filter", { employment_type: type.value || "all" });
+  });
+  if (sort) sort.addEventListener("change", function() {
+    jobsSort = sort.value; jobsPage = 1; renderJobs();
+    if (typeof window.skTrack === "function") window.skTrack("job_sort", { sort_order: sort.value });
+  });
 });
 
 function viewJobDetails(jobId) {
   const job = findJobById(jobId);
   if (!job) return;
+
+  if (typeof window.skTrack === "function") {
+    window.skTrack("job_view", { job_id: job.jobId, job_title: job.title, company: job.companyName });
+  }
 
   const icon = getJobIcon(job.title);
   const modal = document.getElementById("jobModal");
@@ -506,6 +526,10 @@ function applyForJob(jobId) {
   const job = findJobById(jobId);
   if (!job) return;
 
+  if (typeof window.skTrack === "function") {
+    window.skTrack("apply_click", { job_id: job.jobId, job_title: job.title, company: job.companyName });
+  }
+
   const link = (job.applyLink || "").trim();
   const email = (job.hrEmail || "").trim();
   let url = "";
@@ -540,6 +564,10 @@ function shareJobWhatsApp(jobId) {
   const job = findJobById(jobId);
   if (!job) return;
 
+  if (typeof window.skTrack === "function") {
+    window.skTrack("job_share", { method: "whatsapp", job_id: job.jobId, job_title: job.title, company: job.companyName });
+  }
+
   const icon = getJobIcon(job.title);
   let text = "🚀 New Job Opening!\n\n";
   text += icon.emoji + " " + job.title + "\n";
@@ -573,6 +601,10 @@ function shareJobWhatsApp(jobId) {
 function generateInstagramPost(jobId) {
   const job = findJobById(jobId);
   if (!job) return;
+
+  if (typeof window.skTrack === "function") {
+    window.skTrack("job_share", { method: "instagram", job_id: job.jobId, job_title: job.title, company: job.companyName });
+  }
 
   const icon = getJobIcon(job.title);
   const modal = document.getElementById("instaModal");
