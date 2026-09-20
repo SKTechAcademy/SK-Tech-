@@ -18,7 +18,7 @@ body.auth-page .login-form input:focus{border-color:var(--ai-cyan);box-shadow:0 
 body.auth-page .login-form button{border-radius:12px;padding:15px;background:linear-gradient(135deg,#087cff,#11b2ff)}
 
 body.portal-page header{position:sticky;top:0;z-index:20;margin:18px auto 0;width:min(1300px,calc(100% - 32px));padding:14px 18px;border:1px solid var(--ai-line);border-radius:18px;background:rgba(10,21,38,.84);backdrop-filter:blur(19px);box-shadow:0 18px 45px rgba(0,0,0,.25)}
-body.portal-page header .logo img{border-radius:10px}
+body.portal-page header .logo img{border-radius:50%;object-fit:contain}
 body.portal-page header nav a{padding:9px 11px;border-radius:9px;color:#dbe8fa}
 body.portal-page header nav a:hover{background:rgba(255,255,255,.08);color:#73e0ff}
 body.portal-page main{position:relative;z-index:2;padding-top:40px}
