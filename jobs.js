@@ -5,7 +5,7 @@
  * Includes WhatsApp share, Instagram caption generator, and apply logic.
  */
 
-const JOBS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vScvHF8CHdJV66jF5qG-aR1OXfNdapIuTQyIx5XVMXrHy8-GGiugJa4VhPeUT-lQw/pub?output=csv";
+const JOBS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSZ_q6CAt5GAQQ-Yr4dQVNGOT3R2UruLuxWYJn1TeBMnkWtQH9jiF4fbvqcxlHRZg_Zy0SHZd70Mp3n/pub?gid=800448316&single=true&output=csv";
 
 let jobsData = [];
 let jobsLoaded = false;

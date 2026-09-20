@@ -1,6 +1,6 @@
 (function(){
   "use strict";
-  const jobsUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vScvHF8CHdJV66jF5qG-aR1OXfNdapIuTQyIx5XVMXrHy8-GGiugJa4VhPeUT-lQw/pub?output=csv";
+  const jobsUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vSZ_q6CAt5GAQQ-Yr4dQVNGOT3R2UruLuxWYJn1TeBMnkWtQH9jiF4fbvqcxlHRZg_Zy0SHZd70Mp3n/pub?gid=800448316&single=true&output=csv";
   function csvLine(line){const out=[];let value="",quoted=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){if(quoted&&line[i+1]==='"'){value+='"';i++;}else quoted=!quoted;}else if(ch===','&&!quoted){out.push(value);value="";}else value+=ch;}out.push(value);return out;}
   function parseCsv(text){const lines=text.trim().split(/\r?\n/),headers=csvLine(lines.shift()||"").map(x=>x.trim());return lines.filter(Boolean).map(line=>{const values=csvLine(line),row={};headers.forEach((h,i)=>row[h]=(values[i]||"").trim());return row;});}
   function safe(value){return String(value||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
