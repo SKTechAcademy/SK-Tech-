@@ -132,21 +132,19 @@ body.dashboard-page {
   .last-updated { display:none; }
 }
 
-/* Mobile schedule cards: keep every interview detail visible without horizontal scrolling. */
+/* Compact mobile table: preserve the familiar desktop table while fitting every column. */
 @media(max-width:680px){
-  .table-shell { overflow:visible; border:0; border-radius:0; background:transparent; box-shadow:none; backdrop-filter:none; }
-  .dashboard-page table { display:block; min-width:0; width:100%; background:transparent; }
-  .dashboard-page thead { display:none; }
-  .dashboard-page tbody { display:grid; gap:12px; }
-  .dashboard-page tbody tr { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); overflow:hidden; border:1px solid rgba(255,255,255,.13); border-left-width:4px; border-radius:16px; box-shadow:0 14px 35px rgba(0,0,0,.22); }
-  .dashboard-page tbody td { display:grid; min-width:0; gap:5px; padding:12px 14px; border:0; border-top:1px solid rgba(255,255,255,.07); white-space:normal; }
-  .dashboard-page tbody td::before { content:attr(data-label); color:rgba(220,232,248,.66); font-size:10px; font-weight:850; letter-spacing:.65px; line-height:1; text-transform:uppercase; }
-  .dashboard-page tbody td:nth-child(-n+2) { border-top:0; }
-  .dashboard-page tbody td:nth-child(odd) { border-right:1px solid rgba(255,255,255,.07); }
-  .dashboard-page tbody td:nth-child(3) { grid-column:1/-1; border-right:0; }
-  .dashboard-page tbody td[colspan] { grid-column:1/-1; display:block; border:0; }
-  .dashboard-page tbody td[colspan]::before { content:none; }
-  .dashboard-page .date-badge { width:max-content; margin:0 7px 0 0; }
-  .dashboard-page .date-value { white-space:normal; }
-  .dashboard-page tbody tr:hover { filter:brightness(1.05); }
+  .table-shell { overflow:hidden; border-radius:14px; }
+  .dashboard-page table { min-width:0; width:100%; table-layout:fixed; }
+  .dashboard-page th { padding:11px 4px; font-size:8px; letter-spacing:.25px; text-align:center; }
+  .dashboard-page td { padding:12px 4px; font-size:10px; line-height:1.25; text-align:center; white-space:normal; overflow-wrap:anywhere; }
+  .dashboard-page th:nth-child(1),.dashboard-page td:nth-child(1){width:12%}
+  .dashboard-page th:nth-child(2),.dashboard-page td:nth-child(2){width:22%}
+  .dashboard-page th:nth-child(3),.dashboard-page td:nth-child(3){width:27%}
+  .dashboard-page th:nth-child(4),.dashboard-page td:nth-child(4){width:14%}
+  .dashboard-page th:nth-child(5),.dashboard-page td:nth-child(5){width:14%}
+  .dashboard-page th:nth-child(6),.dashboard-page td:nth-child(6){width:11%}
+  .dashboard-page .date-badge { display:flex; justify-content:center; width:max-content; max-width:100%; margin:0 auto 5px; padding:3px 5px; font-size:7px; white-space:normal; }
+  .dashboard-page .date-value { display:block; white-space:nowrap; }
+  .dashboard-page tbody tr { border-left-width:3px; }
 }
