@@ -131,15 +131,12 @@ function findConflicts(upcoming) {
     const item1 = upcoming[i];
     const dateOnly1 = getDateOnly(item1["Interview Date"]);
     if (!dateOnly1) continue;
-    const id1 = ((item1["Sk Tech Register ID"] || "").toString()).toLowerCase().trim();
     const start1 = toMinutes(item1["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"]);
     const end1 = toMinutes(item1["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"]);
     for (let j = i + 1; j < upcoming.length; j++) {
       const item2 = upcoming[j];
       const dateOnly2 = getDateOnly(item2["Interview Date"]);
       if (!dateOnly2 || dateOnly1.getTime() !== dateOnly2.getTime()) continue;
-      const id2 = ((item2["Sk Tech Register ID"] || "").toString()).toLowerCase().trim();
-      if (!id1 || !id2 || id1 !== id2) continue;
       const start2 = toMinutes(item2["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"]);
       const end2 = toMinutes(item2["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"]);
       if (start1 < end2 && start2 < end1) {
