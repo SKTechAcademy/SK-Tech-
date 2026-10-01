@@ -337,7 +337,10 @@ async function loadData() {
     try {
       const response = await fetch(API_URL, { signal: currentController.signal, cache: "default" });
       if (!response.ok) throw new Error("Server returned " + response.status);
-      const data = await response.json();
+      const responseData = await response.json();
+      const data = Array.isArray(responseData) ? responseData.filter(function(item) {
+        return String(item["Full Name"] || "").trim().toLowerCase() !== "system qa check";
+      }) : responseData;
       if (sequence !== dashboardLoadSequence) return;
       applyDashboardData(data, false);
       try { localStorage.setItem(DASHBOARD_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data: data })); } catch (cacheError) { console.warn("Could not save dashboard cache:", cacheError); }
