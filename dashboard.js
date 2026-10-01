@@ -41,13 +41,13 @@ function renderTable(data) {
     }
     row += ">";
 
-    row += "<td>" + escapeHtml(item["Sk Tech Register ID"] || "") + "</td>";
-    row += "<td>" + escapeHtml(item["Round"] || "") + "</td>";
+    row += '<td data-label="ID">' + escapeHtml(item["Sk Tech Register ID"] || "") + "</td>";
+    row += '<td data-label="Round">' + escapeHtml(item["Round"] || "") + "</td>";
     const dateLabel = obj.dateLabel || "Upcoming";
-    row += '<td><span class="date-badge">' + escapeHtml(dateLabel) + '</span><span class="date-value">' + escapeHtml(formatDate(item["Interview Date"])) + "</span></td>";
-    row += "<td>" + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
-    row += "<td>" + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
-    row += "<td>" + escapeHtml(item["Batch"] || "") + "</td>";
+    row += '<td data-label="Date"><span class="date-badge">' + escapeHtml(dateLabel) + '</span><span class="date-value">' + escapeHtml(formatDate(item["Interview Date"])) + "</span></td>";
+    row += '<td data-label="From">' + escapeHtml(formatTime(item["Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
+    row += '<td data-label="To">' + escapeHtml(formatTime(item["Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment"])) + "</td>";
+    row += '<td data-label="Batch">' + escapeHtml(item["Batch"] || "") + "</td>";
 
     row += "</tr>";
     table.innerHTML += row;
