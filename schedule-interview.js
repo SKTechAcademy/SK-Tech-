@@ -115,7 +115,7 @@
     submitButton.textContent="Saving…";setStatus("Checking and saving interview…","working");
     let outcome;
     try{
-      outcome=await SkInterviewSave.save(details);
+      outcome=await SkInterviewSave.save(details,function(message){setStatus(message,"working");});
       if(outcome==="busy")return;
       if(outcome==="existing"){
         setStatus("This interview already exists. No duplicate was saved. If you are rescheduling, change the interview date, time, or round before saving.","warning");

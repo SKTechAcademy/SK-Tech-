@@ -6,7 +6,7 @@ const source=fs.readFileSync(require('node:path').join(__dirname,'../schedule-sa
 const details={registerId:'SK26',round:'Round 1',technology:'Full Stack Dot Net Developer',company:'Persistent systems',batch:'2',date:'2026-10-08',fromTime:'16:00',toTime:'17:00'};
 const row={'Sk Tech Register ID':'SK26','Round':'Round 1',' Technologies Required*':details.technology,'Interview Company ':details.company,'Batch':2,'Interview Date':'2026-10-07T18:30:00Z','Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment':'1899-12-30T10:38:50Z','Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment':'1899-12-30T11:38:50Z'};
 function setup(fetch,storage=new Map(),navigator={}){
- const context={fetch,navigator,URLSearchParams,AbortController,Intl,localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},setTimeout:(fn,ms)=>setTimeout(fn,ms===12000?ms:0),clearTimeout};
+ const context={fetch,navigator,URLSearchParams,AbortController,Intl,localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},setTimeout:(fn,ms)=>setTimeout(fn,ms>=15000?ms:0),clearTimeout};
  vm.runInNewContext(source,context);
  return context.SkInterviewSave;
 }
@@ -53,4 +53,43 @@ test('same booking in two tabs is serialized by Web Locks',async()=>{
  const storage=new Map();const fetch=async(url,options)=>{if(options.method){posts++;return {};}return response(posts?[row]:[]);};
  const results=await Promise.all([setup(fetch,storage,navigator).save(details),setup(fetch,storage,navigator).save(details)]);
  assert.deepEqual(results,['saved','existing']);assert.equal(posts,1);
+});
+
+test('transient initial network failure automatically recovers and detects duplicate',async()=>{
+ let reads=0,posts=0;const progress=[];
+ const api=setup(async(url,options)=>{if(options.method){posts++;return {};}if(++reads===1)throw new TypeError('Failed to fetch');return response([row]);});
+ assert.equal(await api.save(details,message=>progress.push(message)),'existing');
+ assert.equal(reads,2);assert.equal(posts,0);assert.ok(progress.some(message=>message.includes('2 of 3')));
+});
+test('new booking survives two temporary read failures and sends exactly one POST',async()=>{
+ let reads=0,posts=0;
+ const api=setup(async(url,options)=>{if(options.method){posts++;return {};}if(++reads<=2)throw Error('network');return response(posts?[row]:[]);});
+ assert.equal(await api.save(details),'saved');assert.equal(posts,1);
+});
+test('HTTP failure and invalid JSON are retried before checking duplicate',async()=>{
+ let reads=0,posts=0;
+ const api=setup(async(url,options)=>{if(options.method)posts++;reads++;if(reads===1)return {ok:false};if(reads===2)return {ok:true,json:async()=>{throw SyntaxError('HTML instead of JSON');}};return response([row]);});
+ assert.equal(await api.save(details),'existing');assert.equal(reads,3);assert.equal(posts,0);
+});
+test('non-array responses do not authorize a write',async()=>{
+ let reads=0,posts=0;const api=setup(async(url,options)=>{if(options.method)posts++;reads++;return response({error:'quota exceeded'});});
+ await assert.rejects(api.save(details),/after 3 attempts/);assert.equal(reads,3);assert.equal(posts,0);
+});
+test('an aborted read retries without posting a duplicate',async()=>{
+ let reads=0,posts=0;
+ const api=setup(async(url,options)=>{if(options.method)posts++;if(++reads===1){const error=new Error('timeout');error.name='AbortError';throw error;}return response([row]);});
+ assert.equal(await api.save(details),'existing');assert.equal(posts,0);
+});
+test('whitespace and casing differences still match the same booking',()=>{
+ const api=setup();assert.equal(api.matches({...row,'Interview Company ':'  PERSISTENT   systems  '},{...details,technology:' full STACK dot net developer '}),true);
+});
+test('a pending save can later be confirmed after retry without a new POST',async()=>{
+ let visible=false,offline=false,posts=0;
+ const api=setup(async(url,options)=>{if(options.method){posts++;return {};}if(offline)throw Error('offline');return response(visible?[row]:[]);});
+ assert.equal(await api.save(details),'pending');offline=true;assert.equal(await api.save(details),'pending');
+ offline=false;visible=true;assert.equal(await api.save(details),'saved');assert.equal(posts,1);
+});
+test('AM, PM and rescheduled rounds are distinct bookings',()=>{
+ const api=setup();assert.equal(api.matches(row,{...details,fromTime:'04:00',toTime:'05:00'}),false);
+ assert.equal(api.matches(row,{...details,round:'Reschedule Round 1'}),false);
 });
