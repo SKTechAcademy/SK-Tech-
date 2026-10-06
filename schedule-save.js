@@ -39,6 +39,8 @@
   async function exists(details,timeout=20000){
     const rows=await request(VERIFY_URL+"?fresh="+Date.now(),{cache:"no-store",credentials:"omit"},timeout,true);
     if(!Array.isArray(rows))throw new Error("Invalid interview service response");
+    const columns=["Sk Tech Register ID","Round"," Technologies Required*","Interview Company ","Batch","Interview Date",timeKey,endKey];
+    if(rows.some(row=>!row||typeof row!=="object"||!columns.every(column=>Object.prototype.hasOwnProperty.call(row,column))))throw new Error("Incomplete interview service response");
     return rows.some(row=>matches(row,details));
   }
   async function checkExisting(details,onProgress){

@@ -41,15 +41,15 @@
   fields.forEach(function(field){
     const error=document.createElement("span");error.className="schedule-field-error";error.id=field.id+"Error";error.setAttribute("aria-live","polite");const errorAnchor=field.closest(".modern-time-picker")||field;errorAnchor.insertAdjacentElement("afterend",error);field.setAttribute("aria-describedby",error.id);
     field.addEventListener("blur",function(){field.dataset.touched="true";validateField(field,true);});
-    ["input","change"].forEach(function(eventName){field.addEventListener(eventName,function(){validateField(field,field.dataset.touched==="true");});});
+    ["input","change"].forEach(function(eventName){field.addEventListener(eventName,function(){validateField(field,field.dataset.touched==="true");if(field.id==="scheduleTimeFrom"){const end=document.getElementById("scheduleTimeTo");validateField(end,end.dataset.touched==="true");}});});
   });
 
-  function showStep(index){
+  function showStep(index,focusField){
     currentStep=Math.max(0,Math.min(index,sections.length-1));closeTimePanels();
     sections.forEach(function(section,sectionIndex){const active=sectionIndex===currentStep;section.hidden=!active;section.classList.toggle("is-active",active);});
     progressTitle.textContent=sections[currentStep].dataset.scheduleStep;progressText.textContent="Step "+(currentStep+1)+" of "+sections.length;progressBar.style.width=((currentStep+1)/sections.length*100)+"%";
     backButton.hidden=currentStep===0;nextButton.hidden=currentStep===sections.length-1;submitButton.hidden=currentStep!==sections.length-1;
-    const first=sections[currentStep].querySelector("input,select");if(first)setTimeout(function(){first.focus();},80);
+    const first=focusField||sections[currentStep].querySelector("input,select");if(first)setTimeout(function(){first.focus();},80);
   }
   function validateStep(index){
     const stepFields=fields.filter(function(field){return sections[index].contains(field);});let valid=true;
@@ -72,7 +72,15 @@
     for(let hour=1;hour<=12;hour++){hourSelect.add(new Option(String(hour).padStart(2,"0"),String(hour)));}
     for(let minute=0;minute<60;minute+=5){minuteSelect.add(new Option(String(minute).padStart(2,"0"),String(minute)));}
     hourSelect.value="9";minuteSelect.value="0";
-    function openPanel(event){event.preventDefault();event.stopPropagation();closeTimePanels(panel);panel.hidden=false;hourSelect.focus();}
+    function openPanel(event){
+      if(saving)return;
+      event.preventDefault();event.stopPropagation();closeTimePanels(panel);
+      const selected=input.value.match(/^(\d{1,2}):(\d{2}) (AM|PM)$/);
+      hourSelect.value=selected?String(Number(selected[1])):"9";
+      minuteSelect.value=selected?String(Number(selected[2])):"0";
+      panel.querySelectorAll("[data-period]").forEach(function(button){button.classList.toggle("active",button.dataset.period===(selected?selected[3]:"AM"));});
+      panel.hidden=false;hourSelect.focus();
+    }
     input.addEventListener("click",openPanel);icon.addEventListener("click",openPanel);
     panel.addEventListener("click",function(event){event.stopPropagation();const periodButton=event.target.closest("[data-period]");if(periodButton){panel.querySelectorAll("[data-period]").forEach(function(button){button.classList.toggle("active",button===periodButton);});return;}const quick=event.target.closest("[data-quick]");if(quick){const match=quick.dataset.quick.match(/(\d+):(\d+)\s(AM|PM)/);setModernTime(input,match[1],match[2],match[3]);panel.hidden=true;input.focus();return;}if(event.target.closest(".modern-time-panel__apply")){const period=panel.querySelector("[data-period].active").dataset.period;setModernTime(input,hourSelect.value,minuteSelect.value,period);panel.hidden=true;input.focus();}});
   });
@@ -80,23 +88,28 @@
 
   function validateField(field,show){
     field.setCustomValidity("");
-    if(field.id==="scheduleTimeTo"&&field.value&&document.getElementById("scheduleTimeFrom").value&&toMinutes(field.value)<=toMinutes(document.getElementById("scheduleTimeFrom").value)){field.setCustomValidity("End time must be later than the start time.");}
     const error=document.getElementById(field.id+"Error");
+    const label=fieldNames[field.id]||"This field";
+    const value=field.value.trim();
+    const isTime=field.hasAttribute("data-modern-time");
     let message="";
-    if(!field.validity.valid){
-      const label=fieldNames[field.id]||"This field";
-      if(field.validity.valueMissing)message=label+" is required.";
-      else if(field.validity.typeMismatch)message="Enter a valid "+label.toLowerCase()+".";
+    // Read-only picker inputs are excluded from native constraint validation.
+    if(field.required&&!value)message=label+" is required.";
+    else if(isTime&&value&&!/^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/.test(value))message="Choose a valid "+label.toLowerCase()+".";
+    else if(field.id==="scheduleTimeTo"&&value&&document.getElementById("scheduleTimeFrom").value&&toMinutes(value)<=toMinutes(document.getElementById("scheduleTimeFrom").value))message="End time must be later than the start time.";
+    else if(!field.validity.valid){
+      if(field.validity.typeMismatch)message="Enter a valid "+label.toLowerCase()+".";
       else if(field.validity.patternMismatch)message=field.title||("Enter a valid "+label.toLowerCase()+".");
       else message=field.validationMessage;
     }
+    field.setCustomValidity(message);
     error.textContent=show?message:"";field.classList.toggle("is-invalid",Boolean(show&&message));field.classList.toggle("is-valid",Boolean(field.value&&!message));
     return !message;
   }
 
   function validateForm(){
-    let valid=true;fields.forEach(function(field){if(!validateField(field,true))valid=false;});
-    if(!valid){const first=form.querySelector(".is-invalid");if(first)first.focus();setStatus("Please correct the highlighted fields.","error");}
+    let valid=true;fields.forEach(function(field){field.dataset.touched="true";if(!validateField(field,true))valid=false;});
+    if(!valid){const first=form.querySelector(".is-invalid");if(first){showStep(sections.findIndex(function(section){return section.contains(first);}),first);}setStatus("Please correct the highlighted fields.","error");}
     return valid;
   }
 

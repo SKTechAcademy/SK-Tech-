@@ -5,8 +5,9 @@ const fs=require('node:fs');
 const source=fs.readFileSync(require('node:path').join(__dirname,'../schedule-save.js'),'utf8');
 const details={registerId:'SK26',round:'Round 1',technology:'Full Stack Dot Net Developer',company:'Persistent systems',batch:'2',date:'2026-10-08',fromTime:'16:00',toTime:'17:00'};
 const row={'Sk Tech Register ID':'SK26','Round':'Round 1',' Technologies Required*':details.technology,'Interview Company ':details.company,'Batch':2,'Interview Date':'2026-10-07T18:30:00Z','Interview Time (From)  or  If Time Not confirmed plz select 00:00 like Assessment':'1899-12-30T10:38:50Z','Interview Time (To) or  If Time Not confirmed plz select 00:00 like Assessment':'1899-12-30T11:38:50Z'};
-function setup(fetch,storage=new Map(),navigator={}){
+function setup(fetch,storage=new Map(),navigator={},overrides={}){
  const context={fetch,navigator,URLSearchParams,AbortController,Intl,localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},setTimeout:(fn,ms)=>setTimeout(fn,ms>=15000?ms:0),clearTimeout};
+ Object.assign(context,overrides);
  vm.runInNewContext(source,context);
  return context.SkInterviewSave;
 }
@@ -92,4 +93,30 @@ test('a pending save can later be confirmed after retry without a new POST',asyn
 test('AM, PM and rescheduled rounds are distinct bookings',()=>{
  const api=setup();assert.equal(api.matches(row,{...details,fromTime:'04:00',toTime:'05:00'}),false);
  assert.equal(api.matches(row,{...details,round:'Reschedule Round 1'}),false);
+});
+
+for(const [key,value] of Object.entries({registerId:'SK77',round:'Round 2',technology:'Java',company:'Another Company',batch:'3',date:'2026-10-09',fromTime:'16:30',toTime:'17:30'}))test('changing '+key+' is not a duplicate',()=>{
+ assert.equal(setup().matches(row,{...details,[key]:value}),false);
+});
+for(const bad of [null,{},{'Sk Tech Register ID':'SK26'}])test('incomplete row '+JSON.stringify(bad)+' blocks writes',async()=>{
+ let posts=0;const api=setup(async(url,options)=>{if(options.method)posts++;return response([bad]);});
+ await assert.rejects(api.save(details),/Nothing was sent/);assert.equal(posts,0);
+});
+test('disabled storage still protects repeated attempts in the same page',async()=>{
+ let posts=0;const api=setup(async(url,options)=>{if(options.method)posts++;return response([]);},new Map(),{}, {localStorage:{getItem(){throw Error('blocked');},setItem(){throw Error('blocked');},removeItem(){throw Error('blocked');}}});
+ assert.equal(await api.save(details),'pending');assert.equal(await api.save(details),'pending');assert.equal(posts,1);
+});
+test('real abort signal interrupts a stalled JSON body and then retries',async()=>{
+ let reads=0,aborts=0,posts=0;
+ const api=setup(async(url,options)=>{if(options.method)posts++;if(++reads===1)return {ok:true,json:()=>new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>{aborts++;reject(Error('body timeout'));},{once:true}))};return response([row]);},new Map(),{}, {setTimeout:(fn,ms)=>setTimeout(fn,ms>=15000?5:0)});
+ assert.equal(await api.save(details),'existing');assert.equal(aborts,1);assert.equal(posts,0);
+});
+test('real POST timeout never resends a possibly saved request',async()=>{
+ let posts=0,aborts=0;
+ const api=setup(async(url,options)=>{if(options.method){posts++;return new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>{aborts++;reject(Error('post timeout'));},{once:true}));}return response(posts?[row]:[]);},new Map(),{}, {setTimeout:(fn,ms)=>setTimeout(fn,ms>=15000?5:0)});
+ assert.equal(await api.save(details),'saved');assert.equal(aborts,1);assert.equal(posts,1);
+});
+test('failed verification reads do not trigger another POST',async()=>{
+ let posts=0,reads=0;const api=setup(async(url,options)=>{if(options.method){posts++;return {};}if(posts&&++reads<3)throw Error('temporary');return response(posts?[row]:[]);});
+ assert.equal(await api.save(details),'saved');assert.equal(posts,1);
 });
