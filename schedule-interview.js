@@ -1,8 +1,6 @@
 (function(){
   "use strict";
 
-  const SAVE_URL="https://script.google.com/macros/s/AKfycbzZJqQBmjAPssoUklP7sq3xIEi0oA2S9ofZZxYAtwe4haRTI-jwmBmg5A-ixQ4DHW5n/exec";
-  const VERIFY_URL="https://script.google.com/macros/s/AKfycbwxpMoYA7gmul9iMk9eA2Cae07sxynCp6Ff73BhXFAdJoOMBmNzZP2-5ck2qRyqjm7W/exec";
   const modal=document.getElementById("scheduleModal");
   const openButton=document.getElementById("openScheduleModal");
   const form=document.getElementById("scheduleInterviewForm");
@@ -11,7 +9,7 @@
   const technology=document.getElementById("scheduleTechnology");
   const otherWrap=document.getElementById("scheduleOtherTechnologyWrap");
   const otherTechnology=document.getElementById("scheduleOtherTechnology");
-  const sections=Array.from(form.querySelectorAll("[data-schedule-step]"));
+  const sections=Array.from(form?form.querySelectorAll("[data-schedule-step]"):[]);
   const progressTitle=document.getElementById("scheduleProgressTitle");
   const progressText=document.getElementById("scheduleProgressText");
   const progressBar=document.getElementById("scheduleProgressBar");
@@ -19,12 +17,13 @@
   const nextButton=document.getElementById("scheduleNextButton");
   let previousFocus=null;
   let currentStep=0;
+  let saving=false;
 
   if(!modal||!openButton||!form)return;
 
   function setStatus(message,type){status.textContent=message||"";status.className="schedule-form__status"+(type?" is-"+type:"");}
-  function openModal(){previousFocus=document.activeElement;modal.hidden=false;document.body.classList.add("schedule-modal-open");setStatus("");showStep(0);setTimeout(function(){document.getElementById("scheduleEmail").focus();},0);}
-  function closeModal(){modal.hidden=true;document.body.classList.remove("schedule-modal-open");if(previousFocus)previousFocus.focus();}
+  function openModal(){if(saving)return;previousFocus=document.activeElement;modal.hidden=false;document.body.classList.add("schedule-modal-open");setStatus("");showStep(0);setTimeout(function(){document.getElementById("scheduleEmail").focus();},0);}
+  function closeModal(){if(saving)return;modal.hidden=true;document.body.classList.remove("schedule-modal-open");if(previousFocus)previousFocus.focus();}
 
   openButton.addEventListener("click",openModal);
   modal.querySelectorAll("[data-close-schedule]").forEach(function(button){button.addEventListener("click",closeModal);});
@@ -101,42 +100,37 @@
     return valid;
   }
 
-  function apiValue(row,key){return String(row[key]===undefined?"":row[key]).trim().toLowerCase();}
-  function submissionExists(row,details){
-    return apiValue(row,"Sk Tech Register ID")===details.registerId.toLowerCase()&&
-      apiValue(row,"Full Name")===details.fullName.toLowerCase()&&
-      apiValue(row,"Round")===details.round.toLowerCase()&&
-      apiValue(row," Technologies Required*")===details.technology.toLowerCase()&&
-      apiValue(row,"Interview Company ")===details.company.toLowerCase()&&
-      apiValue(row,"Batch")===details.batch.toLowerCase();
-  }
-  async function confirmSaved(details){
-    for(let attempt=0;attempt<3;attempt++){
-      try{
-        const response=await fetch(VERIFY_URL+"?fresh="+Date.now(),{cache:"no-store"});
-        if(response.ok){const rows=await response.json();if(Array.isArray(rows)&&rows.some(function(row){return submissionExists(row,details);}))return true;}
-      }catch(error){}
-      await new Promise(function(resolve){setTimeout(resolve,650);});
-    }
-    return false;
-  }
-
   form.addEventListener("submit",async function(event){
     event.preventDefault();
+    if(saving)return;
+    if(currentStep<sections.length-1){nextButton.click();return;}
     if(!validateForm())return;
     function normalizedTime(id){const minutes=toMinutes(document.getElementById(id).value);return String(Math.floor(minutes/60)).padStart(2,"0")+":"+String(minutes%60).padStart(2,"0");}
     const details={email:document.getElementById("scheduleEmail").value.trim(),registerId:document.getElementById("scheduleRegisterId").value.trim().toUpperCase(),fullName:document.getElementById("scheduleFullName").value.trim(),batch:document.getElementById("scheduleBatch").value,round:document.getElementById("scheduleRound").value,technology:technology.value==="__other_option__"?otherTechnology.value.trim():technology.value,company:document.getElementById("scheduleCompany").value.trim(),hrName:document.getElementById("scheduleHrName").value.trim(),hrNumber:document.getElementById("scheduleHrNumber").value.trim(),hrEmail:document.getElementById("scheduleHrEmail").value.trim(),date:document.getElementById("scheduleDate").value,fromTime:normalizedTime("scheduleTimeFrom"),toTime:normalizedTime("scheduleTimeTo")};
-    submitButton.disabled=true;setStatus("Saving interview…","working");
+    saving=true;
+    const controls=Array.from(form.querySelectorAll("input,select,button"));
+    const disabledStates=controls.map(function(control){return control.disabled;});
+    controls.forEach(function(control){control.disabled=true;});
+    form.setAttribute("aria-busy","true");
+    submitButton.textContent="Saving…";setStatus("Checking and saving interview…","working");
+    let outcome;
     try{
-      const saveRequest=fetch(SAVE_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(details)});
-      await new Promise(function(resolve){setTimeout(resolve,600);});
-      const verificationRequest=confirmSaved(details);
-      await saveRequest;
-      if(!await verificationRequest)throw new Error("Save could not be confirmed");
+      outcome=await SkInterviewSave.save(details);
+      if(outcome==="busy")return;
+      if(outcome==="pending"){
+        setStatus("Your save is awaiting confirmation. Use Check save status to check again without sending another booking. If it remains unconfirmed, contact SK Tech before submitting again.","error");
+        return;
+      }
       form.reset();otherWrap.hidden=true;otherTechnology.required=false;fields.forEach(function(field){delete field.dataset.touched;field.classList.remove("is-valid","is-invalid");validateField(field,false);});
-      setStatus("Interview saved successfully.","success");
-      setTimeout(function(){closeModal();showStep(0);if(typeof loadData==="function")loadData();},1250);
-    }catch(error){setStatus("Interview was not saved. Your details are still here—please try again.","error");}
-    finally{submitButton.disabled=false;}
+      setStatus(outcome==="existing"?"This interview is already saved. No duplicate was added.":"Interview saved successfully.","success");
+      await new Promise(function(resolve){setTimeout(resolve,1250);});
+      saving=false;closeModal();showStep(0);if(typeof loadData==="function")loadData();
+    }catch(error){setStatus(error.message||"Could not check the save status. Please try again.","error");}
+    finally{
+      saving=false;
+      controls.forEach(function(control,index){control.disabled=disabledStates[index];});
+      form.removeAttribute("aria-busy");
+      submitButton.textContent=outcome==="pending"?"Check save status":"Save Interview";
+    }
   });
 })();
