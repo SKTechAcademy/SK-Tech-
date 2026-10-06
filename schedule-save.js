@@ -70,7 +70,7 @@
       onProgress("Saving interview… Please keep this form open.");
       try{await request(SAVE_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(details)});}catch{/* Verify before deciding the outcome. */}
     }
-    onProgress("Waiting for Google Sheets to confirm your save… No second booking will be sent.");
+    onProgress("Confirming your interview booking… Please wait.");
     for(let attempt=0;attempt<5;attempt++){
       if(attempt)await new Promise(resolve=>setTimeout(resolve,1500));
       try{if(await exists(details)){forget(key);return "saved";}}catch{/* A failed read is not a failed save. */}
