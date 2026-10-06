@@ -117,12 +117,16 @@
     try{
       outcome=await SkInterviewSave.save(details);
       if(outcome==="busy")return;
+      if(outcome==="existing"){
+        setStatus("This interview already exists. No duplicate was saved. If you are rescheduling, change the interview date, time, or round before saving.","warning");
+        return;
+      }
       if(outcome==="pending"){
         setStatus("Your save is awaiting confirmation. Use Check save status to check again without sending another booking. If it remains unconfirmed, contact SK Tech before submitting again.","error");
         return;
       }
       form.reset();otherWrap.hidden=true;otherTechnology.required=false;fields.forEach(function(field){delete field.dataset.touched;field.classList.remove("is-valid","is-invalid");validateField(field,false);});
-      setStatus(outcome==="existing"?"This interview is already saved. No duplicate was added.":"Interview saved successfully.","success");
+      setStatus("Interview saved successfully.","success");
       await new Promise(function(resolve){setTimeout(resolve,1250);});
       saving=false;closeModal();showStep(0);if(typeof loadData==="function")loadData();
     }catch(error){setStatus(error.message||"Could not check the save status. Please try again.","error");}

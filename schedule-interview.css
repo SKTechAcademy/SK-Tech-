@@ -16,3 +16,5 @@
 .schedule-modal__close{margin-left:auto;align-self:flex-start}
 @media(max-width:680px){.schedule-modal__close{width:44px;height:44px;min-width:44px;min-height:44px}}
 @supports(-webkit-touch-callout:none){@media(max-width:680px){.schedule-modal{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}.schedule-modal__dialog{max-height:calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom))}.schedule-form input,.schedule-form select,.modern-time-panel button{font-size:16px}.schedule-modal__close{min-width:44px;min-height:44px}}}
+
+.schedule-form__status.is-warning{color:#ffe0a3;background:rgba(255,174,51,.12);border:1px solid rgba(255,174,51,.45);border-radius:10px;padding:12px 14px;line-height:1.5}
