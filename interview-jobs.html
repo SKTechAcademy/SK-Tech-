@@ -1,26 +1,28 @@
-&lt;!DOCTYPE html&gt;
+<!DOCTYPE html>
 
-&lt;html lang=&quot;en&quot;&gt;
+<html lang="en">
 
-&lt;head&gt;
+<head>
 
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  <meta charset="UTF-8">
 
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover&quot;&gt;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 
-  &lt;title&gt;SK Tech | Candidate Interview &amp; Career Portal&lt;/title&gt;
+  <title>SK Tech | Candidate Interview & Career Portal</title>
 
-  &lt;script src=&quot;https://cdn.tailwindcss.com/3.4.17&quot;&gt;&lt;/script&gt;
+  <link rel="icon" type="image/png" href="sk-tech-logo.png?v=20261108">
 
-  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
-  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  &lt;style&gt;
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    /* iOS &amp; Android smooth touch scrolling &amp; layout hygiene */
+  <style>
+
+    /* iOS & Android smooth touch scrolling & layout hygiene */
 
     * {
 
@@ -32,7 +34,7 @@
 
     body {
 
-      font-family: &#39;Inter&#39;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
       overflow-x: hidden;
 
@@ -40,7 +42,7 @@
 
     }
 
-    .mono { font-family: &#39;JetBrains Mono&#39;, monospace; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
 
     .custom-scroll {
 
@@ -88,19 +90,19 @@
 
     }
 
-  &lt;/style&gt;
+  </style>
 
-  &lt;!-- Google Analytics 4 (GA4) Integration --&gt;
+  <!-- Google Analytics 4 (GA4) Integration -->
 
-  &lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=G-SKTECHACADEMY&quot;&gt;&lt;/script&gt;
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKTECHACADEMY"></script>
 
-  &lt;script&gt;
+  <script>
 
     window.dataLayer = window.dataLayer || [];
 
     function gtag(){ dataLayer.push(arguments); }
 
-    gtag(&#39;js&#39;, new Date());
+    gtag('js', new Date());
 
 
 
@@ -146,85 +148,27 @@
 
     };
 
-  &lt;/script&gt;
+  </script>
 
-&lt;/head&gt;
+</head>
 
-&lt;body class=&quot;bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-slate-950&quot;&gt;
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-slate-950">
 
 
 
-  &lt;!-- Mobile-First Responsive Navigation Header --&gt;
+  <!-- Mobile-First Responsive Navigation Header -->
 
-  &lt;header class=&quot;border-b border-slate-800/90 bg-slate-950/95 border-b border-cyan-950/80 backdrop-blur-md sticky top-0 z-40 transition-all&quot;&gt;
+  <header class="border-b border-slate-800/90 bg-slate-950/95 border-b border-cyan-950/80 backdrop-blur-md sticky top-0 z-40 transition-all">
 
-    &lt;div class=&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between&quot;&gt;
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 
       
 
-            <!-- Official SK Tech Brand Vector Logo & Matching Colors -->
+      <!-- Reuse the verified brand asset already shipped with the site. -->
 
       <div class="flex items-center gap-3">
 
-        <div class="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-400 via-blue-600 to-indigo-600 p-[1.5px] shadow-lg shadow-cyan-500/25 shrink-0">
-
-          <div class="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center p-1 overflow-hidden">
-
-            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-              <defs>
-
-                <linearGradient id="skLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-
-                  <stop offset="0%" stop-color="#22d3ee" />
-
-                  <stop offset="50%" stop-color="#3b82f6" />
-
-                  <stop offset="100%" stop-color="#1d4ed8" />
-
-                </linearGradient>
-
-                <linearGradient id="skRingGrad" x1="100%" y1="0%" x2="0%" y2="100%">
-
-                  <stop offset="0%" stop-color="#06b6d4" />
-
-                  <stop offset="100%" stop-color="#6366f1" />
-
-                </linearGradient>
-
-              </defs>
-
-              <!-- Outer Tech Circuit Ring -->
-
-              <circle cx="50" cy="50" r="44" stroke="url(#skRingGrad)" stroke-width="3" stroke-dasharray="8 4" stroke-opacity="0.8"/>
-
-              <circle cx="50" cy="50" r="38" fill="#090d16" stroke="url(#skLogoGrad)" stroke-width="2"/>
-
-              <!-- Code Bracket Accents -->
-
-              <path d="M26 43 L19 50 L26 57" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-              <path d="M74 43 L81 50 L74 57" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-              <!-- Graduation Cap / Growth Crown on top of SK -->
-
-              <path d="M50 24 L64 30 L50 36 L36 30 Z" fill="url(#skLogoGrad)"/>
-
-              <path d="M60 32 L60 39 C60 41.5 50 44 50 44 C50 44 40 41.5 40 39 L40 32" stroke="#60a5fa" stroke-width="1.5" fill="none"/>
-
-              <path d="M64 30 L66 38" stroke="#38bdf8" stroke-width="1.5"/>
-
-              <!-- Monogram SK -->
-
-              <text x="50" y="65" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="24" fill="#ffffff" letter-spacing="-1">SK</text>
-
-              <circle cx="50" cy="74" r="2.5" fill="#22d3ee"/>
-
-            </svg>
-
-          </div>
-
-        </div>
+        <img src="sk-tech-logo.png?v=20261108" width="44" height="44" alt="SK Tech logo" class="w-11 h-11 rounded-full bg-white object-contain shadow-lg shadow-cyan-500/25 shrink-0" decoding="async">
 
         <div>
 
@@ -314,13 +258,13 @@
 
     </div>
 
-  &lt;/header&gt;
+  </header>
 
 
 
-  &lt;!-- Main Container --&gt;
+  <!-- Main Container -->
 
-  &lt;main class=&quot;flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 space-y-6&quot;&gt;
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 space-y-6">
 
 
 
@@ -876,15 +820,15 @@
 
 
 
-  &lt;/main&gt;
+  </main>
 
 
 
-  &lt;!-- Job Preparation &amp; Details Modal --&gt;
+  <!-- Job Preparation & Details Modal -->
 
-  &lt;div id=&quot;jobPrepModal&quot; class=&quot;fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4&quot;&gt;
+  <div id="jobPrepModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
 
-    &lt;div class=&quot;bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden&quot;&gt;
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
 
       
 
@@ -1014,23 +958,23 @@
 
     </div>
 
-  &lt;/div&gt;
+  </div>
 
 
 
-  &lt;!-- Toast Notification (iOS/Android compatible floating snackbar) --&gt;
+  <!-- Toast Notification (iOS/Android compatible floating snackbar) -->
 
-  &lt;div id=&quot;toast&quot; class=&quot;fixed bottom-6 right-6 left-6 sm:left-auto sm:max-w-md z-50 bg-slate-900/95 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 backdrop-blur-md&quot;&gt;
+  <div id="toast" class="fixed bottom-6 right-6 left-6 sm:left-auto sm:max-w-md z-50 bg-slate-900/95 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 backdrop-blur-md">
 
-    &lt;div id=&quot;toastDot&quot; class=&quot;w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0&quot;&gt;&lt;/div&gt;
+    <div id="toastDot" class="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0"></div>
 
-    &lt;span id=&quot;toastMsg&quot; class=&quot;text-xs font-medium flex-1&quot;&gt;Notification&lt;/span&gt;
+    <span id="toastMsg" class="text-xs font-medium flex-1">Notification</span>
 
-  &lt;/div&gt;
+  </div>
 
 
 
-  &lt;script&gt;
+  <script>
 
     // State
 
@@ -1038,683 +982,683 @@
 
   {
 
-    &quot;id&quot;: &quot;net-01&quot;,
+    "id": "net-01",
 
-    &quot;track&quot;: &quot;dotnet&quot;,
+    "track": "dotnet",
 
-    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+    "trackName": ".NET & C#",
 
-    &quot;trackColor&quot;: &quot;text-cyan-400 bg-cyan-950/60 border-cyan-800&quot;,
+    "trackColor": "text-cyan-400 bg-cyan-950/60 border-cyan-800",
 
-    &quot;title&quot;: &quot;Senior .NET Core &amp; Microservices Architect&quot;,
+    "title": "Senior .NET Core & Microservices Architect",
 
-    &quot;company&quot;: &quot;Microsoft Solutions Partner&quot;,
+    "company": "Microsoft Solutions Partner",
 
-    &quot;companyInitial&quot;: &quot;M&quot;,
+    "companyInitial": "M",
 
-    &quot;companyColor&quot;: &quot;from-blue-600 to-indigo-600&quot;,
+    "companyColor": "from-blue-600 to-indigo-600",
 
-    &quot;location&quot;: &quot;Bangalore, India&quot;,
+    "location": "Bangalore, India",
 
-    &quot;locationCode&quot;: &quot;BLR&quot;,
+    "locationCode": "BLR",
 
-    &quot;workMode&quot;: &quot;Hybrid&quot;,
+    "workMode": "Hybrid",
 
-    &quot;experience&quot;: &quot;5 - 8 Years&quot;,
+    "experience": "5 - 8 Years",
 
-    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+    "expCategory": "SENIOR",
 
-    &quot;salary&quot;: &quot;\u20b926 - \u20b936 LPA&quot;,
+    "salary": "\u20b926 - \u20b936 LPA",
 
-    &quot;salaryMin&quot;: 26,
+    "salaryMin": 26,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;C#&quot;,
+      "C#",
 
-      &quot;.NET 8&quot;,
+      ".NET 8",
 
-      &quot;ASP.NET Core&quot;,
+      "ASP.NET Core",
 
-      &quot;Microservices&quot;,
+      "Microservices",
 
-      &quot;Azure&quot;,
+      "Azure",
 
-      &quot;Docker&quot;,
+      "Docker",
 
-      &quot;SQL Server&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;C# Asynchronous Concurrency&quot;,
-
-      &quot;ASP.NET Core Middleware &amp; DI&quot;,
-
-      &quot;Microservices Distributed Transactions&quot;
+      "SQL Server"
 
     ],
 
-    &quot;source&quot;: &quot;Microsoft Enterprise Portal&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://careers.microsoft.com&quot;,
+      "C# Asynchronous Concurrency",
 
-    &quot;postedDate&quot;: &quot;1 day ago&quot;,
+      "ASP.NET Core Middleware & DI",
 
-    &quot;description&quot;: &quot;Design and build enterprise distributed cloud microservices. Deep expertise required in C#, ASP.NET Core, Entity Framework Core, Azure Service Bus, and container orchestration.&quot;
+      "Microservices Distributed Transactions"
+
+    ],
+
+    "source": "Microsoft Enterprise Portal",
+
+    "sourceUrl": "https://careers.microsoft.com",
+
+    "postedDate": "1 day ago",
+
+    "description": "Design and build enterprise distributed cloud microservices. Deep expertise required in C#, ASP.NET Core, Entity Framework Core, Azure Service Bus, and container orchestration."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;net-02&quot;,
+    "id": "net-02",
 
-    &quot;track&quot;: &quot;dotnet&quot;,
+    "track": "dotnet",
 
-    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+    "trackName": ".NET & C#",
 
-    &quot;trackColor&quot;: &quot;text-cyan-400 bg-cyan-950/60 border-cyan-800&quot;,
+    "trackColor": "text-cyan-400 bg-cyan-950/60 border-cyan-800",
 
-    &quot;title&quot;: &quot;Fullstack .NET Developer (C# + React)&quot;,
+    "title": "Fullstack .NET Developer (C# + React)",
 
-    &quot;company&quot;: &quot;Fintech Dynamics&quot;,
+    "company": "Fintech Dynamics",
 
-    &quot;companyInitial&quot;: &quot;F&quot;,
+    "companyInitial": "F",
 
-    &quot;companyColor&quot;: &quot;from-emerald-600 to-teal-600&quot;,
+    "companyColor": "from-emerald-600 to-teal-600",
 
-    &quot;location&quot;: &quot;Remote (India)&quot;,
+    "location": "Remote (India)",
 
-    &quot;locationCode&quot;: &quot;REMOTE&quot;,
+    "locationCode": "REMOTE",
 
-    &quot;workMode&quot;: &quot;Remote&quot;,
+    "workMode": "Remote",
 
-    &quot;experience&quot;: &quot;3 - 5 Years&quot;,
+    "experience": "3 - 5 Years",
 
-    &quot;expCategory&quot;: &quot;MID&quot;,
+    "expCategory": "MID",
 
-    &quot;salary&quot;: &quot;\u20b916 - \u20b924 LPA&quot;,
+    "salary": "\u20b916 - \u20b924 LPA",
 
-    &quot;salaryMin&quot;: 16,
+    "salaryMin": 16,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;C#&quot;,
+      "C#",
 
-      &quot;ASP.NET Core&quot;,
+      "ASP.NET Core",
 
-      &quot;React&quot;,
+      "React",
 
-      &quot;TypeScript&quot;,
+      "TypeScript",
 
-      &quot;EF Core&quot;,
+      "EF Core",
 
-      &quot;PostgreSQL&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;REST API Design &amp; WebSockets&quot;,
-
-      &quot;React Hooks &amp; State Management&quot;,
-
-      &quot;Entity Framework Query Optimization&quot;
+      "PostgreSQL"
 
     ],
 
-    &quot;source&quot;: &quot;Lever ATS Feed&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://jobs.lever.co&quot;,
+      "REST API Design & WebSockets",
 
-    &quot;postedDate&quot;: &quot;2 days ago&quot;,
+      "React Hooks & State Management",
 
-    &quot;description&quot;: &quot;Build high-throughput transactional payment systems using C# and ASP.NET Core Web APIs on the backend paired with modern React and TypeScript on the frontend.&quot;
+      "Entity Framework Query Optimization"
+
+    ],
+
+    "source": "Lever ATS Feed",
+
+    "sourceUrl": "https://jobs.lever.co",
+
+    "postedDate": "2 days ago",
+
+    "description": "Build high-throughput transactional payment systems using C# and ASP.NET Core Web APIs on the backend paired with modern React and TypeScript on the frontend."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;net-03&quot;,
+    "id": "net-03",
 
-    &quot;track&quot;: &quot;dotnet&quot;,
+    "track": "dotnet",
 
-    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+    "trackName": ".NET & C#",
 
-    &quot;trackColor&quot;: &quot;text-cyan-400 bg-cyan-950/60 border-cyan-800&quot;,
+    "trackColor": "text-cyan-400 bg-cyan-950/60 border-cyan-800",
 
-    &quot;title&quot;: &quot;Junior C# / .NET Software Engineer&quot;,
+    "title": "Junior C# / .NET Software Engineer",
 
-    &quot;company&quot;: &quot;CloudTech Innovations&quot;,
+    "company": "CloudTech Innovations",
 
-    &quot;companyInitial&quot;: &quot;C&quot;,
+    "companyInitial": "C",
 
-    &quot;companyColor&quot;: &quot;from-purple-600 to-indigo-600&quot;,
+    "companyColor": "from-purple-600 to-indigo-600",
 
-    &quot;location&quot;: &quot;Hyderabad, India&quot;,
+    "location": "Hyderabad, India",
 
-    &quot;locationCode&quot;: &quot;HYD&quot;,
+    "locationCode": "HYD",
 
-    &quot;workMode&quot;: &quot;On-site&quot;,
+    "workMode": "On-site",
 
-    &quot;experience&quot;: &quot;0 - 2 Years&quot;,
+    "experience": "0 - 2 Years",
 
-    &quot;expCategory&quot;: &quot;JUNIOR&quot;,
+    "expCategory": "JUNIOR",
 
-    &quot;salary&quot;: &quot;\u20b97 - \u20b911 LPA&quot;,
+    "salary": "\u20b97 - \u20b911 LPA",
 
-    &quot;salaryMin&quot;: 7,
+    "salaryMin": 7,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;C#&quot;,
+      "C#",
 
-      &quot;.NET 8&quot;,
+      ".NET 8",
 
-      &quot;OOP&quot;,
+      "OOP",
 
-      &quot;SQL Server&quot;,
+      "SQL Server",
 
-      &quot;Clean Architecture&quot;,
+      "Clean Architecture",
 
-      &quot;Git&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;OOP Principles &amp; Solid Design&quot;,
-
-      &quot;LINQ &amp; Collections in C#&quot;,
-
-      &quot;Basic SQL Indexing and Joins&quot;
+      "Git"
 
     ],
 
-    &quot;source&quot;: &quot;Greenhouse ATS&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://boards.greenhouse.io&quot;,
+      "OOP Principles & Solid Design",
 
-    &quot;postedDate&quot;: &quot;Just now&quot;,
+      "LINQ & Collections in C#",
 
-    &quot;description&quot;: &quot;Exciting entry-level position for enthusiastic developers. Work alongside senior engineers building clean C# .NET APIs, writing unit tests, and optimizing database queries.&quot;
+      "Basic SQL Indexing and Joins"
+
+    ],
+
+    "source": "Greenhouse ATS",
+
+    "sourceUrl": "https://boards.greenhouse.io",
+
+    "postedDate": "Just now",
+
+    "description": "Exciting entry-level position for enthusiastic developers. Work alongside senior engineers building clean C# .NET APIs, writing unit tests, and optimizing database queries."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;java-01&quot;,
+    "id": "java-01",
 
-    &quot;track&quot;: &quot;java&quot;,
+    "track": "java",
 
-    &quot;trackName&quot;: &quot;Java &amp; Spring&quot;,
+    "trackName": "Java & Spring",
 
-    &quot;trackColor&quot;: &quot;text-amber-400 bg-amber-950/60 border-amber-800&quot;,
+    "trackColor": "text-amber-400 bg-amber-950/60 border-amber-800",
 
-    &quot;title&quot;: &quot;Senior Java Spring Boot Microservices Engineer&quot;,
+    "title": "Senior Java Spring Boot Microservices Engineer",
 
-    &quot;company&quot;: &quot;Infosys Digital Labs&quot;,
+    "company": "Infosys Digital Labs",
 
-    &quot;companyInitial&quot;: &quot;I&quot;,
+    "companyInitial": "I",
 
-    &quot;companyColor&quot;: &quot;from-amber-600 to-orange-600&quot;,
+    "companyColor": "from-amber-600 to-orange-600",
 
-    &quot;location&quot;: &quot;Pune, India&quot;,
+    "location": "Pune, India",
 
-    &quot;locationCode&quot;: &quot;PUN&quot;,
+    "locationCode": "PUN",
 
-    &quot;workMode&quot;: &quot;Hybrid&quot;,
+    "workMode": "Hybrid",
 
-    &quot;experience&quot;: &quot;5 - 8 Years&quot;,
+    "experience": "5 - 8 Years",
 
-    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+    "expCategory": "SENIOR",
 
-    &quot;salary&quot;: &quot;\u20b922 - \u20b932 LPA&quot;,
+    "salary": "\u20b922 - \u20b932 LPA",
 
-    &quot;salaryMin&quot;: 22,
+    "salaryMin": 22,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;Java 17&quot;,
+      "Java 17",
 
-      &quot;Spring Boot&quot;,
+      "Spring Boot",
 
-      &quot;Hibernate&quot;,
+      "Hibernate",
 
-      &quot;Kafka&quot;,
+      "Kafka",
 
-      &quot;Microservices&quot;,
+      "Microservices",
 
-      &quot;PostgreSQL&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;Spring Boot Auto-configuration&quot;,
-
-      &quot;Kafka Partitioning &amp; Consumer Groups&quot;,
-
-      &quot;JVM Memory Management &amp; Garbage Collection&quot;
+      "PostgreSQL"
 
     ],
 
-    &quot;source&quot;: &quot;Infosys Career Portal&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://infosys.com/careers&quot;,
+      "Spring Boot Auto-configuration",
 
-    &quot;postedDate&quot;: &quot;1 day ago&quot;,
+      "Kafka Partitioning & Consumer Groups",
 
-    &quot;description&quot;: &quot;Architect and deploy high-availability banking microservices using Java 17, Spring Boot, Spring Cloud, Kafka streaming, and distributed SQL.&quot;
+      "JVM Memory Management & Garbage Collection"
+
+    ],
+
+    "source": "Infosys Career Portal",
+
+    "sourceUrl": "https://infosys.com/careers",
+
+    "postedDate": "1 day ago",
+
+    "description": "Architect and deploy high-availability banking microservices using Java 17, Spring Boot, Spring Cloud, Kafka streaming, and distributed SQL."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;java-02&quot;,
+    "id": "java-02",
 
-    &quot;track&quot;: &quot;java&quot;,
+    "track": "java",
 
-    &quot;trackName&quot;: &quot;Java &amp; Spring&quot;,
+    "trackName": "Java & Spring",
 
-    &quot;trackColor&quot;: &quot;text-amber-400 bg-amber-950/60 border-amber-800&quot;,
+    "trackColor": "text-amber-400 bg-amber-950/60 border-amber-800",
 
-    &quot;title&quot;: &quot;Java Backend Developer (Spring Boot + AWS)&quot;,
+    "title": "Java Backend Developer (Spring Boot + AWS)",
 
-    &quot;company&quot;: &quot;Accenture Technology&quot;,
+    "company": "Accenture Technology",
 
-    &quot;companyInitial&quot;: &quot;A&quot;,
+    "companyInitial": "A",
 
-    &quot;companyColor&quot;: &quot;from-orange-600 to-amber-700&quot;,
+    "companyColor": "from-orange-600 to-amber-700",
 
-    &quot;location&quot;: &quot;Bangalore, India&quot;,
+    "location": "Bangalore, India",
 
-    &quot;locationCode&quot;: &quot;BLR&quot;,
+    "locationCode": "BLR",
 
-    &quot;workMode&quot;: &quot;Hybrid&quot;,
+    "workMode": "Hybrid",
 
-    &quot;experience&quot;: &quot;3 - 5 Years&quot;,
+    "experience": "3 - 5 Years",
 
-    &quot;expCategory&quot;: &quot;MID&quot;,
+    "expCategory": "MID",
 
-    &quot;salary&quot;: &quot;\u20b915 - \u20b923 LPA&quot;,
+    "salary": "\u20b915 - \u20b923 LPA",
 
-    &quot;salaryMin&quot;: 15,
+    "salaryMin": 15,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;Java&quot;,
+      "Java",
 
-      &quot;Spring Boot&quot;,
+      "Spring Boot",
 
-      &quot;REST APIs&quot;,
+      "REST APIs",
 
-      &quot;AWS ECS&quot;,
+      "AWS ECS",
 
-      &quot;MySQL&quot;,
+      "MySQL",
 
-      &quot;Docker&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;Spring Security with JWT&quot;,
-
-      &quot;Docker Containerization&quot;,
-
-      &quot;AWS ECS Deployment Patterns&quot;
+      "Docker"
 
     ],
 
-    &quot;source&quot;: &quot;Corporate Portal&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://accenture.com&quot;,
+      "Spring Security with JWT",
 
-    &quot;postedDate&quot;: &quot;3 days ago&quot;,
+      "Docker Containerization",
 
-    &quot;description&quot;: &quot;Build scalable cloud-native backend services using Spring Boot and AWS. Involves Docker containerization, REST API design, and CI/CD automation.&quot;
+      "AWS ECS Deployment Patterns"
+
+    ],
+
+    "source": "Corporate Portal",
+
+    "sourceUrl": "https://accenture.com",
+
+    "postedDate": "3 days ago",
+
+    "description": "Build scalable cloud-native backend services using Spring Boot and AWS. Involves Docker containerization, REST API design, and CI/CD automation."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;py-01&quot;,
+    "id": "py-01",
 
-    &quot;track&quot;: &quot;python&quot;,
+    "track": "python",
 
-    &quot;trackName&quot;: &quot;Python &amp; AI&quot;,
+    "trackName": "Python & AI",
 
-    &quot;trackColor&quot;: &quot;text-emerald-400 bg-emerald-950/60 border-emerald-800&quot;,
+    "trackColor": "text-emerald-400 bg-emerald-950/60 border-emerald-800",
 
-    &quot;title&quot;: &quot;AI / ML Engineer (Python + LangChain + LLMs)&quot;,
+    "title": "AI / ML Engineer (Python + LangChain + LLMs)",
 
-    &quot;company&quot;: &quot;Cognitive AI Labs&quot;,
+    "company": "Cognitive AI Labs",
 
-    &quot;companyInitial&quot;: &quot;C&quot;,
+    "companyInitial": "C",
 
-    &quot;companyColor&quot;: &quot;from-emerald-600 to-teal-700&quot;,
+    "companyColor": "from-emerald-600 to-teal-700",
 
-    &quot;location&quot;: &quot;Remote (India)&quot;,
+    "location": "Remote (India)",
 
-    &quot;locationCode&quot;: &quot;REMOTE&quot;,
+    "locationCode": "REMOTE",
 
-    &quot;workMode&quot;: &quot;Remote&quot;,
+    "workMode": "Remote",
 
-    &quot;experience&quot;: &quot;3 - 6 Years&quot;,
+    "experience": "3 - 6 Years",
 
-    &quot;expCategory&quot;: &quot;MID&quot;,
+    "expCategory": "MID",
 
-    &quot;salary&quot;: &quot;\u20b922 - \u20b935 LPA&quot;,
+    "salary": "\u20b922 - \u20b935 LPA",
 
-    &quot;salaryMin&quot;: 22,
+    "salaryMin": 22,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;Python&quot;,
+      "Python",
 
-      &quot;FastAPI&quot;,
+      "FastAPI",
 
-      &quot;LangChain&quot;,
+      "LangChain",
 
-      &quot;OpenAI / LLMs&quot;,
+      "OpenAI / LLMs",
 
-      &quot;PyTorch&quot;,
+      "PyTorch",
 
-      &quot;Vector DBs&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;Retrieval-Augmented Generation (RAG)&quot;,
-
-      &quot;Embeddings &amp; Vector Cosine Similarity&quot;,
-
-      &quot;FastAPI Asynchronous Routing&quot;
+      "Vector DBs"
 
     ],
 
-    &quot;source&quot;: &quot;Greenhouse ATS&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://boards.greenhouse.io&quot;,
+      "Retrieval-Augmented Generation (RAG)",
 
-    &quot;postedDate&quot;: &quot;2 days ago&quot;,
+      "Embeddings & Vector Cosine Similarity",
 
-    &quot;description&quot;: &quot;Develop generative AI workflows, RAG systems, and autonomous agent pipelines using Python, FastAPI, Pinecone/Chroma vector stores, and PyTorch.&quot;
+      "FastAPI Asynchronous Routing"
+
+    ],
+
+    "source": "Greenhouse ATS",
+
+    "sourceUrl": "https://boards.greenhouse.io",
+
+    "postedDate": "2 days ago",
+
+    "description": "Develop generative AI workflows, RAG systems, and autonomous agent pipelines using Python, FastAPI, Pinecone/Chroma vector stores, and PyTorch."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;front-01&quot;,
+    "id": "front-01",
 
-    &quot;track&quot;: &quot;frontend&quot;,
+    "track": "frontend",
 
-    &quot;trackName&quot;: &quot;React &amp; Fullstack&quot;,
+    "trackName": "React & Fullstack",
 
-    &quot;trackColor&quot;: &quot;text-sky-400 bg-sky-950/60 border-sky-800&quot;,
+    "trackColor": "text-sky-400 bg-sky-950/60 border-sky-800",
 
-    &quot;title&quot;: &quot;Senior Fullstack Engineer (React + Node.js)&quot;,
+    "title": "Senior Fullstack Engineer (React + Node.js)",
 
-    &quot;company&quot;: &quot;Nexus Web Systems&quot;,
+    "company": "Nexus Web Systems",
 
-    &quot;companyInitial&quot;: &quot;N&quot;,
+    "companyInitial": "N",
 
-    &quot;companyColor&quot;: &quot;from-sky-600 to-cyan-600&quot;,
+    "companyColor": "from-sky-600 to-cyan-600",
 
-    &quot;location&quot;: &quot;Bangalore, India&quot;,
+    "location": "Bangalore, India",
 
-    &quot;locationCode&quot;: &quot;BLR&quot;,
+    "locationCode": "BLR",
 
-    &quot;workMode&quot;: &quot;Hybrid&quot;,
+    "workMode": "Hybrid",
 
-    &quot;experience&quot;: &quot;4 - 7 Years&quot;,
+    "experience": "4 - 7 Years",
 
-    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+    "expCategory": "SENIOR",
 
-    &quot;salary&quot;: &quot;\u20b922 - \u20b930 LPA&quot;,
+    "salary": "\u20b922 - \u20b930 LPA",
 
-    &quot;salaryMin&quot;: 22,
+    "salaryMin": 22,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;React&quot;,
+      "React",
 
-      &quot;Node.js&quot;,
+      "Node.js",
 
-      &quot;TypeScript&quot;,
+      "TypeScript",
 
-      &quot;Next.js&quot;,
+      "Next.js",
 
-      &quot;Tailwind CSS&quot;,
+      "Tailwind CSS",
 
-      &quot;MongoDB&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;Server-Side Rendering (SSR) in Next.js&quot;,
-
-      &quot;Event Loop &amp; Node.js Concurrency&quot;,
-
-      &quot;TypeScript Advanced Generics&quot;
+      "MongoDB"
 
     ],
 
-    &quot;source&quot;: &quot;Adzuna Job Board&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://adzuna.com&quot;,
+      "Server-Side Rendering (SSR) in Next.js",
 
-    &quot;postedDate&quot;: &quot;1 day ago&quot;,
+      "Event Loop & Node.js Concurrency",
 
-    &quot;description&quot;: &quot;Build high-conversion customer web portals using Next.js 14, TypeScript, and micro-frontends backed by Node.js GraphQL and REST services.&quot;
+      "TypeScript Advanced Generics"
+
+    ],
+
+    "source": "Adzuna Job Board",
+
+    "sourceUrl": "https://adzuna.com",
+
+    "postedDate": "1 day ago",
+
+    "description": "Build high-conversion customer web portals using Next.js 14, TypeScript, and micro-frontends backed by Node.js GraphQL and REST services."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;devops-01&quot;,
+    "id": "devops-01",
 
-    &quot;track&quot;: &quot;devops&quot;,
+    "track": "devops",
 
-    &quot;trackName&quot;: &quot;Cloud &amp; DevOps&quot;,
+    "trackName": "Cloud & DevOps",
 
-    &quot;trackColor&quot;: &quot;text-indigo-400 bg-indigo-950/60 border-indigo-800&quot;,
+    "trackColor": "text-indigo-400 bg-indigo-950/60 border-indigo-800",
 
-    &quot;title&quot;: &quot;DevOps &amp; Cloud Infrastructure Engineer (AWS / K8s)&quot;,
+    "title": "DevOps & Cloud Infrastructure Engineer (AWS / K8s)",
 
-    &quot;company&quot;: &quot;CloudScale Global&quot;,
+    "company": "CloudScale Global",
 
-    &quot;companyInitial&quot;: &quot;C&quot;,
+    "companyInitial": "C",
 
-    &quot;companyColor&quot;: &quot;from-indigo-600 to-purple-700&quot;,
+    "companyColor": "from-indigo-600 to-purple-700",
 
-    &quot;location&quot;: &quot;Remote (India)&quot;,
+    "location": "Remote (India)",
 
-    &quot;locationCode&quot;: &quot;REMOTE&quot;,
+    "locationCode": "REMOTE",
 
-    &quot;workMode&quot;: &quot;Remote&quot;,
+    "workMode": "Remote",
 
-    &quot;experience&quot;: &quot;4 - 8 Years&quot;,
+    "experience": "4 - 8 Years",
 
-    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+    "expCategory": "SENIOR",
 
-    &quot;salary&quot;: &quot;\u20b925 - \u20b936 LPA&quot;,
+    "salary": "\u20b925 - \u20b936 LPA",
 
-    &quot;salaryMin&quot;: 25,
+    "salaryMin": 25,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;AWS&quot;,
+      "AWS",
 
-      &quot;Kubernetes&quot;,
+      "Kubernetes",
 
-      &quot;Docker&quot;,
+      "Docker",
 
-      &quot;Terraform&quot;,
+      "Terraform",
 
-      &quot;GitHub Actions&quot;,
+      "GitHub Actions",
 
-      &quot;Prometheus&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;Kubernetes Ingress &amp; StatefulSets&quot;,
-
-      &quot;Terraform Infrastructure as Code Modules&quot;,
-
-      &quot;Zero-downtime Blue/Green Deployments&quot;
+      "Prometheus"
 
     ],
 
-    &quot;source&quot;: &quot;Greenhouse ATS&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://boards.greenhouse.io&quot;,
+      "Kubernetes Ingress & StatefulSets",
 
-    &quot;postedDate&quot;: &quot;2 days ago&quot;,
+      "Terraform Infrastructure as Code Modules",
 
-    &quot;description&quot;: &quot;Manage multi-region AWS cloud clusters using Kubernetes (EKS) and Terraform. Implement automated zero-downtime CI/CD deployment pipelines.&quot;
+      "Zero-downtime Blue/Green Deployments"
+
+    ],
+
+    "source": "Greenhouse ATS",
+
+    "sourceUrl": "https://boards.greenhouse.io",
+
+    "postedDate": "2 days ago",
+
+    "description": "Manage multi-region AWS cloud clusters using Kubernetes (EKS) and Terraform. Implement automated zero-downtime CI/CD deployment pipelines."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;qa-01&quot;,
+    "id": "qa-01",
 
-    &quot;track&quot;: &quot;qa&quot;,
+    "track": "qa",
 
-    &quot;trackName&quot;: &quot;QA &amp; Automation&quot;,
+    "trackName": "QA & Automation",
 
-    &quot;trackColor&quot;: &quot;text-pink-400 bg-pink-950/60 border-pink-800&quot;,
+    "trackColor": "text-pink-400 bg-pink-950/60 border-pink-800",
 
-    &quot;title&quot;: &quot;QA Automation Engineer (Selenium + Java/Python)&quot;,
+    "title": "QA Automation Engineer (Selenium + Java/Python)",
 
-    &quot;company&quot;: &quot;QualityFirst Systems&quot;,
+    "company": "QualityFirst Systems",
 
-    &quot;companyInitial&quot;: &quot;Q&quot;,
+    "companyInitial": "Q",
 
-    &quot;companyColor&quot;: &quot;from-pink-600 to-rose-700&quot;,
+    "companyColor": "from-pink-600 to-rose-700",
 
-    &quot;location&quot;: &quot;Pune, India&quot;,
+    "location": "Pune, India",
 
-    &quot;locationCode&quot;: &quot;PUN&quot;,
+    "locationCode": "PUN",
 
-    &quot;workMode&quot;: &quot;Hybrid&quot;,
+    "workMode": "Hybrid",
 
-    &quot;experience&quot;: &quot;3 - 6 Years&quot;,
+    "experience": "3 - 6 Years",
 
-    &quot;expCategory&quot;: &quot;MID&quot;,
+    "expCategory": "MID",
 
-    &quot;salary&quot;: &quot;\u20b912 - \u20b918 LPA&quot;,
+    "salary": "\u20b912 - \u20b918 LPA",
 
-    &quot;salaryMin&quot;: 12,
+    "salaryMin": 12,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;Selenium&quot;,
+      "Selenium",
 
-      &quot;Java&quot;,
+      "Java",
 
-      &quot;Python&quot;,
+      "Python",
 
-      &quot;TestNG&quot;,
+      "TestNG",
 
-      &quot;Postman / API Testing&quot;,
+      "Postman / API Testing",
 
-      &quot;Jira&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;Page Object Model (POM) Design&quot;,
-
-      &quot;Dynamic XPath &amp; Explicit Waits&quot;,
-
-      &quot;API Contract Testing with Postman/RestAssured&quot;
+      "Jira"
 
     ],
 
-    &quot;source&quot;: &quot;Lever ATS Feed&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://jobs.lever.co&quot;,
+      "Page Object Model (POM) Design",
 
-    &quot;postedDate&quot;: &quot;3 days ago&quot;,
+      "Dynamic XPath & Explicit Waits",
 
-    &quot;description&quot;: &quot;Build automated UI and regression testing frameworks using Selenium WebDriver and RestAssured. Integrate automated smoke testing into CI/CD pipelines.&quot;
+      "API Contract Testing with Postman/RestAssured"
+
+    ],
+
+    "source": "Lever ATS Feed",
+
+    "sourceUrl": "https://jobs.lever.co",
+
+    "postedDate": "3 days ago",
+
+    "description": "Build automated UI and regression testing frameworks using Selenium WebDriver and RestAssured. Integrate automated smoke testing into CI/CD pipelines."
 
   },
 
   {
 
-    &quot;id&quot;: &quot;data-01&quot;,
+    "id": "data-01",
 
-    &quot;track&quot;: &quot;data&quot;,
+    "track": "data",
 
-    &quot;trackName&quot;: &quot;Data Engineering&quot;,
+    "trackName": "Data Engineering",
 
-    &quot;trackColor&quot;: &quot;text-teal-400 bg-teal-950/60 border-teal-800&quot;,
+    "trackColor": "text-teal-400 bg-teal-950/60 border-teal-800",
 
-    &quot;title&quot;: &quot;Data Engineer (SQL + PySpark + Snowflake)&quot;,
+    "title": "Data Engineer (SQL + PySpark + Snowflake)",
 
-    &quot;company&quot;: &quot;Insight Data Dynamics&quot;,
+    "company": "Insight Data Dynamics",
 
-    &quot;companyInitial&quot;: &quot;I&quot;,
+    "companyInitial": "I",
 
-    &quot;companyColor&quot;: &quot;from-teal-600 to-emerald-700&quot;,
+    "companyColor": "from-teal-600 to-emerald-700",
 
-    &quot;location&quot;: &quot;Hyderabad, India&quot;,
+    "location": "Hyderabad, India",
 
-    &quot;locationCode&quot;: &quot;HYD&quot;,
+    "locationCode": "HYD",
 
-    &quot;workMode&quot;: &quot;Hybrid&quot;,
+    "workMode": "Hybrid",
 
-    &quot;experience&quot;: &quot;3 - 7 Years&quot;,
+    "experience": "3 - 7 Years",
 
-    &quot;expCategory&quot;: &quot;MID&quot;,
+    "expCategory": "MID",
 
-    &quot;salary&quot;: &quot;\u20b918 - \u20b928 LPA&quot;,
+    "salary": "\u20b918 - \u20b928 LPA",
 
-    &quot;salaryMin&quot;: 18,
+    "salaryMin": 18,
 
-    &quot;skills&quot;: [
+    "skills": [
 
-      &quot;SQL&quot;,
+      "SQL",
 
-      &quot;PySpark&quot;,
+      "PySpark",
 
-      &quot;Snowflake&quot;,
+      "Snowflake",
 
-      &quot;dbt&quot;,
+      "dbt",
 
-      &quot;Airflow&quot;,
+      "Airflow",
 
-      &quot;AWS S3&quot;
-
-    ],
-
-    &quot;prepTopics&quot;: [
-
-      &quot;PySpark RDD vs DataFrame Transformations&quot;,
-
-      &quot;Snowflake Clustering &amp; Virtual Warehouses&quot;,
-
-      &quot;Airflow DAG Dependency Orchestration&quot;
+      "AWS S3"
 
     ],
 
-    &quot;source&quot;: &quot;Corporate Career Page&quot;,
+    "prepTopics": [
 
-    &quot;sourceUrl&quot;: &quot;https://insightdata.io&quot;,
+      "PySpark RDD vs DataFrame Transformations",
 
-    &quot;postedDate&quot;: &quot;Just now&quot;,
+      "Snowflake Clustering & Virtual Warehouses",
 
-    &quot;description&quot;: &quot;Construct scalable ETL/ELT data pipelines feeding cloud data lakes and analytics marts. Deep proficiency in SQL query tuning, PySpark, and Apache Airflow.&quot;
+      "Airflow DAG Dependency Orchestration"
+
+    ],
+
+    "source": "Corporate Career Page",
+
+    "sourceUrl": "https://insightdata.io",
+
+    "postedDate": "Just now",
+
+    "description": "Construct scalable ETL/ELT data pipelines feeding cloud data lakes and analytics marts. Deep proficiency in SQL query tuning, PySpark, and Apache Airflow."
 
   }
 
@@ -1724,35 +1668,35 @@
 
   {
 
-    &quot;id&quot;: &quot;int-901&quot;,
+    "id": "int-901",
 
-    &quot;role&quot;: &quot;Senior .NET Core &amp; Microservices Architect&quot;,
+    "role": "Senior .NET Core & Microservices Architect",
 
-    &quot;company&quot;: &quot;Microsoft Solutions Partner&quot;,
+    "company": "Microsoft Solutions Partner",
 
-    &quot;track&quot;: &quot;dotnet&quot;,
+    "track": "dotnet",
 
-    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+    "trackName": ".NET & C#",
 
-    &quot;candidateName&quot;: &quot;Kiran Kumar&quot;,
+    "candidateName": "Kiran Kumar",
 
-    &quot;date&quot;: &quot;Tomorrow, 11:30 AM&quot;,
+    "date": "Tomorrow, 11:30 AM",
 
-    &quot;mode&quot;: &quot;Google Meet (Online)&quot;,
+    "mode": "Google Meet (Online)",
 
-    &quot;meetLink&quot;: &quot;https://meet.google.com/abc-defg-hij&quot;,
+    "meetLink": "https://meet.google.com/abc-defg-hij",
 
-    &quot;status&quot;: &quot;CONFIRMED&quot;,
+    "status": "CONFIRMED",
 
-    &quot;interviewer&quot;: &quot;Tech Panel Lead (Sr. Architect)&quot;,
+    "interviewer": "Tech Panel Lead (Sr. Architect)",
 
-    &quot;topics&quot;: [
+    "topics": [
 
-      &quot;C# Async/Await&quot;,
+      "C# Async/Await",
 
-      &quot;Microservices Design&quot;,
+      "Microservices Design",
 
-      &quot;Azure Deployment&quot;
+      "Azure Deployment"
 
     ]
 
@@ -1760,35 +1704,35 @@
 
   {
 
-    &quot;id&quot;: &quot;int-902&quot;,
+    "id": "int-902",
 
-    &quot;role&quot;: &quot;Fullstack .NET Developer (C# + React)&quot;,
+    "role": "Fullstack .NET Developer (C# + React)",
 
-    &quot;company&quot;: &quot;Fintech Dynamics&quot;,
+    "company": "Fintech Dynamics",
 
-    &quot;track&quot;: &quot;dotnet&quot;,
+    "track": "dotnet",
 
-    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+    "trackName": ".NET & C#",
 
-    &quot;candidateName&quot;: &quot;Kiran Kumar&quot;,
+    "candidateName": "Kiran Kumar",
 
-    &quot;date&quot;: &quot;Nov 12, 02:00 PM&quot;,
+    "date": "Nov 12, 02:00 PM",
 
-    &quot;mode&quot;: &quot;Microsoft Teams&quot;,
+    "mode": "Microsoft Teams",
 
-    &quot;meetLink&quot;: &quot;https://teams.microsoft.com/l/meetup-join&quot;,
+    "meetLink": "https://teams.microsoft.com/l/meetup-join",
 
-    &quot;status&quot;: &quot;SCHEDULED&quot;,
+    "status": "SCHEDULED",
 
-    &quot;interviewer&quot;: &quot;Engineering Manager&quot;,
+    "interviewer": "Engineering Manager",
 
-    &quot;topics&quot;: [
+    "topics": [
 
-      &quot;ASP.NET Core Web APIs&quot;,
+      "ASP.NET Core Web APIs",
 
-      &quot;React State Management&quot;,
+      "React State Management",
 
-      &quot;SQL Tuning&quot;
+      "SQL Tuning"
 
     ]
 
@@ -1796,7 +1740,7 @@
 
 ];
 
-    let activeJobTrack = &#39;ALL&#39;;
+    let activeJobTrack = 'ALL';
 
     let currentSelectedJob = null;
 
@@ -1804,91 +1748,91 @@
 
     // View Navigation Tabs
 
-    const viewInterviews = document.getElementById(&#39;viewInterviews&#39;);
+    const viewInterviews = document.getElementById('viewInterviews');
 
-    const viewJobs = document.getElementById(&#39;viewJobs&#39;);
+    const viewJobs = document.getElementById('viewJobs');
 
-    const viewBookNew = document.getElementById(&#39;viewBookNew&#39;);
+    const viewBookNew = document.getElementById('viewBookNew');
 
 
 
-    const navTabInterviews = document.getElementById(&#39;navTabInterviews&#39;);
+    const navTabInterviews = document.getElementById('navTabInterviews');
 
-    const navTabJobs = document.getElementById(&#39;navTabJobs&#39;);
+    const navTabJobs = document.getElementById('navTabJobs');
 
-    const navTabBookNew = document.getElementById(&#39;navTabBookNew&#39;);
+    const navTabBookNew = document.getElementById('navTabBookNew');
 
 
 
     function switchView(viewName) {
 
-      viewInterviews.classList.toggle(&#39;hidden&#39;, viewName !== &#39;interviews&#39;);
+      viewInterviews.classList.toggle('hidden', viewName !== 'interviews');
 
-      viewJobs.classList.toggle(&#39;hidden&#39;, viewName !== &#39;jobs&#39;);
+      viewJobs.classList.toggle('hidden', viewName !== 'jobs');
 
-      viewBookNew.classList.toggle(&#39;hidden&#39;, viewName !== &#39;book&#39;);
+      viewBookNew.classList.toggle('hidden', viewName !== 'book');
 
 
 
       // Update Nav Buttons Styling
 
-      const activeClass = &quot;touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20&quot;;
+      const activeClass = "touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20";
 
-      const inactiveClass = &quot;touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-800&quot;;
-
-
-
-      navTabInterviews.className = viewName === &#39;interviews&#39; ? activeClass : inactiveClass;
-
-      navTabJobs.className = viewName === &#39;jobs&#39; ? activeClass : inactiveClass;
-
-      navTabBookNew.className = viewName === &#39;book&#39; ? activeClass : inactiveClass;
+      const inactiveClass = "touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-800";
 
 
 
-      window.scrollTo({ top: 0, behavior: &#39;smooth&#39; });
+      navTabInterviews.className = viewName === 'interviews' ? activeClass : inactiveClass;
+
+      navTabJobs.className = viewName === 'jobs' ? activeClass : inactiveClass;
+
+      navTabBookNew.className = viewName === 'book' ? activeClass : inactiveClass;
+
+
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
     }
 
 
 
-    navTabInterviews.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;interviews&#39;));
+    navTabInterviews.addEventListener('click', () => switchView('interviews'));
 
-    navTabJobs.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;jobs&#39;));
+    navTabJobs.addEventListener('click', () => switchView('jobs'));
 
-    navTabBookNew.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+    navTabBookNew.addEventListener('click', () => switchView('book'));
 
 
 
-    document.getElementById(&#39;btnQuickBookNav&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+    document.getElementById('btnQuickBookNav').addEventListener('click', () => switchView('book'));
 
-    document.getElementById(&#39;btnOpenScheduleModal&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+    document.getElementById('btnOpenScheduleModal').addEventListener('click', () => switchView('book'));
 
-    document.getElementById(&#39;btnSwitchToJobsHero&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;jobs&#39;));
+    document.getElementById('btnSwitchToJobsHero').addEventListener('click', () => switchView('jobs'));
 
-    document.getElementById(&#39;btnJumpToJobsBanner&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;jobs&#39;));
+    document.getElementById('btnJumpToJobsBanner').addEventListener('click', () => switchView('jobs'));
 
-    document.getElementById(&#39;btnCancelBooking&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;interviews&#39;));
+    document.getElementById('btnCancelBooking').addEventListener('click', () => switchView('interviews'));
 
 
 
     function showToast(msg, isSuccess = true) {
 
-      const toast = document.getElementById(&#39;toast&#39;);
+      const toast = document.getElementById('toast');
 
-      const toastMsg = document.getElementById(&#39;toastMsg&#39;);
+      const toastMsg = document.getElementById('toastMsg');
 
-      const toastDot = document.getElementById(&#39;toastDot&#39;);
+      const toastDot = document.getElementById('toastDot');
 
       toastMsg.textContent = msg;
 
-      toastDot.className = `w-2.5 h-2.5 rounded-full shrink-0 ${isSuccess ? &#39;bg-cyan-400&#39; : &#39;bg-rose-400&#39;}`;
+      toastDot.className = `w-2.5 h-2.5 rounded-full shrink-0 ${isSuccess ? 'bg-cyan-400' : 'bg-rose-400'}`;
 
-      toast.classList.remove(&#39;opacity-0&#39;, &#39;pointer-events-none&#39;, &#39;translate-y-4&#39;);
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
 
-      setTimeout(() =&gt; {
+      setTimeout(() => {
 
-        toast.classList.add(&#39;opacity-0&#39;, &#39;pointer-events-none&#39;, &#39;translate-y-4&#39;);
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
 
       }, 3200);
 
@@ -1900,11 +1844,11 @@
 
     function renderInterviews() {
 
-      const container = document.getElementById(&#39;interviewsListContainer&#39;);
+      const container = document.getElementById('interviewsListContainer');
 
-      document.getElementById(&#39;interviewCountBadge&#39;).textContent = interviews.length;
+      document.getElementById('interviewCountBadge').textContent = interviews.length;
 
-      document.getElementById(&#39;statActiveCount&#39;).textContent = `${interviews.length} Confirmed`;
+      document.getElementById('statActiveCount').textContent = `${interviews.length} Confirmed`;
 
 
 
@@ -1912,23 +1856,23 @@
 
         container.innerHTML = `
 
-          &lt;div class=&quot;py-12 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/40&quot;&gt;
+          <div class="py-12 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/40">
 
-            &lt;p class=&quot;text-sm font-semibold text-slate-300&quot;&gt;No scheduled technical rounds&lt;/p&gt;
+            <p class="text-sm font-semibold text-slate-300">No scheduled technical rounds</p>
 
-            &lt;p class=&quot;text-xs text-slate-500 mt-1&quot;&gt;Book a slot or explore open roles to schedule an interview.&lt;/p&gt;
+            <p class="text-xs text-slate-500 mt-1">Book a slot or explore open roles to schedule an interview.</p>
 
-            &lt;button id=&quot;btnEmptyBook&quot; class=&quot;touch-press mt-3 px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs&quot;&gt;
+            <button id="btnEmptyBook" class="touch-press mt-3 px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs">
 
               Book First Interview
 
-            &lt;/button&gt;
+            </button>
 
-          &lt;/div&gt;
+          </div>
 
         `;
 
-        document.getElementById(&#39;btnEmptyBook&#39;)?.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+        document.getElementById('btnEmptyBook')?.addEventListener('click', () => switchView('book'));
 
         return;
 
@@ -1936,103 +1880,103 @@
 
 
 
-      container.innerHTML = interviews.map(item =&gt; `
+      container.innerHTML = interviews.map(item => `
 
-        &lt;div class=&quot;bg-slate-900 rounded-xl border border-slate-800 p-4 sm:p-5 hover:border-slate-700 transition shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+        <div class="bg-slate-900 rounded-xl border border-slate-800 p-4 sm:p-5 hover:border-slate-700 transition shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
           
 
-          &lt;div class=&quot;space-y-2&quot;&gt;
+          <div class="space-y-2">
 
-            &lt;div class=&quot;flex items-center gap-2 flex-wrap&quot;&gt;
+            <div class="flex items-center gap-2 flex-wrap">
 
-              &lt;span class=&quot;px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-300 text-[10px] font-bold&quot;&gt;
+              <span class="px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-300 text-[10px] font-bold">
 
                 ✓ ${item.status}
 
-              &lt;/span&gt;
+              </span>
 
-              &lt;span class=&quot;px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 text-[10px] font-semibold&quot;&gt;
+              <span class="px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 text-[10px] font-semibold">
 
                 ${item.trackName}
 
-              &lt;/span&gt;
+              </span>
 
-              &lt;span class=&quot;text-xs text-slate-400 font-medium&quot;&gt;
+              <span class="text-xs text-slate-400 font-medium">
 
                 ${item.date}
 
-              &lt;/span&gt;
+              </span>
 
-            &lt;/div&gt;
+            </div>
 
 
 
-            &lt;h3 class=&quot;text-sm sm:text-base font-bold text-white&quot;&gt;${item.role}&lt;/h3&gt;
+            <h3 class="text-sm sm:text-base font-bold text-white">${item.role}</h3>
 
             
 
-            &lt;div class=&quot;text-xs text-slate-400 flex items-center gap-2 flex-wrap&quot;&gt;
+            <div class="text-xs text-slate-400 flex items-center gap-2 flex-wrap">
 
-              &lt;span&gt;&lt;strong&gt;Company:&lt;/strong&gt; ${item.company}&lt;/span&gt;
+              <span><strong>Company:</strong> ${item.company}</span>
 
-              &lt;span&gt;•&lt;/span&gt;
+              <span>•</span>
 
-              &lt;span&gt;&lt;strong&gt;Panel:&lt;/strong&gt; ${item.interviewer}&lt;/span&gt;
+              <span><strong>Panel:</strong> ${item.interviewer}</span>
 
-              &lt;span&gt;•&lt;/span&gt;
+              <span>•</span>
 
-              &lt;span class=&quot;text-cyan-400 font-medium&quot;&gt;${item.mode}&lt;/span&gt;
+              <span class="text-cyan-400 font-medium">${item.mode}</span>
 
-            &lt;/div&gt;
-
-
-
-            &lt;div class=&quot;flex items-center gap-1.5 flex-wrap pt-1&quot;&gt;
-
-              &lt;span class=&quot;text-[10px] text-slate-500&quot;&gt;Key Focus:&lt;/span&gt;
-
-              ${item.topics.map(t =&gt; `&lt;span class=&quot;px-1.5 py-0.5 rounded bg-slate-950 text-slate-300 text-[10px] font-mono border border-slate-800&quot;&gt;${t}&lt;/span&gt;`).join(&#39;&#39;)}
-
-            &lt;/div&gt;
-
-          &lt;/div&gt;
+            </div>
 
 
 
-          &lt;div class=&quot;flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-800 shrink-0&quot;&gt;
+            <div class="flex items-center gap-1.5 flex-wrap pt-1">
 
-            &lt;a href=&quot;${item.meetLink}&quot; target=&quot;_blank&quot; class=&quot;touch-press px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition flex items-center gap-1.5 shadow-md shadow-cyan-500/20&quot;&gt;
+              <span class="text-[10px] text-slate-500">Key Focus:</span>
 
-              &lt;svg class=&quot;w-3.5 h-3.5&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z&quot;/&gt;&lt;/svg&gt;
+              ${item.topics.map(t => `<span class="px-1.5 py-0.5 rounded bg-slate-950 text-slate-300 text-[10px] font-mono border border-slate-800">${t}</span>`).join('')}
 
-              &lt;span&gt;Join Meeting&lt;/span&gt;
+            </div>
 
-            &lt;/a&gt;
+          </div>
 
-            &lt;button class=&quot;btn-reschedule text-xs text-slate-400 hover:text-cyan-300 transition py-1&quot; data-id=&quot;${item.id}&quot;&gt;
+
+
+          <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-800 shrink-0">
+
+            <a href="${item.meetLink}" target="_blank" class="touch-press px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition flex items-center gap-1.5 shadow-md shadow-cyan-500/20">
+
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+
+              <span>Join Meeting</span>
+
+            </a>
+
+            <button class="btn-reschedule text-xs text-slate-400 hover:text-cyan-300 transition py-1" data-id="${item.id}">
 
               Reschedule Slot
 
-            &lt;/button&gt;
+            </button>
 
-          &lt;/div&gt;
-
-
-
-        &lt;/div&gt;
-
-      `).join(&#39;&#39;);
+          </div>
 
 
 
-      document.querySelectorAll(&#39;.btn-reschedule&#39;).forEach(btn =&gt; {
+        </div>
 
-        btn.addEventListener(&#39;click&#39;, () =&gt; {
+      `).join('');
 
-          showToast(&quot;Rescheduling mode active: Please select a new time slot in the booking form.&quot;);
 
-          switchView(&#39;book&#39;);
+
+      document.querySelectorAll('.btn-reschedule').forEach(btn => {
+
+        btn.addEventListener('click', () => {
+
+          showToast("Rescheduling mode active: Please select a new time slot in the booking form.");
+
+          switchView('book');
 
         });
 
@@ -2046,19 +1990,19 @@
 
     function renderJobs() {
 
-      const query = document.getElementById(&#39;jobSearchInput&#39;).value.toLowerCase().trim();
+      const query = document.getElementById('jobSearchInput').value.toLowerCase().trim();
 
-      const exp = document.getElementById(&#39;jobExpSelect&#39;).value;
+      const exp = document.getElementById('jobExpSelect').value;
 
-      const mode = document.getElementById(&#39;jobModeSelect&#39;).value;
+      const mode = document.getElementById('jobModeSelect').value;
 
-      const container = document.getElementById(&#39;integratedJobsGrid&#39;);
+      const container = document.getElementById('integratedJobsGrid');
 
 
 
-      let filtered = ALL_JOBS.filter(job =&gt; {
+      let filtered = ALL_JOBS.filter(job => {
 
-        if (activeJobTrack !== &#39;ALL&#39; &amp;&amp; job.track !== activeJobTrack) return false;
+        if (activeJobTrack !== 'ALL' && job.track !== activeJobTrack) return false;
 
         if (query) {
 
@@ -2068,15 +2012,15 @@
 
           const inDesc = job.description.toLowerCase().includes(query);
 
-          const inSkills = job.skills.some(s =&gt; s.toLowerCase().includes(query));
+          const inSkills = job.skills.some(s => s.toLowerCase().includes(query));
 
-          if (!inTitle &amp;&amp; !inCompany &amp;&amp; !inDesc &amp;&amp; !inSkills) return false;
+          if (!inTitle && !inCompany && !inDesc && !inSkills) return false;
 
         }
 
-        if (exp !== &#39;ALL&#39; &amp;&amp; job.expCategory !== exp) return false;
+        if (exp !== 'ALL' && job.expCategory !== exp) return false;
 
-        if (mode !== &#39;ALL&#39; &amp;&amp; job.workMode !== mode) return false;
+        if (mode !== 'ALL' && job.workMode !== mode) return false;
 
         return true;
 
@@ -2084,7 +2028,7 @@
 
 
 
-      document.getElementById(&#39;jobsCountBadge&#39;).textContent = `${filtered.length} Roles`;
+      document.getElementById('jobsCountBadge').textContent = `${filtered.length} Roles`;
 
 
 
@@ -2092,17 +2036,17 @@
 
         container.innerHTML = `
 
-          &lt;div class=&quot;col-span-full py-12 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/40&quot;&gt;
+          <div class="col-span-full py-12 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/40">
 
-            &lt;p class=&quot;text-sm font-semibold text-slate-300&quot;&gt;No jobs match your current search&lt;/p&gt;
+            <p class="text-sm font-semibold text-slate-300">No jobs match your current search</p>
 
-            &lt;button id=&quot;btnResetSearch&quot; class=&quot;touch-press mt-2 text-xs text-cyan-400 hover:underline&quot;&gt;Clear all search filters&lt;/button&gt;
+            <button id="btnResetSearch" class="touch-press mt-2 text-xs text-cyan-400 hover:underline">Clear all search filters</button>
 
-          &lt;/div&gt;
+          </div>
 
         `;
 
-        document.getElementById(&#39;btnResetSearch&#39;)?.addEventListener(&#39;click&#39;, resetJobFilters);
+        document.getElementById('btnResetSearch')?.addEventListener('click', resetJobFilters);
 
         return;
 
@@ -2110,125 +2054,125 @@
 
 
 
-      container.innerHTML = filtered.map(job =&gt; `
+      container.innerHTML = filtered.map(job => `
 
-        &lt;div class=&quot;bg-slate-900 rounded-xl border border-slate-800 p-4 sm:p-5 flex flex-col justify-between hover:border-slate-700 transition shadow-lg relative group&quot;&gt;
+        <div class="bg-slate-900 rounded-xl border border-slate-800 p-4 sm:p-5 flex flex-col justify-between hover:border-slate-700 transition shadow-lg relative group">
 
           
 
-          &lt;div class=&quot;space-y-3&quot;&gt;
+          <div class="space-y-3">
 
-            &lt;div class=&quot;flex items-start justify-between gap-2&quot;&gt;
+            <div class="flex items-start justify-between gap-2">
 
-              &lt;div class=&quot;flex items-center gap-3&quot;&gt;
+              <div class="flex items-center gap-3">
 
-                &lt;div class=&quot;w-10 h-10 rounded-xl bg-gradient-to-tr ${job.companyColor} flex items-center justify-center font-bold text-white text-sm shadow-md shrink-0&quot;&gt;
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr ${job.companyColor} flex items-center justify-center font-bold text-white text-sm shadow-md shrink-0">
 
                   ${job.companyInitial}
 
-                &lt;/div&gt;
+                </div>
 
-                &lt;div&gt;
+                <div>
 
-                  &lt;h4 class=&quot;font-semibold text-white text-sm line-clamp-1 group-hover:text-cyan-300 transition&quot;&gt;${job.title}&lt;/h4&gt;
+                  <h4 class="font-semibold text-white text-sm line-clamp-1 group-hover:text-cyan-300 transition">${job.title}</h4>
 
-                  &lt;span class=&quot;text-xs text-slate-400 block&quot;&gt;${job.company}&lt;/span&gt;
+                  <span class="text-xs text-slate-400 block">${job.company}</span>
 
-                &lt;/div&gt;
+                </div>
 
-              &lt;/div&gt;
+              </div>
 
-              &lt;span class=&quot;shrink-0 px-2 py-0.5 rounded-full border text-[10px] font-semibold ${job.trackColor}&quot;&gt;
+              <span class="shrink-0 px-2 py-0.5 rounded-full border text-[10px] font-semibold ${job.trackColor}">
 
                 ${job.trackName}
 
-              &lt;/span&gt;
+              </span>
 
-            &lt;/div&gt;
-
-
-
-            &lt;div class=&quot;flex flex-wrap gap-1.5 text-[11px]&quot;&gt;
-
-              &lt;span class=&quot;px-2 py-0.5 rounded bg-slate-800 text-slate-300&quot;&gt;${job.location}&lt;/span&gt;
-
-              &lt;span class=&quot;px-2 py-0.5 rounded bg-slate-800 text-slate-300&quot;&gt;${job.experience}&lt;/span&gt;
-
-              &lt;span class=&quot;px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 font-semibold&quot;&gt;${job.salary}&lt;/span&gt;
-
-            &lt;/div&gt;
+            </div>
 
 
 
-            &lt;p class=&quot;text-xs text-slate-400 line-clamp-2 leading-relaxed&quot;&gt;
+            <div class="flex flex-wrap gap-1.5 text-[11px]">
+
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">${job.location}</span>
+
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">${job.experience}</span>
+
+              <span class="px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 font-semibold">${job.salary}</span>
+
+            </div>
+
+
+
+            <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
 
               ${job.description}
 
-            &lt;/p&gt;
+            </p>
 
 
 
-            &lt;div class=&quot;flex flex-wrap gap-1 pt-1&quot;&gt;
+            <div class="flex flex-wrap gap-1 pt-1">
 
-              ${job.skills.slice(0, 4).map(s =&gt; `&lt;span class=&quot;px-2 py-0.5 rounded bg-slate-950 text-slate-300 border border-slate-800 text-[10px] font-mono&quot;&gt;${s}&lt;/span&gt;`).join(&#39;&#39;)}
+              ${job.skills.slice(0, 4).map(s => `<span class="px-2 py-0.5 rounded bg-slate-950 text-slate-300 border border-slate-800 text-[10px] font-mono">${s}</span>`).join('')}
 
-              ${job.skills.length &gt; 4 ? `&lt;span class=&quot;text-[10px] text-slate-500 self-center&quot;&gt;+${job.skills.length - 4}&lt;/span&gt;` : &#39;&#39;}
+              ${job.skills.length > 4 ? `<span class="text-[10px] text-slate-500 self-center">+${job.skills.length - 4}</span>` : ''}
 
-            &lt;/div&gt;
+            </div>
 
-          &lt;/div&gt;
-
-
-
-          &lt;!-- Bottom Action Buttons: Special Feature Integration --&gt;
-
-          &lt;div class=&quot;pt-4 mt-4 border-t border-slate-800/80 flex flex-col gap-2&quot;&gt;
-
-            &lt;button class=&quot;btn-book-this-role touch-press w-full py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/10 transition flex items-center justify-center gap-1.5&quot; data-id=&quot;${job.id}&quot;&gt;
-
-              &lt;svg class=&quot;w-3.5 h-3.5&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z&quot;/&gt;&lt;/svg&gt;
-
-              &lt;span&gt;Book Interview for this Role&lt;/span&gt;
-
-            &lt;/button&gt;
+          </div>
 
 
 
-            &lt;div class=&quot;flex items-center justify-between text-xs pt-1&quot;&gt;
+          <!-- Bottom Action Buttons: Special Feature Integration -->
 
-              &lt;span class=&quot;text-[10px] text-slate-500&quot;&gt;${job.source}&lt;/span&gt;
+          <div class="pt-4 mt-4 border-t border-slate-800/80 flex flex-col gap-2">
 
-              &lt;button class=&quot;btn-view-prep text-cyan-400 hover:underline text-[11px]&quot; data-id=&quot;${job.id}&quot;&gt;
+            <button class="btn-book-this-role touch-press w-full py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/10 transition flex items-center justify-center gap-1.5" data-id="${job.id}">
 
-                View Prep &amp; Details →
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
 
-              &lt;/button&gt;
+              <span>Book Interview for this Role</span>
 
-            &lt;/div&gt;
-
-          &lt;/div&gt;
+            </button>
 
 
 
-        &lt;/div&gt;
+            <div class="flex items-center justify-between text-xs pt-1">
 
-      `).join(&#39;&#39;);
+              <span class="text-[10px] text-slate-500">${job.source}</span>
+
+              <button class="btn-view-prep text-cyan-400 hover:underline text-[11px]" data-id="${job.id}">
+
+                View Prep & Details →
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+      `).join('');
 
 
 
       // Wire up buttons
 
-      document.querySelectorAll(&#39;.btn-book-this-role&#39;).forEach(btn =&gt; {
+      document.querySelectorAll('.btn-book-this-role').forEach(btn => {
 
-        btn.addEventListener(&#39;click&#39;, () =&gt; {
+        btn.addEventListener('click', () => {
 
-          const job = ALL_JOBS.find(j =&gt; j.id === btn.dataset.id);
+          const job = ALL_JOBS.find(j => j.id === btn.dataset.id);
 
           if (job) {
 
             if (window.trackCandidateEvent) {
 
-              window.trackCandidateEvent(&#39;click_book_from_job&#39;, { job_id: job.id, job_title: job.title, company: job.company, track: job.track });
+              window.trackCandidateEvent('click_book_from_job', { job_id: job.id, job_title: job.title, company: job.company, track: job.track });
 
             }
 
@@ -2242,11 +2186,11 @@
 
 
 
-      document.querySelectorAll(&#39;.btn-view-prep&#39;).forEach(btn =&gt; {
+      document.querySelectorAll('.btn-view-prep').forEach(btn => {
 
-        btn.addEventListener(&#39;click&#39;, () =&gt; {
+        btn.addEventListener('click', () => {
 
-          const job = ALL_JOBS.find(j =&gt; j.id === btn.dataset.id);
+          const job = ALL_JOBS.find(j => j.id === btn.dataset.id);
 
           if (job) openPrepModal(job);
 
@@ -2260,19 +2204,19 @@
 
     function resetJobFilters() {
 
-      document.getElementById(&#39;jobSearchInput&#39;).value = &#39;&#39;;
+      document.getElementById('jobSearchInput').value = '';
 
-      document.getElementById(&#39;jobExpSelect&#39;).value = &#39;ALL&#39;;
+      document.getElementById('jobExpSelect').value = 'ALL';
 
-      document.getElementById(&#39;jobModeSelect&#39;).value = &#39;ALL&#39;;
+      document.getElementById('jobModeSelect').value = 'ALL';
 
-      activeJobTrack = &#39;ALL&#39;;
+      activeJobTrack = 'ALL';
 
       updateTrackButtonsUI();
 
       renderJobs();
 
-      showToast(&#39;Filters reset.&#39;);
+      showToast('Filters reset.');
 
     }
 
@@ -2280,15 +2224,15 @@
 
     function updateTrackButtonsUI() {
 
-      document.querySelectorAll(&#39;.job-track-btn&#39;).forEach(btn =&gt; {
+      document.querySelectorAll('.job-track-btn').forEach(btn => {
 
         if (btn.dataset.track === activeJobTrack) {
 
-          btn.className = &quot;job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition border bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20&quot;;
+          btn.className = "job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition border bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20";
 
         } else {
 
-          btn.className = &quot;job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800&quot;;
+          btn.className = "job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800";
 
         }
 
@@ -2298,15 +2242,15 @@
 
 
 
-    document.querySelectorAll(&#39;.job-track-btn&#39;).forEach(btn =&gt; {
+    document.querySelectorAll('.job-track-btn').forEach(btn => {
 
-      btn.addEventListener(&#39;click&#39;, () =&gt; {
+      btn.addEventListener('click', () => {
 
         activeJobTrack = btn.dataset.track;
 
         if (window.trackCandidateEvent) {
 
-          window.trackCandidateEvent(&#39;select_tech_track&#39;, { track: activeJobTrack });
+          window.trackCandidateEvent('select_tech_track', { track: activeJobTrack });
 
         }
 
@@ -2320,25 +2264,25 @@
 
 
 
-    document.getElementById(&#39;jobSearchInput&#39;).addEventListener(&#39;input&#39;, () =&gt; {
+    document.getElementById('jobSearchInput').addEventListener('input', () => {
 
       renderJobs();
 
-      const q = document.getElementById(&#39;jobSearchInput&#39;).value.trim();
+      const q = document.getElementById('jobSearchInput').value.trim();
 
-      if (q.length &gt; 2 &amp;&amp; window.trackCandidateEvent) {
+      if (q.length > 2 && window.trackCandidateEvent) {
 
-        window.trackCandidateEvent(&#39;search_jobs&#39;, { search_term: q });
+        window.trackCandidateEvent('search_jobs', { search_term: q });
 
       }
 
     });
 
-    document.getElementById(&#39;jobExpSelect&#39;).addEventListener(&#39;change&#39;, renderJobs);
+    document.getElementById('jobExpSelect').addEventListener('change', renderJobs);
 
-    document.getElementById(&#39;jobModeSelect&#39;).addEventListener(&#39;change&#39;, renderJobs);
+    document.getElementById('jobModeSelect').addEventListener('change', renderJobs);
 
-    document.getElementById(&#39;btnResetJobFilters&#39;).addEventListener(&#39;click&#39;, resetJobFilters);
+    document.getElementById('btnResetJobFilters').addEventListener('click', resetJobFilters);
 
 
 
@@ -2346,9 +2290,9 @@
 
     function prefillAndSwitchToBooking(job) {
 
-      document.getElementById(&#39;formTechTrack&#39;).value = job.track;
+      document.getElementById('formTechTrack').value = job.track;
 
-      document.getElementById(&#39;formJobRole&#39;).value = `${job.title} (${job.company})`;
+      document.getElementById('formJobRole').value = `${job.title} (${job.company})`;
 
       
 
@@ -2358,93 +2302,93 @@
 
       tomorrow.setDate(tomorrow.getDate() + 1);
 
-      document.getElementById(&#39;formDate&#39;).value = tomorrow.toISOString().split(&#39;T&#39;)[0];
+      document.getElementById('formDate').value = tomorrow.toISOString().split('T')[0];
 
 
 
-      switchView(&#39;book&#39;);
+      switchView('book');
 
-      showToast(`Pre-filled interview booking for &quot;${job.title}&quot;! Select your slot.`);
+      showToast(`Pre-filled interview booking for "${job.title}"! Select your slot.`);
 
     }
 
 
 
-    // --- MODAL DETAILS &amp; PREPARATION TOPICS ---
+    // --- MODAL DETAILS & PREPARATION TOPICS ---
 
     function openPrepModal(job) {
 
       currentSelectedJob = job;
 
-      document.getElementById(&#39;modalTrackBadge&#39;).textContent = job.trackName;
+      document.getElementById('modalTrackBadge').textContent = job.trackName;
 
-      document.getElementById(&#39;modalTrackBadge&#39;).className = `text-[10px] font-semibold px-2 py-0.5 rounded-full border mb-1 inline-block ${job.trackColor}`;
+      document.getElementById('modalTrackBadge').className = `text-[10px] font-semibold px-2 py-0.5 rounded-full border mb-1 inline-block ${job.trackColor}`;
 
-      document.getElementById(&#39;modalJobTitle&#39;).textContent = job.title;
+      document.getElementById('modalJobTitle').textContent = job.title;
 
-      document.getElementById(&#39;modalJobCompany&#39;).textContent = `${job.company} • ${job.location}`;
+      document.getElementById('modalJobCompany').textContent = `${job.company} • ${job.location}`;
 
-      document.getElementById(&#39;modalJobSalary&#39;).textContent = job.salary;
+      document.getElementById('modalJobSalary').textContent = job.salary;
 
-      document.getElementById(&#39;modalJobExp&#39;).textContent = job.experience;
+      document.getElementById('modalJobExp').textContent = job.experience;
 
-      document.getElementById(&#39;modalJobLoc&#39;).textContent = job.location;
+      document.getElementById('modalJobLoc').textContent = job.location;
 
-      document.getElementById(&#39;modalJobDesc&#39;).textContent = job.description;
-
-
-
-      const prepContainer = document.getElementById(&#39;modalPrepList&#39;);
-
-      prepContainer.innerHTML = job.prepTopics.map((topic, i) =&gt; `
-
-        &lt;div class=&quot;flex items-center gap-2&quot;&gt;
-
-          &lt;span class=&quot;w-4 h-4 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold flex items-center justify-center text-[10px] shrink-0&quot;&gt;${i+1}&lt;/span&gt;
-
-          &lt;span class=&quot;text-xs font-medium text-slate-200&quot;&gt;${topic}&lt;/span&gt;
-
-        &lt;/div&gt;
-
-      `).join(&#39;&#39;);
+      document.getElementById('modalJobDesc').textContent = job.description;
 
 
 
-      const skillsContainer = document.getElementById(&#39;modalSkills&#39;);
+      const prepContainer = document.getElementById('modalPrepList');
 
-      skillsContainer.innerHTML = job.skills.map(s =&gt; `
+      prepContainer.innerHTML = job.prepTopics.map((topic, i) => `
 
-        &lt;span class=&quot;px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-cyan-300 font-mono text-[11px]&quot;&gt;
+        <div class="flex items-center gap-2">
+
+          <span class="w-4 h-4 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold flex items-center justify-center text-[10px] shrink-0">${i+1}</span>
+
+          <span class="text-xs font-medium text-slate-200">${topic}</span>
+
+        </div>
+
+      `).join('');
+
+
+
+      const skillsContainer = document.getElementById('modalSkills');
+
+      skillsContainer.innerHTML = job.skills.map(s => `
+
+        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-cyan-300 font-mono text-[11px]">
 
           ✓ ${s}
 
-        &lt;/span&gt;
+        </span>
 
-      `).join(&#39;&#39;);
+      `).join('');
 
 
 
-      document.getElementById(&#39;jobPrepModal&#39;).classList.remove(&#39;hidden&#39;);
+      document.getElementById('jobPrepModal').classList.remove('hidden');
 
     }
 
 
 
-    document.getElementById(&#39;btnClosePrepModal&#39;).addEventListener(&#39;click&#39;, () =&gt; {
+    document.getElementById('btnClosePrepModal').addEventListener('click', () => {
 
-      document.getElementById(&#39;jobPrepModal&#39;).classList.add(&#39;hidden&#39;);
-
-    });
-
-    document.getElementById(&#39;btnClosePrepModalFooter&#39;).addEventListener(&#39;click&#39;, () =&gt; {
-
-      document.getElementById(&#39;jobPrepModal&#39;).classList.add(&#39;hidden&#39;);
+      document.getElementById('jobPrepModal').classList.add('hidden');
 
     });
 
-    document.getElementById(&#39;btnModalBookForThisRole&#39;).addEventListener(&#39;click&#39;, () =&gt; {
+    document.getElementById('btnClosePrepModalFooter').addEventListener('click', () => {
 
-      document.getElementById(&#39;jobPrepModal&#39;).classList.add(&#39;hidden&#39;);
+      document.getElementById('jobPrepModal').classList.add('hidden');
+
+    });
+
+    document.getElementById('btnModalBookForThisRole').addEventListener('click', () => {
+
+      document.getElementById('jobPrepModal').classList.add('hidden');
 
       if (currentSelectedJob) prefillAndSwitchToBooking(currentSelectedJob);
 
@@ -2454,27 +2398,27 @@
 
     // --- HANDLE NEW INTERVIEW SUBMISSION (WITH SAFE OVERLAP CHECK) ---
 
-    document.getElementById(&#39;scheduleInterviewForm&#39;).addEventListener(&#39;submit&#39;, (e) =&gt; {
+    document.getElementById('scheduleInterviewForm').addEventListener('submit', (e) => {
 
       e.preventDefault();
 
       
 
-      const candidateName = document.getElementById(&#39;formCandidateName&#39;).value.trim();
+      const candidateName = document.getElementById('formCandidateName').value.trim();
 
-      const role = document.getElementById(&#39;formJobRole&#39;).value.trim();
+      const role = document.getElementById('formJobRole').value.trim();
 
-      const track = document.getElementById(&#39;formTechTrack&#39;).value;
+      const track = document.getElementById('formTechTrack').value;
 
-      const dateVal = document.getElementById(&#39;formDate&#39;).value;
+      const dateVal = document.getElementById('formDate').value;
 
-      const timeSlot = document.getElementById(&#39;formTimeSlot&#39;).value;
+      const timeSlot = document.getElementById('formTimeSlot').value;
 
-      const mode = document.querySelector(&#39;input[name=&quot;formMode&quot;]:checked&#39;).value;
+      const mode = document.querySelector('input[name="formMode"]:checked').value;
 
 
 
-      const trackObj = ALL_JOBS.find(j =&gt; j.track === track) || { trackName: &quot;.NET &amp; C#&quot; };
+      const trackObj = ALL_JOBS.find(j => j.track === track) || { trackName: ".NET & C#" };
 
 
 
@@ -2482,13 +2426,13 @@
 
       const dateFormatted = `${dateVal}, ${timeSlot}`;
 
-      const isOverlap = interviews.some(i =&gt; i.date === dateFormatted);
+      const isOverlap = interviews.some(i => i.date === dateFormatted);
 
 
 
       if (isOverlap) {
 
-        showToast(&quot;Slot conflict detected! That exact time slot is already booked. Please choose a different slot.&quot;, false);
+        showToast("Slot conflict detected! That exact time slot is already booked. Please choose a different slot.", false);
 
         return;
 
@@ -2504,7 +2448,7 @@
 
         role: role,
 
-        company: &quot;SK Tech Client Partner&quot;,
+        company: "SK Tech Client Partner",
 
         track: track,
 
@@ -2516,13 +2460,13 @@
 
         mode: mode,
 
-        meetLink: &quot;https://meet.google.com/sk-tech-interview&quot;,
+        meetLink: "https://meet.google.com/sk-tech-interview",
 
-        status: &quot;CONFIRMED&quot;,
+        status: "CONFIRMED",
 
-        interviewer: &quot;Technical Evaluation Board&quot;,
+        interviewer: "Technical Evaluation Board",
 
-        topics: [&quot;System Design&quot;, &quot;Core Coding Round&quot;, &quot;Scenario Problem Solving&quot;]
+        topics: ["System Design", "Core Coding Round", "Scenario Problem Solving"]
 
       };
 
@@ -2532,7 +2476,7 @@
 
       if (window.trackCandidateEvent) {
 
-        window.trackCandidateEvent(&#39;schedule_interview_confirmed&#39;, {
+        window.trackCandidateEvent('schedule_interview_confirmed', {
 
           role: role,
 
@@ -2548,7 +2492,7 @@
 
       renderInterviews();
 
-      switchView(&#39;interviews&#39;);
+      switchView('interviews');
 
       showToast(`Interview successfully booked for ${candidateName} on ${dateFormatted}!`);
 
@@ -2556,7 +2500,7 @@
 
       // Reset form
 
-      document.getElementById(&#39;scheduleInterviewForm&#39;).reset();
+      document.getElementById('scheduleInterviewForm').reset();
 
     });
 
@@ -2568,7 +2512,7 @@
 
     defaultDate.setDate(defaultDate.getDate() + 1);
 
-    document.getElementById(&#39;formDate&#39;).value = defaultDate.toISOString().split(&#39;T&#39;)[0];
+    document.getElementById('formDate').value = defaultDate.toISOString().split('T')[0];
 
 
 
@@ -2578,59 +2522,59 @@
 
     renderJobs();
 
-  &lt;/script&gt;
+  </script>
 
 
 
-  &lt;!-- Live Google Analytics Event Inspector (Zero Risk Feedback) --&gt;
+  <!-- Live Google Analytics Event Inspector (Zero Risk Feedback) -->
 
-  &lt;div class=&quot;fixed bottom-4 left-4 z-40 hidden sm:block&quot;&gt;
+  <div class="fixed bottom-4 left-4 z-40 hidden sm:block">
 
-    &lt;div id=&quot;gaDrawer&quot; class=&quot;bg-slate-900/95 border border-slate-700/80 rounded-2xl p-3 shadow-2xl backdrop-blur-md max-w-xs transition-all text-xs space-y-2&quot;&gt;
+    <div id="gaDrawer" class="bg-slate-900/95 border border-slate-700/80 rounded-2xl p-3 shadow-2xl backdrop-blur-md max-w-xs transition-all text-xs space-y-2">
 
-      &lt;div class=&quot;flex items-center justify-between border-b border-slate-800 pb-2&quot;&gt;
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2">
 
-        &lt;div class=&quot;flex items-center gap-2&quot;&gt;
+        <div class="flex items-center gap-2">
 
-          &lt;span class=&quot;w-2 h-2 rounded-full bg-emerald-400 animate-pulse&quot;&gt;&lt;/span&gt;
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
 
-          &lt;span class=&quot;font-bold text-white text-[11px]&quot;&gt;Google Analytics 4 Active&lt;/span&gt;
+          <span class="font-bold text-white text-[11px]">Google Analytics 4 Active</span>
 
-        &lt;/div&gt;
+        </div>
 
-        &lt;button id=&quot;btnToggleGaLogs&quot; class=&quot;text-slate-400 hover:text-white text-[10px]&quot;&gt;Minimize&lt;/button&gt;
+        <button id="btnToggleGaLogs" class="text-slate-400 hover:text-white text-[10px]">Minimize</button>
 
-      &lt;/div&gt;
+      </div>
 
-      &lt;div id=&quot;gaLogsBody&quot; class=&quot;space-y-1.5 max-h-28 overflow-y-auto custom-scroll text-[10px] font-mono text-slate-300&quot;&gt;
+      <div id="gaLogsBody" class="space-y-1.5 max-h-28 overflow-y-auto custom-scroll text-[10px] font-mono text-slate-300">
 
-        &lt;div class=&quot;text-slate-500&quot;&gt;Listening for candidate interactions...&lt;/div&gt;
+        <div class="text-slate-500">Listening for candidate interactions...</div>
 
-      &lt;/div&gt;
+      </div>
 
-    &lt;/div&gt;
+    </div>
 
-  &lt;/div&gt;
+  </div>
 
 
 
-  &lt;script&gt;
+  <script>
 
     // Live UI logger for Google Analytics events
 
     window.recordAnalyticsLog = function(name, params) {
 
-      const logs = document.getElementById(&#39;gaLogsBody&#39;);
+      const logs = document.getElementById('gaLogsBody');
 
       if (!logs) return;
 
-      const row = document.createElement(&#39;div&#39;);
+      const row = document.createElement('div');
 
-      row.className = &quot;flex items-start gap-1 text-emerald-300&quot;;
+      row.className = "flex items-start gap-1 text-emerald-300";
 
-      const time = new Date().toTimeString().split(&#39; &#39;)[0];
+      const time = new Date().toTimeString().split(' ')[0];
 
-      row.innerHTML = `&lt;span class=&quot;text-slate-500&quot;&gt;${time}&lt;/span&gt; &lt;strong&gt;${name}&lt;/strong&gt;`;
+      row.innerHTML = `<span class="text-slate-500">${time}</span> <strong>${name}</strong>`;
 
       logs.prepend(row);
 
@@ -2638,23 +2582,23 @@
 
 
 
-    document.getElementById(&#39;btnToggleGaLogs&#39;)?.addEventListener(&#39;click&#39;, () =&gt; {
+    document.getElementById('btnToggleGaLogs')?.addEventListener('click', () => {
 
-      const b = document.getElementById(&#39;gaLogsBody&#39;);
+      const b = document.getElementById('gaLogsBody');
 
-      const btn = document.getElementById(&#39;btnToggleGaLogs&#39;);
+      const btn = document.getElementById('btnToggleGaLogs');
 
-      if (b.classList.contains(&#39;hidden&#39;)) {
+      if (b.classList.contains('hidden')) {
 
-        b.classList.remove(&#39;hidden&#39;);
+        b.classList.remove('hidden');
 
-        btn.textContent = &#39;Minimize&#39;;
+        btn.textContent = 'Minimize';
 
       } else {
 
-        b.classList.add(&#39;hidden&#39;);
+        b.classList.add('hidden');
 
-        btn.textContent = &#39;Expand&#39;;
+        btn.textContent = 'Expand';
 
       }
 
@@ -2664,18 +2608,18 @@
 
     // Fire initial page_view on load
 
-    window.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    window.addEventListener('DOMContentLoaded', () => {
 
       if (window.trackCandidateEvent) {
 
-        window.trackCandidateEvent(&#39;page_view&#39;, { page_title: &#39;SK Tech Interview &amp; Multi-Tech Jobs Portal&#39;, page_path: &#39;/interview-jobs.html&#39; });
+        window.trackCandidateEvent('page_view', { page_title: 'SK Tech Interview & Multi-Tech Jobs Portal', page_path: '/interview-jobs.html' });
 
       }
 
     });
 
-  &lt;/script&gt;
+  </script>
 
-&lt;/body&gt;
+</body>
 
-&lt;/html&gt;
+</html>
