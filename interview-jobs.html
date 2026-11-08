@@ -1,0 +1,2681 @@
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover&quot;&gt;
+
+  &lt;title&gt;SK Tech | Candidate Interview &amp; Career Portal&lt;/title&gt;
+
+  &lt;script src=&quot;https://cdn.tailwindcss.com/3.4.17&quot;&gt;&lt;/script&gt;
+
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+
+  &lt;style&gt;
+
+    /* iOS &amp; Android smooth touch scrolling &amp; layout hygiene */
+
+    * {
+
+      -webkit-tap-highlight-color: transparent;
+
+      box-sizing: border-box;
+
+    }
+
+    body {
+
+      font-family: &#39;Inter&#39;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+
+      overflow-x: hidden;
+
+      touch-action: manipulation;
+
+    }
+
+    .mono { font-family: &#39;JetBrains Mono&#39;, monospace; }
+
+    .custom-scroll {
+
+      -webkit-overflow-scrolling: touch;
+
+    }
+
+    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+
+    .custom-scroll::-webkit-scrollbar-track { background: #090d16; }
+
+    .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+
+    .custom-scroll::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+    
+
+    /* Touch optimization for mobile buttons and inputs */
+
+    input, select, textarea, button {
+
+      font-size: 16px; /* Prevents iOS auto-zoom on focus */
+
+    }
+
+    @media (min-width: 640px) {
+
+      input, select, textarea, button {
+
+        font-size: 14px;
+
+      }
+
+    }
+
+    
+
+    /* Active feedback for touch devices */
+
+    .touch-press:active {
+
+      transform: scale(0.98);
+
+      transition: transform 0.1s ease-out;
+
+    }
+
+  &lt;/style&gt;
+
+  &lt;!-- Google Analytics 4 (GA4) Integration --&gt;
+
+  &lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=G-SKTECHACADEMY&quot;&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag(){ dataLayer.push(arguments); }
+
+    gtag(&#39;js&#39;, new Date());
+
+
+
+    // Replace G-SKTECHACADEMY with your actual GA4 Measurement ID in production
+
+    const GA_ID = 'G-SKTECHACADEMY';
+
+    gtag('config', GA_ID, {
+
+      anonymize_ip: true,
+
+      cookie_flags: 'SameSite=None;Secure'
+
+    });
+
+
+
+    // Custom Event Tracking Helper with Live Feedback
+
+    window.trackCandidateEvent = function(eventName, eventParams = {}) {
+
+      try {
+
+        if (typeof gtag === 'function') {
+
+          gtag('event', eventName, eventParams);
+
+        }
+
+        console.log('[Google Analytics Event]:', eventName, eventParams);
+
+        if (window.recordAnalyticsLog) {
+
+          window.recordAnalyticsLog(eventName, eventParams);
+
+        }
+
+      } catch (err) {
+
+        console.warn('Analytics tracking:', err.message);
+
+      }
+
+    };
+
+  &lt;/script&gt;
+
+&lt;/head&gt;
+
+&lt;body class=&quot;bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-slate-950&quot;&gt;
+
+
+
+  &lt;!-- Mobile-First Responsive Navigation Header --&gt;
+
+  &lt;header class=&quot;border-b border-slate-800/90 bg-slate-950/95 border-b border-cyan-950/80 backdrop-blur-md sticky top-0 z-40 transition-all&quot;&gt;
+
+    &lt;div class=&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between&quot;&gt;
+
+      
+
+            <!-- Official SK Tech Brand Vector Logo & Matching Colors -->
+
+      <div class="flex items-center gap-3">
+
+        <div class="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-400 via-blue-600 to-indigo-600 p-[1.5px] shadow-lg shadow-cyan-500/25 shrink-0">
+
+          <div class="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center p-1 overflow-hidden">
+
+            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+              <defs>
+
+                <linearGradient id="skLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+
+                  <stop offset="0%" stop-color="#22d3ee" />
+
+                  <stop offset="50%" stop-color="#3b82f6" />
+
+                  <stop offset="100%" stop-color="#1d4ed8" />
+
+                </linearGradient>
+
+                <linearGradient id="skRingGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+
+                  <stop offset="0%" stop-color="#06b6d4" />
+
+                  <stop offset="100%" stop-color="#6366f1" />
+
+                </linearGradient>
+
+              </defs>
+
+              <!-- Outer Tech Circuit Ring -->
+
+              <circle cx="50" cy="50" r="44" stroke="url(#skRingGrad)" stroke-width="3" stroke-dasharray="8 4" stroke-opacity="0.8"/>
+
+              <circle cx="50" cy="50" r="38" fill="#090d16" stroke="url(#skLogoGrad)" stroke-width="2"/>
+
+              <!-- Code Bracket Accents -->
+
+              <path d="M26 43 L19 50 L26 57" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <path d="M74 43 L81 50 L74 57" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- Graduation Cap / Growth Crown on top of SK -->
+
+              <path d="M50 24 L64 30 L50 36 L36 30 Z" fill="url(#skLogoGrad)"/>
+
+              <path d="M60 32 L60 39 C60 41.5 50 44 50 44 C50 44 40 41.5 40 39 L40 32" stroke="#60a5fa" stroke-width="1.5" fill="none"/>
+
+              <path d="M64 30 L66 38" stroke="#38bdf8" stroke-width="1.5"/>
+
+              <!-- Monogram SK -->
+
+              <text x="50" y="65" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="24" fill="#ffffff" letter-spacing="-1">SK</text>
+
+              <circle cx="50" cy="74" r="2.5" fill="#22d3ee"/>
+
+            </svg>
+
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="flex items-center gap-1.5">
+
+            <span class="font-black text-base sm:text-lg tracking-tight text-white">SK Tech</span>
+
+            <span class="text-[9px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800 font-extrabold tracking-wider">ACADEMY</span>
+
+          </div>
+
+          <p class="text-[11px] text-cyan-400 font-medium tracking-wide">Learn · Code · Grow</p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Live User & Action Badges -->
+
+      <div class="flex items-center gap-2 sm:gap-3">
+
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-800 text-xs text-emerald-300 font-medium">
+
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+
+          <span>Online & Confirmed</span>
+
+        </div>
+
+        <button id="btnQuickBookNav" class="touch-press px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 transition flex items-center gap-1.5">
+
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+
+          <span>Book Interview</span>
+
+        </button>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- Primary Feature Mode Tabs (Sticky Switcher) -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-slate-900 border-t border-slate-800/80">
+
+      <div class="flex gap-2 py-2 overflow-x-auto custom-scroll">
+
+        <button id="navTabInterviews" class="touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20">
+
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+
+          <span>My Interview Schedule</span>
+
+          <span id="interviewCountBadge" class="ml-1 px-1.5 py-0.2 rounded-full bg-slate-950/30 text-[10px] font-bold">2</span>
+
+        </button>
+
+
+
+        <button id="navTabJobs" class="touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-800">
+
+          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+
+          <span>Explore Job Openings</span>
+
+          <span class="ml-1 px-1.5 py-0.2 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400 text-[10px] font-bold">All Tech</span>
+
+        </button>
+
+
+
+        <button id="navTabBookNew" class="touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-800">
+
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+
+          <span>Schedule New Interview</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  &lt;/header&gt;
+
+
+
+  &lt;!-- Main Container --&gt;
+
+  &lt;main class=&quot;flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 space-y-6&quot;&gt;
+
+
+
+    <!-- ============================================================= -->
+
+    <!-- VIEW 1: MY INTERVIEW SCHEDULE & DASHBOARD                     -->
+
+    <!-- ============================================================= -->
+
+    <div id="viewInterviews" class="space-y-6">
+
+      
+
+      <!-- Candidate Greeting & Status Hero -->
+
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950/70 border-cyan-900/40 border border-slate-800 p-5 sm:p-7 shadow-xl">
+
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+
+          <div class="space-y-2">
+
+            <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">
+
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+
+              Live Candidate Dashboard
+
+            </div>
+
+            <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+
+              Welcome back, Candidate
+
+            </h1>
+
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+
+              Track your scheduled technical interviews, join video links directly, or explore fresh job openings across all technologies with 1-click interview requests.
+
+            </p>
+
+          </div>
+
+
+
+          <div class="flex flex-wrap sm:flex-nowrap gap-2.5 shrink-0">
+
+            <button id="btnSwitchToJobsHero" class="touch-press px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-semibold transition flex items-center gap-2">
+
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+
+              <span>Explore Tech Openings</span>
+
+            </button>
+
+            <button id="btnOpenScheduleModal" class="touch-press px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-md shadow-cyan-500/20 transition flex items-center gap-2">
+
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+
+              <span>Book New Slot</span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Interview Quick Stats -->
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+
+          <span class="text-[11px] text-slate-400 block">Upcoming Interviews</span>
+
+          <span id="statActiveCount" class="text-xl font-bold text-white mt-1 block">2 Confirmed</span>
+
+        </div>
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+
+          <span class="text-[11px] text-emerald-400 block">Interview Status</span>
+
+          <span class="text-xl font-bold text-emerald-300 mt-1 block">Active</span>
+
+        </div>
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+
+          <span class="text-[11px] text-cyan-400 block">Next Round</span>
+
+          <span class="text-xl font-bold text-cyan-300 mt-1 block truncate">Tomorrow 11:30 AM</span>
+
+        </div>
+
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+
+          <span class="text-[11px] text-purple-400 block">Openings Matched</span>
+
+          <span class="text-xl font-bold text-purple-300 mt-1 block">10 Live Roles</span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Active Scheduled Interviews List -->
+
+      <div class="space-y-3">
+
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+
+          <h2 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+
+            Your Confirmed Technical Rounds
+
+          </h2>
+
+          <span class="text-xs text-slate-400">Safe Overlap Conflict Prevention Active</span>
+
+        </div>
+
+
+
+        <div id="interviewsListContainer" class="space-y-3">
+
+          <!-- Rendered via JS -->
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Special Feature Banner: Smart Job Opening Bridge -->
+
+      <div class="rounded-xl bg-gradient-to-r from-blue-950/40 via-indigo-950/40 to-slate-900 border border-blue-900/50 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+        <div class="space-y-1">
+
+          <div class="flex items-center gap-2">
+
+            <span class="px-2 py-0.5 rounded-md bg-cyan-950 border border-cyan-800 text-cyan-300 text-[10px] font-bold uppercase tracking-wider">Special Feature</span>
+
+            <h3 class="text-sm font-bold text-white">Looking for More Opportunities?</h3>
+
+          </div>
+
+          <p class="text-xs text-slate-300">
+
+            Browse verified openings across .NET, Java, Python/AI, Fullstack, DevOps, QA, and Data. Click <strong class="text-cyan-300">"Book Interview for this Role"</strong> to link any job directly to your schedule!
+
+          </p>
+
+        </div>
+
+        <button id="btnJumpToJobsBanner" class="touch-press shrink-0 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 transition flex items-center gap-1.5 self-start sm:self-auto">
+
+          <span>Explore All 10 Roles</span>
+
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+
+        </button>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- ============================================================= -->
+
+    <!-- VIEW 2: EXPLORE JOB OPENINGS ACROSS ALL TECHNOLOGIES          -->
+
+    <!-- ============================================================= -->
+
+    <div id="viewJobs" class="space-y-5 hidden">
+
+      
+
+      <!-- Section Title & Reassurance Badge -->
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+
+        <div>
+
+          <h2 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+
+            Multi-Technology Job Openings
+
+            <span id="jobsCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800 font-bold">10 Roles</span>
+
+          </h2>
+
+          <p class="text-xs text-slate-400">Click "Book Interview for this Role" on any card to automatically pre-fill your interview schedule.</p>
+
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+
+          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+
+            📱 100% Android, iOS & Desktop Tested
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Technology Track Filter Buttons (Mobile-Scrollable) -->
+
+      <div class="space-y-1.5">
+
+        <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Filter by Candidate Track:</span>
+
+        <div class="flex items-center gap-2 overflow-x-auto custom-scroll pb-2">
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition border bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20" data-track="ALL">
+
+            All Technologies (10)
+
+          </button>
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800" data-track="dotnet">
+
+            .NET & C# (3)
+
+          </button>
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800" data-track="java">
+
+            Java & Spring (2)
+
+          </button>
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800" data-track="python">
+
+            Python & AI (1)
+
+          </button>
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800" data-track="frontend">
+
+            React & Fullstack (1)
+
+          </button>
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800" data-track="devops">
+
+            Cloud & DevOps (1)
+
+          </button>
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800" data-track="qa">
+
+            QA & Automation (1)
+
+          </button>
+
+          <button class="job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800" data-track="data">
+
+            Data Engineering (1)
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Search & Filters -->
+
+      <div class="bg-slate-900 rounded-xl border border-slate-800 p-4 space-y-3">
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+
+          <div class="sm:col-span-2 relative">
+
+            <input id="jobSearchInput" type="text" placeholder="Search by role, company, or skills (e.g. C#, Kafka, Azure, Python)..." class="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+
+            <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+
+          </div>
+
+
+
+          <div>
+
+            <select id="jobExpSelect" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+
+              <option value="ALL">All Experience Levels</option>
+
+              <option value="JUNIOR">Junior (0 - 2 Years)</option>
+
+              <option value="MID">Mid-Level (3 - 5 Years)</option>
+
+              <option value="SENIOR">Senior (5+ Years)</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
+
+          <div class="flex items-center gap-2">
+
+            <span class="text-slate-400">Work Mode:</span>
+
+            <select id="jobModeSelect" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-200 focus:outline-none focus:border-cyan-500">
+
+              <option value="ALL">All Modes</option>
+
+              <option value="Remote">Remote Only</option>
+
+              <option value="Hybrid">Hybrid</option>
+
+              <option value="On-site">On-site</option>
+
+            </select>
+
+          </div>
+
+          <button id="btnResetJobFilters" class="text-slate-400 hover:text-cyan-400 text-xs transition">
+
+            Reset Filters
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Job Cards Grid -->
+
+      <div id="integratedJobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <!-- Rendered via JS -->
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- ============================================================= -->
+
+    <!-- VIEW 3: SCHEDULE NEW INTERVIEW FORM                           -->
+
+    <!-- ============================================================= -->
+
+    <div id="viewBookNew" class="space-y-5 hidden">
+
+      
+
+      <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 sm:p-7 max-w-2xl mx-auto shadow-xl space-y-5">
+
+        
+
+        <div class="border-b border-slate-800 pb-3">
+
+          <span class="px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">Fast Booking</span>
+
+          <h2 class="text-lg sm:text-xl font-bold text-white mt-1">Schedule Candidate Technical Round</h2>
+
+          <p class="text-xs text-slate-400">Select your technology track, preferred date & time slot. Conflict detection will automatically verify slot availability.</p>
+
+        </div>
+
+
+
+        <form id="scheduleInterviewForm" class="space-y-4">
+
+          
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <div>
+
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Candidate Full Name *</label>
+
+              <input id="formCandidateName" type="text" required placeholder="e.g. Kiran Kumar" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+
+            </div>
+
+
+
+            <div>
+
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address *</label>
+
+              <input id="formCandidateEmail" type="email" required placeholder="kiran@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+
+            </div>
+
+          </div>
+
+
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <div>
+
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Target Technology Track *</label>
+
+              <select id="formTechTrack" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+
+                <option value="dotnet">.NET & C# Stack</option>
+
+                <option value="java">Java & Spring Boot</option>
+
+                <option value="python">Python & Generative AI</option>
+
+                <option value="frontend">React & Fullstack</option>
+
+                <option value="devops">Cloud & DevOps</option>
+
+                <option value="qa">QA Automation</option>
+
+                <option value="data">Data Engineering</option>
+
+              </select>
+
+            </div>
+
+
+
+            <div>
+
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Target Job Title / Role *</label>
+
+              <input id="formJobRole" type="text" required value="Senior .NET Core & Microservices Architect" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+
+            </div>
+
+          </div>
+
+
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <div>
+
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Preferred Date *</label>
+
+              <input id="formDate" type="date" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+
+            </div>
+
+
+
+            <div>
+
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Preferred Time Slot *</label>
+
+              <select id="formTimeSlot" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+
+                <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+
+                <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+
+                <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+
+                <option value="04:00 PM - 05:00 PM">04:00 PM - 05:00 PM</option>
+
+                <option value="06:00 PM - 07:00 PM">06:00 PM - 07:00 PM</option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+
+          <div>
+
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Interview Format *</label>
+
+            <div class="grid grid-cols-2 gap-3">
+
+              <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950 border border-slate-700 text-xs cursor-pointer">
+
+                <input type="radio" name="formMode" value="Google Meet (Online)" checked class="text-cyan-500 focus:ring-0">
+
+                <span>Google Meet (Online)</span>
+
+              </label>
+
+              <label class="flex items-center gap-2 p-2.5 rounded-lg bg-slate-950 border border-slate-700 text-xs cursor-pointer">
+
+                <input type="radio" name="formMode" value="Office In-Person" class="text-cyan-500 focus:ring-0">
+
+                <span>In-Person at Office</span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="pt-3 flex items-center justify-end gap-3 border-t border-slate-800">
+
+            <button type="button" id="btnCancelBooking" class="touch-press px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition">
+
+              Cancel
+
+            </button>
+
+            <button type="submit" class="touch-press px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 transition flex items-center gap-2">
+
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+
+              <span>Confirm & Lock Interview Slot</span>
+
+            </button>
+
+          </div>
+
+
+
+        </form>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  &lt;/main&gt;
+
+
+
+  &lt;!-- Job Preparation &amp; Details Modal --&gt;
+
+  &lt;div id=&quot;jobPrepModal&quot; class=&quot;fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4&quot;&gt;
+
+    &lt;div class=&quot;bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden&quot;&gt;
+
+      
+
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+
+        <div>
+
+          <span id="modalTrackBadge" class="text-[10px] font-semibold px-2 py-0.5 rounded-full border mb-1 inline-block">Track</span>
+
+          <h3 id="modalJobTitle" class="font-bold text-white text-base">Job Title</h3>
+
+          <p id="modalJobCompany" class="text-xs text-slate-400">Company Name</p>
+
+        </div>
+
+        <button id="btnClosePrepModal" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm transition">
+
+          ✕
+
+        </button>
+
+      </div>
+
+
+
+      <div class="p-6 overflow-y-auto custom-scroll space-y-4 flex-1 text-xs">
+
+        
+
+        <div class="grid grid-cols-3 gap-2 text-center">
+
+          <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+
+            <span class="text-slate-500 block text-[10px]">Salary</span>
+
+            <span id="modalJobSalary" class="font-bold text-emerald-400">₹26 - ₹36 LPA</span>
+
+          </div>
+
+          <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+
+            <span class="text-slate-500 block text-[10px]">Experience</span>
+
+            <span id="modalJobExp" class="font-bold text-slate-200">5 - 8 Yrs</span>
+
+          </div>
+
+          <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+
+            <span class="text-slate-500 block text-[10px]">Location</span>
+
+            <span id="modalJobLoc" class="font-bold text-cyan-300">Bangalore</span>
+
+          </div>
+
+        </div>
+
+
+
+        <div>
+
+          <h4 class="font-semibold text-slate-200 mb-1">Role Description:</h4>
+
+          <p id="modalJobDesc" class="text-slate-300 leading-relaxed bg-slate-950 p-3 rounded-lg border border-slate-800"></p>
+
+        </div>
+
+
+
+        <div class="bg-blue-950/30 border border-blue-900/60 p-3.5 rounded-xl space-y-2">
+
+          <div class="flex items-center gap-1.5 text-blue-300 font-bold text-xs">
+
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+
+            <span>Interview Technical Topics to Prepare:</span>
+
+          </div>
+
+          <div id="modalPrepList" class="space-y-1 text-slate-300">
+
+            <!-- Dynamic Topics -->
+
+          </div>
+
+        </div>
+
+
+
+        <div>
+
+          <h4 class="font-semibold text-slate-200 mb-1.5">Required Skills:</h4>
+
+          <div id="modalSkills" class="flex flex-wrap gap-1.5">
+
+            <!-- Dynamic Skills -->
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <div class="px-6 py-3 border-t border-slate-800 bg-slate-950 flex items-center justify-between">
+
+        <button id="btnClosePrepModalFooter" class="touch-press px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition">
+
+          Close
+
+        </button>
+
+        <button id="btnModalBookForThisRole" class="touch-press px-5 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition flex items-center gap-1.5 shadow-md shadow-cyan-500/20">
+
+          <span>Book Interview for this Role</span>
+
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+
+        </button>
+
+      </div>
+
+
+
+    </div>
+
+  &lt;/div&gt;
+
+
+
+  &lt;!-- Toast Notification (iOS/Android compatible floating snackbar) --&gt;
+
+  &lt;div id=&quot;toast&quot; class=&quot;fixed bottom-6 right-6 left-6 sm:left-auto sm:max-w-md z-50 bg-slate-900/95 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 backdrop-blur-md&quot;&gt;
+
+    &lt;div id=&quot;toastDot&quot; class=&quot;w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0&quot;&gt;&lt;/div&gt;
+
+    &lt;span id=&quot;toastMsg&quot; class=&quot;text-xs font-medium flex-1&quot;&gt;Notification&lt;/span&gt;
+
+  &lt;/div&gt;
+
+
+
+  &lt;script&gt;
+
+    // State
+
+    const ALL_JOBS = [
+
+  {
+
+    &quot;id&quot;: &quot;net-01&quot;,
+
+    &quot;track&quot;: &quot;dotnet&quot;,
+
+    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+
+    &quot;trackColor&quot;: &quot;text-cyan-400 bg-cyan-950/60 border-cyan-800&quot;,
+
+    &quot;title&quot;: &quot;Senior .NET Core &amp; Microservices Architect&quot;,
+
+    &quot;company&quot;: &quot;Microsoft Solutions Partner&quot;,
+
+    &quot;companyInitial&quot;: &quot;M&quot;,
+
+    &quot;companyColor&quot;: &quot;from-blue-600 to-indigo-600&quot;,
+
+    &quot;location&quot;: &quot;Bangalore, India&quot;,
+
+    &quot;locationCode&quot;: &quot;BLR&quot;,
+
+    &quot;workMode&quot;: &quot;Hybrid&quot;,
+
+    &quot;experience&quot;: &quot;5 - 8 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+
+    &quot;salary&quot;: &quot;\u20b926 - \u20b936 LPA&quot;,
+
+    &quot;salaryMin&quot;: 26,
+
+    &quot;skills&quot;: [
+
+      &quot;C#&quot;,
+
+      &quot;.NET 8&quot;,
+
+      &quot;ASP.NET Core&quot;,
+
+      &quot;Microservices&quot;,
+
+      &quot;Azure&quot;,
+
+      &quot;Docker&quot;,
+
+      &quot;SQL Server&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;C# Asynchronous Concurrency&quot;,
+
+      &quot;ASP.NET Core Middleware &amp; DI&quot;,
+
+      &quot;Microservices Distributed Transactions&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Microsoft Enterprise Portal&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://careers.microsoft.com&quot;,
+
+    &quot;postedDate&quot;: &quot;1 day ago&quot;,
+
+    &quot;description&quot;: &quot;Design and build enterprise distributed cloud microservices. Deep expertise required in C#, ASP.NET Core, Entity Framework Core, Azure Service Bus, and container orchestration.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;net-02&quot;,
+
+    &quot;track&quot;: &quot;dotnet&quot;,
+
+    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+
+    &quot;trackColor&quot;: &quot;text-cyan-400 bg-cyan-950/60 border-cyan-800&quot;,
+
+    &quot;title&quot;: &quot;Fullstack .NET Developer (C# + React)&quot;,
+
+    &quot;company&quot;: &quot;Fintech Dynamics&quot;,
+
+    &quot;companyInitial&quot;: &quot;F&quot;,
+
+    &quot;companyColor&quot;: &quot;from-emerald-600 to-teal-600&quot;,
+
+    &quot;location&quot;: &quot;Remote (India)&quot;,
+
+    &quot;locationCode&quot;: &quot;REMOTE&quot;,
+
+    &quot;workMode&quot;: &quot;Remote&quot;,
+
+    &quot;experience&quot;: &quot;3 - 5 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;MID&quot;,
+
+    &quot;salary&quot;: &quot;\u20b916 - \u20b924 LPA&quot;,
+
+    &quot;salaryMin&quot;: 16,
+
+    &quot;skills&quot;: [
+
+      &quot;C#&quot;,
+
+      &quot;ASP.NET Core&quot;,
+
+      &quot;React&quot;,
+
+      &quot;TypeScript&quot;,
+
+      &quot;EF Core&quot;,
+
+      &quot;PostgreSQL&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;REST API Design &amp; WebSockets&quot;,
+
+      &quot;React Hooks &amp; State Management&quot;,
+
+      &quot;Entity Framework Query Optimization&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Lever ATS Feed&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://jobs.lever.co&quot;,
+
+    &quot;postedDate&quot;: &quot;2 days ago&quot;,
+
+    &quot;description&quot;: &quot;Build high-throughput transactional payment systems using C# and ASP.NET Core Web APIs on the backend paired with modern React and TypeScript on the frontend.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;net-03&quot;,
+
+    &quot;track&quot;: &quot;dotnet&quot;,
+
+    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+
+    &quot;trackColor&quot;: &quot;text-cyan-400 bg-cyan-950/60 border-cyan-800&quot;,
+
+    &quot;title&quot;: &quot;Junior C# / .NET Software Engineer&quot;,
+
+    &quot;company&quot;: &quot;CloudTech Innovations&quot;,
+
+    &quot;companyInitial&quot;: &quot;C&quot;,
+
+    &quot;companyColor&quot;: &quot;from-purple-600 to-indigo-600&quot;,
+
+    &quot;location&quot;: &quot;Hyderabad, India&quot;,
+
+    &quot;locationCode&quot;: &quot;HYD&quot;,
+
+    &quot;workMode&quot;: &quot;On-site&quot;,
+
+    &quot;experience&quot;: &quot;0 - 2 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;JUNIOR&quot;,
+
+    &quot;salary&quot;: &quot;\u20b97 - \u20b911 LPA&quot;,
+
+    &quot;salaryMin&quot;: 7,
+
+    &quot;skills&quot;: [
+
+      &quot;C#&quot;,
+
+      &quot;.NET 8&quot;,
+
+      &quot;OOP&quot;,
+
+      &quot;SQL Server&quot;,
+
+      &quot;Clean Architecture&quot;,
+
+      &quot;Git&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;OOP Principles &amp; Solid Design&quot;,
+
+      &quot;LINQ &amp; Collections in C#&quot;,
+
+      &quot;Basic SQL Indexing and Joins&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Greenhouse ATS&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://boards.greenhouse.io&quot;,
+
+    &quot;postedDate&quot;: &quot;Just now&quot;,
+
+    &quot;description&quot;: &quot;Exciting entry-level position for enthusiastic developers. Work alongside senior engineers building clean C# .NET APIs, writing unit tests, and optimizing database queries.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;java-01&quot;,
+
+    &quot;track&quot;: &quot;java&quot;,
+
+    &quot;trackName&quot;: &quot;Java &amp; Spring&quot;,
+
+    &quot;trackColor&quot;: &quot;text-amber-400 bg-amber-950/60 border-amber-800&quot;,
+
+    &quot;title&quot;: &quot;Senior Java Spring Boot Microservices Engineer&quot;,
+
+    &quot;company&quot;: &quot;Infosys Digital Labs&quot;,
+
+    &quot;companyInitial&quot;: &quot;I&quot;,
+
+    &quot;companyColor&quot;: &quot;from-amber-600 to-orange-600&quot;,
+
+    &quot;location&quot;: &quot;Pune, India&quot;,
+
+    &quot;locationCode&quot;: &quot;PUN&quot;,
+
+    &quot;workMode&quot;: &quot;Hybrid&quot;,
+
+    &quot;experience&quot;: &quot;5 - 8 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+
+    &quot;salary&quot;: &quot;\u20b922 - \u20b932 LPA&quot;,
+
+    &quot;salaryMin&quot;: 22,
+
+    &quot;skills&quot;: [
+
+      &quot;Java 17&quot;,
+
+      &quot;Spring Boot&quot;,
+
+      &quot;Hibernate&quot;,
+
+      &quot;Kafka&quot;,
+
+      &quot;Microservices&quot;,
+
+      &quot;PostgreSQL&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;Spring Boot Auto-configuration&quot;,
+
+      &quot;Kafka Partitioning &amp; Consumer Groups&quot;,
+
+      &quot;JVM Memory Management &amp; Garbage Collection&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Infosys Career Portal&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://infosys.com/careers&quot;,
+
+    &quot;postedDate&quot;: &quot;1 day ago&quot;,
+
+    &quot;description&quot;: &quot;Architect and deploy high-availability banking microservices using Java 17, Spring Boot, Spring Cloud, Kafka streaming, and distributed SQL.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;java-02&quot;,
+
+    &quot;track&quot;: &quot;java&quot;,
+
+    &quot;trackName&quot;: &quot;Java &amp; Spring&quot;,
+
+    &quot;trackColor&quot;: &quot;text-amber-400 bg-amber-950/60 border-amber-800&quot;,
+
+    &quot;title&quot;: &quot;Java Backend Developer (Spring Boot + AWS)&quot;,
+
+    &quot;company&quot;: &quot;Accenture Technology&quot;,
+
+    &quot;companyInitial&quot;: &quot;A&quot;,
+
+    &quot;companyColor&quot;: &quot;from-orange-600 to-amber-700&quot;,
+
+    &quot;location&quot;: &quot;Bangalore, India&quot;,
+
+    &quot;locationCode&quot;: &quot;BLR&quot;,
+
+    &quot;workMode&quot;: &quot;Hybrid&quot;,
+
+    &quot;experience&quot;: &quot;3 - 5 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;MID&quot;,
+
+    &quot;salary&quot;: &quot;\u20b915 - \u20b923 LPA&quot;,
+
+    &quot;salaryMin&quot;: 15,
+
+    &quot;skills&quot;: [
+
+      &quot;Java&quot;,
+
+      &quot;Spring Boot&quot;,
+
+      &quot;REST APIs&quot;,
+
+      &quot;AWS ECS&quot;,
+
+      &quot;MySQL&quot;,
+
+      &quot;Docker&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;Spring Security with JWT&quot;,
+
+      &quot;Docker Containerization&quot;,
+
+      &quot;AWS ECS Deployment Patterns&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Corporate Portal&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://accenture.com&quot;,
+
+    &quot;postedDate&quot;: &quot;3 days ago&quot;,
+
+    &quot;description&quot;: &quot;Build scalable cloud-native backend services using Spring Boot and AWS. Involves Docker containerization, REST API design, and CI/CD automation.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;py-01&quot;,
+
+    &quot;track&quot;: &quot;python&quot;,
+
+    &quot;trackName&quot;: &quot;Python &amp; AI&quot;,
+
+    &quot;trackColor&quot;: &quot;text-emerald-400 bg-emerald-950/60 border-emerald-800&quot;,
+
+    &quot;title&quot;: &quot;AI / ML Engineer (Python + LangChain + LLMs)&quot;,
+
+    &quot;company&quot;: &quot;Cognitive AI Labs&quot;,
+
+    &quot;companyInitial&quot;: &quot;C&quot;,
+
+    &quot;companyColor&quot;: &quot;from-emerald-600 to-teal-700&quot;,
+
+    &quot;location&quot;: &quot;Remote (India)&quot;,
+
+    &quot;locationCode&quot;: &quot;REMOTE&quot;,
+
+    &quot;workMode&quot;: &quot;Remote&quot;,
+
+    &quot;experience&quot;: &quot;3 - 6 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;MID&quot;,
+
+    &quot;salary&quot;: &quot;\u20b922 - \u20b935 LPA&quot;,
+
+    &quot;salaryMin&quot;: 22,
+
+    &quot;skills&quot;: [
+
+      &quot;Python&quot;,
+
+      &quot;FastAPI&quot;,
+
+      &quot;LangChain&quot;,
+
+      &quot;OpenAI / LLMs&quot;,
+
+      &quot;PyTorch&quot;,
+
+      &quot;Vector DBs&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;Retrieval-Augmented Generation (RAG)&quot;,
+
+      &quot;Embeddings &amp; Vector Cosine Similarity&quot;,
+
+      &quot;FastAPI Asynchronous Routing&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Greenhouse ATS&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://boards.greenhouse.io&quot;,
+
+    &quot;postedDate&quot;: &quot;2 days ago&quot;,
+
+    &quot;description&quot;: &quot;Develop generative AI workflows, RAG systems, and autonomous agent pipelines using Python, FastAPI, Pinecone/Chroma vector stores, and PyTorch.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;front-01&quot;,
+
+    &quot;track&quot;: &quot;frontend&quot;,
+
+    &quot;trackName&quot;: &quot;React &amp; Fullstack&quot;,
+
+    &quot;trackColor&quot;: &quot;text-sky-400 bg-sky-950/60 border-sky-800&quot;,
+
+    &quot;title&quot;: &quot;Senior Fullstack Engineer (React + Node.js)&quot;,
+
+    &quot;company&quot;: &quot;Nexus Web Systems&quot;,
+
+    &quot;companyInitial&quot;: &quot;N&quot;,
+
+    &quot;companyColor&quot;: &quot;from-sky-600 to-cyan-600&quot;,
+
+    &quot;location&quot;: &quot;Bangalore, India&quot;,
+
+    &quot;locationCode&quot;: &quot;BLR&quot;,
+
+    &quot;workMode&quot;: &quot;Hybrid&quot;,
+
+    &quot;experience&quot;: &quot;4 - 7 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+
+    &quot;salary&quot;: &quot;\u20b922 - \u20b930 LPA&quot;,
+
+    &quot;salaryMin&quot;: 22,
+
+    &quot;skills&quot;: [
+
+      &quot;React&quot;,
+
+      &quot;Node.js&quot;,
+
+      &quot;TypeScript&quot;,
+
+      &quot;Next.js&quot;,
+
+      &quot;Tailwind CSS&quot;,
+
+      &quot;MongoDB&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;Server-Side Rendering (SSR) in Next.js&quot;,
+
+      &quot;Event Loop &amp; Node.js Concurrency&quot;,
+
+      &quot;TypeScript Advanced Generics&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Adzuna Job Board&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://adzuna.com&quot;,
+
+    &quot;postedDate&quot;: &quot;1 day ago&quot;,
+
+    &quot;description&quot;: &quot;Build high-conversion customer web portals using Next.js 14, TypeScript, and micro-frontends backed by Node.js GraphQL and REST services.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;devops-01&quot;,
+
+    &quot;track&quot;: &quot;devops&quot;,
+
+    &quot;trackName&quot;: &quot;Cloud &amp; DevOps&quot;,
+
+    &quot;trackColor&quot;: &quot;text-indigo-400 bg-indigo-950/60 border-indigo-800&quot;,
+
+    &quot;title&quot;: &quot;DevOps &amp; Cloud Infrastructure Engineer (AWS / K8s)&quot;,
+
+    &quot;company&quot;: &quot;CloudScale Global&quot;,
+
+    &quot;companyInitial&quot;: &quot;C&quot;,
+
+    &quot;companyColor&quot;: &quot;from-indigo-600 to-purple-700&quot;,
+
+    &quot;location&quot;: &quot;Remote (India)&quot;,
+
+    &quot;locationCode&quot;: &quot;REMOTE&quot;,
+
+    &quot;workMode&quot;: &quot;Remote&quot;,
+
+    &quot;experience&quot;: &quot;4 - 8 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;SENIOR&quot;,
+
+    &quot;salary&quot;: &quot;\u20b925 - \u20b936 LPA&quot;,
+
+    &quot;salaryMin&quot;: 25,
+
+    &quot;skills&quot;: [
+
+      &quot;AWS&quot;,
+
+      &quot;Kubernetes&quot;,
+
+      &quot;Docker&quot;,
+
+      &quot;Terraform&quot;,
+
+      &quot;GitHub Actions&quot;,
+
+      &quot;Prometheus&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;Kubernetes Ingress &amp; StatefulSets&quot;,
+
+      &quot;Terraform Infrastructure as Code Modules&quot;,
+
+      &quot;Zero-downtime Blue/Green Deployments&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Greenhouse ATS&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://boards.greenhouse.io&quot;,
+
+    &quot;postedDate&quot;: &quot;2 days ago&quot;,
+
+    &quot;description&quot;: &quot;Manage multi-region AWS cloud clusters using Kubernetes (EKS) and Terraform. Implement automated zero-downtime CI/CD deployment pipelines.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;qa-01&quot;,
+
+    &quot;track&quot;: &quot;qa&quot;,
+
+    &quot;trackName&quot;: &quot;QA &amp; Automation&quot;,
+
+    &quot;trackColor&quot;: &quot;text-pink-400 bg-pink-950/60 border-pink-800&quot;,
+
+    &quot;title&quot;: &quot;QA Automation Engineer (Selenium + Java/Python)&quot;,
+
+    &quot;company&quot;: &quot;QualityFirst Systems&quot;,
+
+    &quot;companyInitial&quot;: &quot;Q&quot;,
+
+    &quot;companyColor&quot;: &quot;from-pink-600 to-rose-700&quot;,
+
+    &quot;location&quot;: &quot;Pune, India&quot;,
+
+    &quot;locationCode&quot;: &quot;PUN&quot;,
+
+    &quot;workMode&quot;: &quot;Hybrid&quot;,
+
+    &quot;experience&quot;: &quot;3 - 6 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;MID&quot;,
+
+    &quot;salary&quot;: &quot;\u20b912 - \u20b918 LPA&quot;,
+
+    &quot;salaryMin&quot;: 12,
+
+    &quot;skills&quot;: [
+
+      &quot;Selenium&quot;,
+
+      &quot;Java&quot;,
+
+      &quot;Python&quot;,
+
+      &quot;TestNG&quot;,
+
+      &quot;Postman / API Testing&quot;,
+
+      &quot;Jira&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;Page Object Model (POM) Design&quot;,
+
+      &quot;Dynamic XPath &amp; Explicit Waits&quot;,
+
+      &quot;API Contract Testing with Postman/RestAssured&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Lever ATS Feed&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://jobs.lever.co&quot;,
+
+    &quot;postedDate&quot;: &quot;3 days ago&quot;,
+
+    &quot;description&quot;: &quot;Build automated UI and regression testing frameworks using Selenium WebDriver and RestAssured. Integrate automated smoke testing into CI/CD pipelines.&quot;
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;data-01&quot;,
+
+    &quot;track&quot;: &quot;data&quot;,
+
+    &quot;trackName&quot;: &quot;Data Engineering&quot;,
+
+    &quot;trackColor&quot;: &quot;text-teal-400 bg-teal-950/60 border-teal-800&quot;,
+
+    &quot;title&quot;: &quot;Data Engineer (SQL + PySpark + Snowflake)&quot;,
+
+    &quot;company&quot;: &quot;Insight Data Dynamics&quot;,
+
+    &quot;companyInitial&quot;: &quot;I&quot;,
+
+    &quot;companyColor&quot;: &quot;from-teal-600 to-emerald-700&quot;,
+
+    &quot;location&quot;: &quot;Hyderabad, India&quot;,
+
+    &quot;locationCode&quot;: &quot;HYD&quot;,
+
+    &quot;workMode&quot;: &quot;Hybrid&quot;,
+
+    &quot;experience&quot;: &quot;3 - 7 Years&quot;,
+
+    &quot;expCategory&quot;: &quot;MID&quot;,
+
+    &quot;salary&quot;: &quot;\u20b918 - \u20b928 LPA&quot;,
+
+    &quot;salaryMin&quot;: 18,
+
+    &quot;skills&quot;: [
+
+      &quot;SQL&quot;,
+
+      &quot;PySpark&quot;,
+
+      &quot;Snowflake&quot;,
+
+      &quot;dbt&quot;,
+
+      &quot;Airflow&quot;,
+
+      &quot;AWS S3&quot;
+
+    ],
+
+    &quot;prepTopics&quot;: [
+
+      &quot;PySpark RDD vs DataFrame Transformations&quot;,
+
+      &quot;Snowflake Clustering &amp; Virtual Warehouses&quot;,
+
+      &quot;Airflow DAG Dependency Orchestration&quot;
+
+    ],
+
+    &quot;source&quot;: &quot;Corporate Career Page&quot;,
+
+    &quot;sourceUrl&quot;: &quot;https://insightdata.io&quot;,
+
+    &quot;postedDate&quot;: &quot;Just now&quot;,
+
+    &quot;description&quot;: &quot;Construct scalable ETL/ELT data pipelines feeding cloud data lakes and analytics marts. Deep proficiency in SQL query tuning, PySpark, and Apache Airflow.&quot;
+
+  }
+
+];
+
+    let interviews = [
+
+  {
+
+    &quot;id&quot;: &quot;int-901&quot;,
+
+    &quot;role&quot;: &quot;Senior .NET Core &amp; Microservices Architect&quot;,
+
+    &quot;company&quot;: &quot;Microsoft Solutions Partner&quot;,
+
+    &quot;track&quot;: &quot;dotnet&quot;,
+
+    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+
+    &quot;candidateName&quot;: &quot;Kiran Kumar&quot;,
+
+    &quot;date&quot;: &quot;Tomorrow, 11:30 AM&quot;,
+
+    &quot;mode&quot;: &quot;Google Meet (Online)&quot;,
+
+    &quot;meetLink&quot;: &quot;https://meet.google.com/abc-defg-hij&quot;,
+
+    &quot;status&quot;: &quot;CONFIRMED&quot;,
+
+    &quot;interviewer&quot;: &quot;Tech Panel Lead (Sr. Architect)&quot;,
+
+    &quot;topics&quot;: [
+
+      &quot;C# Async/Await&quot;,
+
+      &quot;Microservices Design&quot;,
+
+      &quot;Azure Deployment&quot;
+
+    ]
+
+  },
+
+  {
+
+    &quot;id&quot;: &quot;int-902&quot;,
+
+    &quot;role&quot;: &quot;Fullstack .NET Developer (C# + React)&quot;,
+
+    &quot;company&quot;: &quot;Fintech Dynamics&quot;,
+
+    &quot;track&quot;: &quot;dotnet&quot;,
+
+    &quot;trackName&quot;: &quot;.NET &amp; C#&quot;,
+
+    &quot;candidateName&quot;: &quot;Kiran Kumar&quot;,
+
+    &quot;date&quot;: &quot;Nov 12, 02:00 PM&quot;,
+
+    &quot;mode&quot;: &quot;Microsoft Teams&quot;,
+
+    &quot;meetLink&quot;: &quot;https://teams.microsoft.com/l/meetup-join&quot;,
+
+    &quot;status&quot;: &quot;SCHEDULED&quot;,
+
+    &quot;interviewer&quot;: &quot;Engineering Manager&quot;,
+
+    &quot;topics&quot;: [
+
+      &quot;ASP.NET Core Web APIs&quot;,
+
+      &quot;React State Management&quot;,
+
+      &quot;SQL Tuning&quot;
+
+    ]
+
+  }
+
+];
+
+    let activeJobTrack = &#39;ALL&#39;;
+
+    let currentSelectedJob = null;
+
+
+
+    // View Navigation Tabs
+
+    const viewInterviews = document.getElementById(&#39;viewInterviews&#39;);
+
+    const viewJobs = document.getElementById(&#39;viewJobs&#39;);
+
+    const viewBookNew = document.getElementById(&#39;viewBookNew&#39;);
+
+
+
+    const navTabInterviews = document.getElementById(&#39;navTabInterviews&#39;);
+
+    const navTabJobs = document.getElementById(&#39;navTabJobs&#39;);
+
+    const navTabBookNew = document.getElementById(&#39;navTabBookNew&#39;);
+
+
+
+    function switchView(viewName) {
+
+      viewInterviews.classList.toggle(&#39;hidden&#39;, viewName !== &#39;interviews&#39;);
+
+      viewJobs.classList.toggle(&#39;hidden&#39;, viewName !== &#39;jobs&#39;);
+
+      viewBookNew.classList.toggle(&#39;hidden&#39;, viewName !== &#39;book&#39;);
+
+
+
+      // Update Nav Buttons Styling
+
+      const activeClass = &quot;touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20&quot;;
+
+      const inactiveClass = &quot;touch-press flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-800&quot;;
+
+
+
+      navTabInterviews.className = viewName === &#39;interviews&#39; ? activeClass : inactiveClass;
+
+      navTabJobs.className = viewName === &#39;jobs&#39; ? activeClass : inactiveClass;
+
+      navTabBookNew.className = viewName === &#39;book&#39; ? activeClass : inactiveClass;
+
+
+
+      window.scrollTo({ top: 0, behavior: &#39;smooth&#39; });
+
+    }
+
+
+
+    navTabInterviews.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;interviews&#39;));
+
+    navTabJobs.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;jobs&#39;));
+
+    navTabBookNew.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+
+
+
+    document.getElementById(&#39;btnQuickBookNav&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+
+    document.getElementById(&#39;btnOpenScheduleModal&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+
+    document.getElementById(&#39;btnSwitchToJobsHero&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;jobs&#39;));
+
+    document.getElementById(&#39;btnJumpToJobsBanner&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;jobs&#39;));
+
+    document.getElementById(&#39;btnCancelBooking&#39;).addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;interviews&#39;));
+
+
+
+    function showToast(msg, isSuccess = true) {
+
+      const toast = document.getElementById(&#39;toast&#39;);
+
+      const toastMsg = document.getElementById(&#39;toastMsg&#39;);
+
+      const toastDot = document.getElementById(&#39;toastDot&#39;);
+
+      toastMsg.textContent = msg;
+
+      toastDot.className = `w-2.5 h-2.5 rounded-full shrink-0 ${isSuccess ? &#39;bg-cyan-400&#39; : &#39;bg-rose-400&#39;}`;
+
+      toast.classList.remove(&#39;opacity-0&#39;, &#39;pointer-events-none&#39;, &#39;translate-y-4&#39;);
+
+      setTimeout(() =&gt; {
+
+        toast.classList.add(&#39;opacity-0&#39;, &#39;pointer-events-none&#39;, &#39;translate-y-4&#39;);
+
+      }, 3200);
+
+    }
+
+
+
+    // --- RENDER INTERVIEWS SCHEDULE ---
+
+    function renderInterviews() {
+
+      const container = document.getElementById(&#39;interviewsListContainer&#39;);
+
+      document.getElementById(&#39;interviewCountBadge&#39;).textContent = interviews.length;
+
+      document.getElementById(&#39;statActiveCount&#39;).textContent = `${interviews.length} Confirmed`;
+
+
+
+      if (interviews.length === 0) {
+
+        container.innerHTML = `
+
+          &lt;div class=&quot;py-12 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/40&quot;&gt;
+
+            &lt;p class=&quot;text-sm font-semibold text-slate-300&quot;&gt;No scheduled technical rounds&lt;/p&gt;
+
+            &lt;p class=&quot;text-xs text-slate-500 mt-1&quot;&gt;Book a slot or explore open roles to schedule an interview.&lt;/p&gt;
+
+            &lt;button id=&quot;btnEmptyBook&quot; class=&quot;touch-press mt-3 px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs&quot;&gt;
+
+              Book First Interview
+
+            &lt;/button&gt;
+
+          &lt;/div&gt;
+
+        `;
+
+        document.getElementById(&#39;btnEmptyBook&#39;)?.addEventListener(&#39;click&#39;, () =&gt; switchView(&#39;book&#39;));
+
+        return;
+
+      }
+
+
+
+      container.innerHTML = interviews.map(item =&gt; `
+
+        &lt;div class=&quot;bg-slate-900 rounded-xl border border-slate-800 p-4 sm:p-5 hover:border-slate-700 transition shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4&quot;&gt;
+
+          
+
+          &lt;div class=&quot;space-y-2&quot;&gt;
+
+            &lt;div class=&quot;flex items-center gap-2 flex-wrap&quot;&gt;
+
+              &lt;span class=&quot;px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-300 text-[10px] font-bold&quot;&gt;
+
+                ✓ ${item.status}
+
+              &lt;/span&gt;
+
+              &lt;span class=&quot;px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 text-[10px] font-semibold&quot;&gt;
+
+                ${item.trackName}
+
+              &lt;/span&gt;
+
+              &lt;span class=&quot;text-xs text-slate-400 font-medium&quot;&gt;
+
+                ${item.date}
+
+              &lt;/span&gt;
+
+            &lt;/div&gt;
+
+
+
+            &lt;h3 class=&quot;text-sm sm:text-base font-bold text-white&quot;&gt;${item.role}&lt;/h3&gt;
+
+            
+
+            &lt;div class=&quot;text-xs text-slate-400 flex items-center gap-2 flex-wrap&quot;&gt;
+
+              &lt;span&gt;&lt;strong&gt;Company:&lt;/strong&gt; ${item.company}&lt;/span&gt;
+
+              &lt;span&gt;•&lt;/span&gt;
+
+              &lt;span&gt;&lt;strong&gt;Panel:&lt;/strong&gt; ${item.interviewer}&lt;/span&gt;
+
+              &lt;span&gt;•&lt;/span&gt;
+
+              &lt;span class=&quot;text-cyan-400 font-medium&quot;&gt;${item.mode}&lt;/span&gt;
+
+            &lt;/div&gt;
+
+
+
+            &lt;div class=&quot;flex items-center gap-1.5 flex-wrap pt-1&quot;&gt;
+
+              &lt;span class=&quot;text-[10px] text-slate-500&quot;&gt;Key Focus:&lt;/span&gt;
+
+              ${item.topics.map(t =&gt; `&lt;span class=&quot;px-1.5 py-0.5 rounded bg-slate-950 text-slate-300 text-[10px] font-mono border border-slate-800&quot;&gt;${t}&lt;/span&gt;`).join(&#39;&#39;)}
+
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+
+
+
+          &lt;div class=&quot;flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-800 shrink-0&quot;&gt;
+
+            &lt;a href=&quot;${item.meetLink}&quot; target=&quot;_blank&quot; class=&quot;touch-press px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition flex items-center gap-1.5 shadow-md shadow-cyan-500/20&quot;&gt;
+
+              &lt;svg class=&quot;w-3.5 h-3.5&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z&quot;/&gt;&lt;/svg&gt;
+
+              &lt;span&gt;Join Meeting&lt;/span&gt;
+
+            &lt;/a&gt;
+
+            &lt;button class=&quot;btn-reschedule text-xs text-slate-400 hover:text-cyan-300 transition py-1&quot; data-id=&quot;${item.id}&quot;&gt;
+
+              Reschedule Slot
+
+            &lt;/button&gt;
+
+          &lt;/div&gt;
+
+
+
+        &lt;/div&gt;
+
+      `).join(&#39;&#39;);
+
+
+
+      document.querySelectorAll(&#39;.btn-reschedule&#39;).forEach(btn =&gt; {
+
+        btn.addEventListener(&#39;click&#39;, () =&gt; {
+
+          showToast(&quot;Rescheduling mode active: Please select a new time slot in the booking form.&quot;);
+
+          switchView(&#39;book&#39;);
+
+        });
+
+      });
+
+    }
+
+
+
+    // --- RENDER INTEGRATED JOBS GRID ---
+
+    function renderJobs() {
+
+      const query = document.getElementById(&#39;jobSearchInput&#39;).value.toLowerCase().trim();
+
+      const exp = document.getElementById(&#39;jobExpSelect&#39;).value;
+
+      const mode = document.getElementById(&#39;jobModeSelect&#39;).value;
+
+      const container = document.getElementById(&#39;integratedJobsGrid&#39;);
+
+
+
+      let filtered = ALL_JOBS.filter(job =&gt; {
+
+        if (activeJobTrack !== &#39;ALL&#39; &amp;&amp; job.track !== activeJobTrack) return false;
+
+        if (query) {
+
+          const inTitle = job.title.toLowerCase().includes(query);
+
+          const inCompany = job.company.toLowerCase().includes(query);
+
+          const inDesc = job.description.toLowerCase().includes(query);
+
+          const inSkills = job.skills.some(s =&gt; s.toLowerCase().includes(query));
+
+          if (!inTitle &amp;&amp; !inCompany &amp;&amp; !inDesc &amp;&amp; !inSkills) return false;
+
+        }
+
+        if (exp !== &#39;ALL&#39; &amp;&amp; job.expCategory !== exp) return false;
+
+        if (mode !== &#39;ALL&#39; &amp;&amp; job.workMode !== mode) return false;
+
+        return true;
+
+      });
+
+
+
+      document.getElementById(&#39;jobsCountBadge&#39;).textContent = `${filtered.length} Roles`;
+
+
+
+      if (filtered.length === 0) {
+
+        container.innerHTML = `
+
+          &lt;div class=&quot;col-span-full py-12 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/40&quot;&gt;
+
+            &lt;p class=&quot;text-sm font-semibold text-slate-300&quot;&gt;No jobs match your current search&lt;/p&gt;
+
+            &lt;button id=&quot;btnResetSearch&quot; class=&quot;touch-press mt-2 text-xs text-cyan-400 hover:underline&quot;&gt;Clear all search filters&lt;/button&gt;
+
+          &lt;/div&gt;
+
+        `;
+
+        document.getElementById(&#39;btnResetSearch&#39;)?.addEventListener(&#39;click&#39;, resetJobFilters);
+
+        return;
+
+      }
+
+
+
+      container.innerHTML = filtered.map(job =&gt; `
+
+        &lt;div class=&quot;bg-slate-900 rounded-xl border border-slate-800 p-4 sm:p-5 flex flex-col justify-between hover:border-slate-700 transition shadow-lg relative group&quot;&gt;
+
+          
+
+          &lt;div class=&quot;space-y-3&quot;&gt;
+
+            &lt;div class=&quot;flex items-start justify-between gap-2&quot;&gt;
+
+              &lt;div class=&quot;flex items-center gap-3&quot;&gt;
+
+                &lt;div class=&quot;w-10 h-10 rounded-xl bg-gradient-to-tr ${job.companyColor} flex items-center justify-center font-bold text-white text-sm shadow-md shrink-0&quot;&gt;
+
+                  ${job.companyInitial}
+
+                &lt;/div&gt;
+
+                &lt;div&gt;
+
+                  &lt;h4 class=&quot;font-semibold text-white text-sm line-clamp-1 group-hover:text-cyan-300 transition&quot;&gt;${job.title}&lt;/h4&gt;
+
+                  &lt;span class=&quot;text-xs text-slate-400 block&quot;&gt;${job.company}&lt;/span&gt;
+
+                &lt;/div&gt;
+
+              &lt;/div&gt;
+
+              &lt;span class=&quot;shrink-0 px-2 py-0.5 rounded-full border text-[10px] font-semibold ${job.trackColor}&quot;&gt;
+
+                ${job.trackName}
+
+              &lt;/span&gt;
+
+            &lt;/div&gt;
+
+
+
+            &lt;div class=&quot;flex flex-wrap gap-1.5 text-[11px]&quot;&gt;
+
+              &lt;span class=&quot;px-2 py-0.5 rounded bg-slate-800 text-slate-300&quot;&gt;${job.location}&lt;/span&gt;
+
+              &lt;span class=&quot;px-2 py-0.5 rounded bg-slate-800 text-slate-300&quot;&gt;${job.experience}&lt;/span&gt;
+
+              &lt;span class=&quot;px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 font-semibold&quot;&gt;${job.salary}&lt;/span&gt;
+
+            &lt;/div&gt;
+
+
+
+            &lt;p class=&quot;text-xs text-slate-400 line-clamp-2 leading-relaxed&quot;&gt;
+
+              ${job.description}
+
+            &lt;/p&gt;
+
+
+
+            &lt;div class=&quot;flex flex-wrap gap-1 pt-1&quot;&gt;
+
+              ${job.skills.slice(0, 4).map(s =&gt; `&lt;span class=&quot;px-2 py-0.5 rounded bg-slate-950 text-slate-300 border border-slate-800 text-[10px] font-mono&quot;&gt;${s}&lt;/span&gt;`).join(&#39;&#39;)}
+
+              ${job.skills.length &gt; 4 ? `&lt;span class=&quot;text-[10px] text-slate-500 self-center&quot;&gt;+${job.skills.length - 4}&lt;/span&gt;` : &#39;&#39;}
+
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+
+
+
+          &lt;!-- Bottom Action Buttons: Special Feature Integration --&gt;
+
+          &lt;div class=&quot;pt-4 mt-4 border-t border-slate-800/80 flex flex-col gap-2&quot;&gt;
+
+            &lt;button class=&quot;btn-book-this-role touch-press w-full py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/10 transition flex items-center justify-center gap-1.5&quot; data-id=&quot;${job.id}&quot;&gt;
+
+              &lt;svg class=&quot;w-3.5 h-3.5&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z&quot;/&gt;&lt;/svg&gt;
+
+              &lt;span&gt;Book Interview for this Role&lt;/span&gt;
+
+            &lt;/button&gt;
+
+
+
+            &lt;div class=&quot;flex items-center justify-between text-xs pt-1&quot;&gt;
+
+              &lt;span class=&quot;text-[10px] text-slate-500&quot;&gt;${job.source}&lt;/span&gt;
+
+              &lt;button class=&quot;btn-view-prep text-cyan-400 hover:underline text-[11px]&quot; data-id=&quot;${job.id}&quot;&gt;
+
+                View Prep &amp; Details →
+
+              &lt;/button&gt;
+
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+
+
+
+        &lt;/div&gt;
+
+      `).join(&#39;&#39;);
+
+
+
+      // Wire up buttons
+
+      document.querySelectorAll(&#39;.btn-book-this-role&#39;).forEach(btn =&gt; {
+
+        btn.addEventListener(&#39;click&#39;, () =&gt; {
+
+          const job = ALL_JOBS.find(j =&gt; j.id === btn.dataset.id);
+
+          if (job) {
+
+            if (window.trackCandidateEvent) {
+
+              window.trackCandidateEvent(&#39;click_book_from_job&#39;, { job_id: job.id, job_title: job.title, company: job.company, track: job.track });
+
+            }
+
+            prefillAndSwitchToBooking(job);
+
+          }
+
+        });
+
+      });
+
+
+
+      document.querySelectorAll(&#39;.btn-view-prep&#39;).forEach(btn =&gt; {
+
+        btn.addEventListener(&#39;click&#39;, () =&gt; {
+
+          const job = ALL_JOBS.find(j =&gt; j.id === btn.dataset.id);
+
+          if (job) openPrepModal(job);
+
+        });
+
+      });
+
+    }
+
+
+
+    function resetJobFilters() {
+
+      document.getElementById(&#39;jobSearchInput&#39;).value = &#39;&#39;;
+
+      document.getElementById(&#39;jobExpSelect&#39;).value = &#39;ALL&#39;;
+
+      document.getElementById(&#39;jobModeSelect&#39;).value = &#39;ALL&#39;;
+
+      activeJobTrack = &#39;ALL&#39;;
+
+      updateTrackButtonsUI();
+
+      renderJobs();
+
+      showToast(&#39;Filters reset.&#39;);
+
+    }
+
+
+
+    function updateTrackButtonsUI() {
+
+      document.querySelectorAll(&#39;.job-track-btn&#39;).forEach(btn =&gt; {
+
+        if (btn.dataset.track === activeJobTrack) {
+
+          btn.className = &quot;job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition border bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20&quot;;
+
+        } else {
+
+          btn.className = &quot;job-track-btn touch-press px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition border bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-800&quot;;
+
+        }
+
+      });
+
+    }
+
+
+
+    document.querySelectorAll(&#39;.job-track-btn&#39;).forEach(btn =&gt; {
+
+      btn.addEventListener(&#39;click&#39;, () =&gt; {
+
+        activeJobTrack = btn.dataset.track;
+
+        if (window.trackCandidateEvent) {
+
+          window.trackCandidateEvent(&#39;select_tech_track&#39;, { track: activeJobTrack });
+
+        }
+
+        updateTrackButtonsUI();
+
+        renderJobs();
+
+      });
+
+    });
+
+
+
+    document.getElementById(&#39;jobSearchInput&#39;).addEventListener(&#39;input&#39;, () =&gt; {
+
+      renderJobs();
+
+      const q = document.getElementById(&#39;jobSearchInput&#39;).value.trim();
+
+      if (q.length &gt; 2 &amp;&amp; window.trackCandidateEvent) {
+
+        window.trackCandidateEvent(&#39;search_jobs&#39;, { search_term: q });
+
+      }
+
+    });
+
+    document.getElementById(&#39;jobExpSelect&#39;).addEventListener(&#39;change&#39;, renderJobs);
+
+    document.getElementById(&#39;jobModeSelect&#39;).addEventListener(&#39;change&#39;, renderJobs);
+
+    document.getElementById(&#39;btnResetJobFilters&#39;).addEventListener(&#39;click&#39;, resetJobFilters);
+
+
+
+    // --- PRE-FILL FROM JOB OPENING TO INTERVIEW BOOKING (SPECIAL FEATURE) ---
+
+    function prefillAndSwitchToBooking(job) {
+
+      document.getElementById(&#39;formTechTrack&#39;).value = job.track;
+
+      document.getElementById(&#39;formJobRole&#39;).value = `${job.title} (${job.company})`;
+
+      
+
+      // Auto-set date to tomorrow
+
+      const tomorrow = new Date();
+
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      document.getElementById(&#39;formDate&#39;).value = tomorrow.toISOString().split(&#39;T&#39;)[0];
+
+
+
+      switchView(&#39;book&#39;);
+
+      showToast(`Pre-filled interview booking for &quot;${job.title}&quot;! Select your slot.`);
+
+    }
+
+
+
+    // --- MODAL DETAILS &amp; PREPARATION TOPICS ---
+
+    function openPrepModal(job) {
+
+      currentSelectedJob = job;
+
+      document.getElementById(&#39;modalTrackBadge&#39;).textContent = job.trackName;
+
+      document.getElementById(&#39;modalTrackBadge&#39;).className = `text-[10px] font-semibold px-2 py-0.5 rounded-full border mb-1 inline-block ${job.trackColor}`;
+
+      document.getElementById(&#39;modalJobTitle&#39;).textContent = job.title;
+
+      document.getElementById(&#39;modalJobCompany&#39;).textContent = `${job.company} • ${job.location}`;
+
+      document.getElementById(&#39;modalJobSalary&#39;).textContent = job.salary;
+
+      document.getElementById(&#39;modalJobExp&#39;).textContent = job.experience;
+
+      document.getElementById(&#39;modalJobLoc&#39;).textContent = job.location;
+
+      document.getElementById(&#39;modalJobDesc&#39;).textContent = job.description;
+
+
+
+      const prepContainer = document.getElementById(&#39;modalPrepList&#39;);
+
+      prepContainer.innerHTML = job.prepTopics.map((topic, i) =&gt; `
+
+        &lt;div class=&quot;flex items-center gap-2&quot;&gt;
+
+          &lt;span class=&quot;w-4 h-4 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold flex items-center justify-center text-[10px] shrink-0&quot;&gt;${i+1}&lt;/span&gt;
+
+          &lt;span class=&quot;text-xs font-medium text-slate-200&quot;&gt;${topic}&lt;/span&gt;
+
+        &lt;/div&gt;
+
+      `).join(&#39;&#39;);
+
+
+
+      const skillsContainer = document.getElementById(&#39;modalSkills&#39;);
+
+      skillsContainer.innerHTML = job.skills.map(s =&gt; `
+
+        &lt;span class=&quot;px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-cyan-300 font-mono text-[11px]&quot;&gt;
+
+          ✓ ${s}
+
+        &lt;/span&gt;
+
+      `).join(&#39;&#39;);
+
+
+
+      document.getElementById(&#39;jobPrepModal&#39;).classList.remove(&#39;hidden&#39;);
+
+    }
+
+
+
+    document.getElementById(&#39;btnClosePrepModal&#39;).addEventListener(&#39;click&#39;, () =&gt; {
+
+      document.getElementById(&#39;jobPrepModal&#39;).classList.add(&#39;hidden&#39;);
+
+    });
+
+    document.getElementById(&#39;btnClosePrepModalFooter&#39;).addEventListener(&#39;click&#39;, () =&gt; {
+
+      document.getElementById(&#39;jobPrepModal&#39;).classList.add(&#39;hidden&#39;);
+
+    });
+
+    document.getElementById(&#39;btnModalBookForThisRole&#39;).addEventListener(&#39;click&#39;, () =&gt; {
+
+      document.getElementById(&#39;jobPrepModal&#39;).classList.add(&#39;hidden&#39;);
+
+      if (currentSelectedJob) prefillAndSwitchToBooking(currentSelectedJob);
+
+    });
+
+
+
+    // --- HANDLE NEW INTERVIEW SUBMISSION (WITH SAFE OVERLAP CHECK) ---
+
+    document.getElementById(&#39;scheduleInterviewForm&#39;).addEventListener(&#39;submit&#39;, (e) =&gt; {
+
+      e.preventDefault();
+
+      
+
+      const candidateName = document.getElementById(&#39;formCandidateName&#39;).value.trim();
+
+      const role = document.getElementById(&#39;formJobRole&#39;).value.trim();
+
+      const track = document.getElementById(&#39;formTechTrack&#39;).value;
+
+      const dateVal = document.getElementById(&#39;formDate&#39;).value;
+
+      const timeSlot = document.getElementById(&#39;formTimeSlot&#39;).value;
+
+      const mode = document.querySelector(&#39;input[name=&quot;formMode&quot;]:checked&#39;).value;
+
+
+
+      const trackObj = ALL_JOBS.find(j =&gt; j.track === track) || { trackName: &quot;.NET &amp; C#&quot; };
+
+
+
+      // Conflict Check: Check if an identical time slot already exists
+
+      const dateFormatted = `${dateVal}, ${timeSlot}`;
+
+      const isOverlap = interviews.some(i =&gt; i.date === dateFormatted);
+
+
+
+      if (isOverlap) {
+
+        showToast(&quot;Slot conflict detected! That exact time slot is already booked. Please choose a different slot.&quot;, false);
+
+        return;
+
+      }
+
+
+
+      // Add new interview record
+
+      const newInterview = {
+
+        id: `int-${Date.now().toString().slice(-4)}`,
+
+        role: role,
+
+        company: &quot;SK Tech Client Partner&quot;,
+
+        track: track,
+
+        trackName: trackObj.trackName,
+
+        candidateName: candidateName,
+
+        date: dateFormatted,
+
+        mode: mode,
+
+        meetLink: &quot;https://meet.google.com/sk-tech-interview&quot;,
+
+        status: &quot;CONFIRMED&quot;,
+
+        interviewer: &quot;Technical Evaluation Board&quot;,
+
+        topics: [&quot;System Design&quot;, &quot;Core Coding Round&quot;, &quot;Scenario Problem Solving&quot;]
+
+      };
+
+
+
+      interviews.unshift(newInterview);
+
+      if (window.trackCandidateEvent) {
+
+        window.trackCandidateEvent(&#39;schedule_interview_confirmed&#39;, {
+
+          role: role,
+
+          track: track,
+
+          interview_date: dateFormatted,
+
+          interview_mode: mode
+
+        });
+
+      }
+
+      renderInterviews();
+
+      switchView(&#39;interviews&#39;);
+
+      showToast(`Interview successfully booked for ${candidateName} on ${dateFormatted}!`);
+
+
+
+      // Reset form
+
+      document.getElementById(&#39;scheduleInterviewForm&#39;).reset();
+
+    });
+
+
+
+    // Set default date input to tomorrow on load
+
+    const defaultDate = new Date();
+
+    defaultDate.setDate(defaultDate.getDate() + 1);
+
+    document.getElementById(&#39;formDate&#39;).value = defaultDate.toISOString().split(&#39;T&#39;)[0];
+
+
+
+    // Initial render
+
+    renderInterviews();
+
+    renderJobs();
+
+  &lt;/script&gt;
+
+
+
+  &lt;!-- Live Google Analytics Event Inspector (Zero Risk Feedback) --&gt;
+
+  &lt;div class=&quot;fixed bottom-4 left-4 z-40 hidden sm:block&quot;&gt;
+
+    &lt;div id=&quot;gaDrawer&quot; class=&quot;bg-slate-900/95 border border-slate-700/80 rounded-2xl p-3 shadow-2xl backdrop-blur-md max-w-xs transition-all text-xs space-y-2&quot;&gt;
+
+      &lt;div class=&quot;flex items-center justify-between border-b border-slate-800 pb-2&quot;&gt;
+
+        &lt;div class=&quot;flex items-center gap-2&quot;&gt;
+
+          &lt;span class=&quot;w-2 h-2 rounded-full bg-emerald-400 animate-pulse&quot;&gt;&lt;/span&gt;
+
+          &lt;span class=&quot;font-bold text-white text-[11px]&quot;&gt;Google Analytics 4 Active&lt;/span&gt;
+
+        &lt;/div&gt;
+
+        &lt;button id=&quot;btnToggleGaLogs&quot; class=&quot;text-slate-400 hover:text-white text-[10px]&quot;&gt;Minimize&lt;/button&gt;
+
+      &lt;/div&gt;
+
+      &lt;div id=&quot;gaLogsBody&quot; class=&quot;space-y-1.5 max-h-28 overflow-y-auto custom-scroll text-[10px] font-mono text-slate-300&quot;&gt;
+
+        &lt;div class=&quot;text-slate-500&quot;&gt;Listening for candidate interactions...&lt;/div&gt;
+
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+
+
+  &lt;script&gt;
+
+    // Live UI logger for Google Analytics events
+
+    window.recordAnalyticsLog = function(name, params) {
+
+      const logs = document.getElementById(&#39;gaLogsBody&#39;);
+
+      if (!logs) return;
+
+      const row = document.createElement(&#39;div&#39;);
+
+      row.className = &quot;flex items-start gap-1 text-emerald-300&quot;;
+
+      const time = new Date().toTimeString().split(&#39; &#39;)[0];
+
+      row.innerHTML = `&lt;span class=&quot;text-slate-500&quot;&gt;${time}&lt;/span&gt; &lt;strong&gt;${name}&lt;/strong&gt;`;
+
+      logs.prepend(row);
+
+    };
+
+
+
+    document.getElementById(&#39;btnToggleGaLogs&#39;)?.addEventListener(&#39;click&#39;, () =&gt; {
+
+      const b = document.getElementById(&#39;gaLogsBody&#39;);
+
+      const btn = document.getElementById(&#39;btnToggleGaLogs&#39;);
+
+      if (b.classList.contains(&#39;hidden&#39;)) {
+
+        b.classList.remove(&#39;hidden&#39;);
+
+        btn.textContent = &#39;Minimize&#39;;
+
+      } else {
+
+        b.classList.add(&#39;hidden&#39;);
+
+        btn.textContent = &#39;Expand&#39;;
+
+      }
+
+    });
+
+
+
+    // Fire initial page_view on load
+
+    window.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+
+      if (window.trackCandidateEvent) {
+
+        window.trackCandidateEvent(&#39;page_view&#39;, { page_title: &#39;SK Tech Interview &amp; Multi-Tech Jobs Portal&#39;, page_path: &#39;/interview-jobs.html&#39; });
+
+      }
+
+    });
+
+  &lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
